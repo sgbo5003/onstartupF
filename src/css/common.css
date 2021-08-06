@@ -1,0 +1,790 @@
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+/* default */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #222;
+  letter-spacing: -0.75px;
+  font-family: "Noto Sans KR";
+  text-decoration: none;
+  list-style: none;
+}
+body {
+  background-color: #fff;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  vertical-align: top;
+  max-width: 100%;
+}
+.hidden {
+  position: absolute;
+  font-size: 0px;
+  left: -9999px;
+}
+
+/*=============================================
+=            내가 한 것들                      =
+=============================================*/
+
+/*=============================================
+=            Section header block             =
+=============================================*/
+.ly_popover-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+header {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  width: 100%;
+  height: 80px;
+  background-color: #222222;
+}
+.header_cove {
+  position: relative;
+  z-index: 99;
+  top: 0px;
+  width: 100%;
+  height: 80px;
+}
+.header_area_mr {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: auto;
+  height: 80px;
+}
+.header_area_left {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 29%;
+  min-width: 500px;
+  height: 80px;
+}
+.header_area_right {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: auto;
+  height: 80px;
+  margin-left: 2%;
+}
+.header_area_middle {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 34%;
+  height: 80px;
+}
+.logo_area {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: auto;
+  height: 80px;
+}
+.logo_area > a {
+  position: relative;
+  display: inline-block;
+  margin-left: 23px;
+  width: 168px;
+  height: 80px;
+}
+.header_logo {
+  position: absolute;
+  width: 168px;
+  height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.coar_area {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: auto;
+  height: 80px;
+  line-height: 80px;
+}
+.coar_area > p {
+  display: inline-block;
+}
+.coar_area > p > a {
+  display: inline-block;
+  padding-left: 1.75em;
+  padding-right: 1.75em;
+  font-size: 1.4375rem;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+}
+.mypage_area {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 110px;
+  height: 80px;
+}
+.mypage_photo_cove {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mypage_photo {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.search_tab {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 80px;
+}
+#search_text {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 42px;
+  font-size: 1.4375rem;
+  font-weight: 500;
+  color: #999999;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 6px;
+  box-sizing: border-box;
+  top: 50%;
+  transform: translate(0%, -50%);
+  padding-left: 12px;
+}
+#search_text::placeholder {
+  font-size: 1.4375rem;
+  font-weight: 500;
+  color: #999999;
+}
+#search_text:focus {
+  background-color: #d8d8d8;
+  color: #222222;
+  font-size: 1.4375rem;
+  font-weight: 500;
+}
+#search_img {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  width: 29px;
+  height: 29px;
+  margin-right: 8px;
+  top: 50%;
+  right: 0px;
+  transform: translate(0%, -50%);
+}
+.search {
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*=============================================
+=            Section Qmenu block              =
+=============================================*/
+
+.Qmenu_area {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: auto;
+  height: 80px;
+}
+.Qmenu_list {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 46px;
+  height: 80px;
+}
+.Qmenu_item_cove {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.Qmenu_item {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Qmenu_padding {
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+.tail_on {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  top: -16px;
+  right: 7px;
+  width: 30px;
+  height: 16px;
+}
+.tail_off {
+  position: absolute;
+  z-index: 100;
+  display: none;
+  top: -16px;
+  right: 7px;
+  width: 30px;
+  height: 16px;
+}
+.Qmenu_bar_on {
+  position: absolute;
+  z-index: 100;
+  display: block;
+  top: 80px;
+  right: 0px;
+  width: 300px;
+  height: 303px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.Qmenu_bar_off {
+  position: absolute;
+  z-index: 100;
+  display: none;
+  top: 80px;
+  right: 0px;
+  width: 300px;
+  height: 303px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.Qmenu_menu_cove {
+  position: relative;
+  width: 100%;
+}
+.Qmenu_menu {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 76px;
+  line-height: 76px;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+  font-size: 1.375rem;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+.Qmenu_bar2 {
+  position: absolute;
+  z-index: 100;
+  top: 80px;
+  right: 46px;
+  width: 640px;
+  height: auto;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.Qmeny_message {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 135px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.Qmeny_massage_title_cove {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 22px);
+  margin-top: 15px;
+}
+.Qmeny_massage_title {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+}
+.Qmeny_massage_info_cove {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 17px;
+}
+.Qmeny_massage_info {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.message_back_cove {
+  position: absolute;
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+}
+.message_back {
+  position: relative;
+  z-index: 50;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+.message_back_img {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.message_active_cove {
+  position: absolute;
+  top: 29px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+}
+.message_active {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/*=============================================
+=           Section homesave block            =
+=============================================*/
+
+.side_bar {
+  position: fixed;
+  display: inline-block;
+  z-index: 100;
+  left: 0px;
+  top: 80px;
+  width: 300px;
+  height: 100vh;
+  border-right: 1px solid #e7e7e7;
+  box-sizing: border-box;
+}
+.side_bar_cove {
+  position: relative;
+  display: inline-block;
+  float: left;
+  z-index: 99;
+  left: 0px;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+}
+.side_homesave {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
+.side_menu_cove {
+  display: inline-block;
+  width: 100%;
+}
+.side_menu {
+  position: relative;
+  display: inline-block;
+  padding-left: 1.625em;
+  padding-right: 1.625em;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.4375rem;
+  font-weight: 500;
+  text-align: left;
+  border-bottom: 1px solid #dddddd;
+  box-sizing: border-box;
+}
+.side_menu_normal {
+  background-color: #fff !important;
+}
+.side_menu_active {
+  background-color: #e7e7e7 !important;
+}
+.side_img_cove {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin-left: 2%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.side_text_cove {
+  position: relative;
+  display: inline-block;
+  line-height: 70px;
+  left: -40px;
+}
+.home_img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+}
+.save_img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+}
+
+/*=============================================
+=           Section category block            =
+=============================================*/
+
+.side_main {
+  position: relative;
+  width: 100%;
+}
+.side_title {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 65px;
+  line-height: 65px;
+  padding-left: 1.875em;
+  padding-right: 1.875em;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #575757;
+}
+.sidemenu_text_active {
+  color: #bea36b;
+}
+.side_sub_bar {
+  cursor: pointer;
+}
+.side_sub_menu {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+}
+.side_sub_menu_icon_cove {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin-left: 2%;
+}
+.side_sub_menu_icon {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+}
+.sidemenu_text {
+  position: relative;
+  display: inline-block;
+  line-height: 70px;
+  font-size: 1.375rem;
+  font-weight: 400;
+}
+.side_subsm_off {
+  position: relative;
+  display: none;
+  width: auto;
+}
+.side_subsm_on {
+  position: relative;
+  display: block;
+  width: auto;
+}
+.side_subsm_bar {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+.side_subsm_menu {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 1.375rem;
+  font-weight: 400;
+  background-color: #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  box-sizing: border-box;
+  padding-left: calc(70px + 2%);
+  cursor: pointer;
+}
+.side_subsm_menu:hover {
+  color: #bea36b;
+  background-color: #fff;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  box-sizing: border-box;
+}
+
+/*=============================================
+=           Section content block            =
+=============================================*/
+
+.content {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: calc(100% - 300px);
+  height: 100vh;
+}
+
+/*=============================================
+=           Section context block             =
+=============================================*/
+
+.context_menu {
+  position: fixed;
+  z-index: 200;
+  width: auto;
+  height: 160px;
+  opacity: 0.9;
+  bottom: 0%;
+  right: 0%;
+  margin-right: 34px;
+  margin-bottom: 34px;
+}
+.coin_pre_btn_area {
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+.coin_pre_btn_cove {
+  position: relative;
+  display: inline-block;
+  width: 213px;
+  height: 70px;
+  border-radius: 40px;
+  background-color: #fee7b8;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.coin_pre_btn {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-left: 14px;
+  width: 52px;
+  height: 70px;
+}
+.coin_pre_btn_img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.coin_pre_text {
+  line-height: 70px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.top_btn_area {
+  position: absolute;
+  display: inline-block;
+  bottom: 0px;
+  right: 0px;
+}
+.top_btn_cove {
+  position: relative;
+  display: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.top_btn_img {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.coin_pre_cove {
+  display: none;
+  position: fixed;
+  z-index: 400;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.coin_pre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 820px;
+  max-width: 620px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.coin_pre > h3 {
+  display: inline-block;
+  line-height: 80px;
+  width: 100%;
+  height: 80px;
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+}
+.coin_pre > p {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 78px;
+  height: 80px;
+}
+.coin_pre > p > a {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.coin_pre > p > a > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+.coin_pre_date {
+  position: relative;
+  top: 7%;
+  padding-left: 4.6875em;
+  padding-right: 4.6875em;
+}
+.coin_pre_date > li {
+  float: left;
+  width: calc(20% - 33.6px);
+  margin-left: 16.8px;
+  margin-right: 16.8px;
+}
+.coin_pre_date > li > a {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 67px;
+  height: 67px;
+  line-height: 67px;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeeee;
+  border-radius: 33.5px;
+}
+.coin_pre_date > li > p {
+  position: relative;
+  display: inline-block;
+  top: -40px;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #bea36b;
+}
+.coin_pre_active {
+  background-color: #d5b778 !important;
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+/*===============================
+=        CSS add, modify        =
+===============================*/
+.side_sub {
+  /* height: 560px; */
+  overflow: auto;
+}
+@media (min-width: 1024px) {
+  .header_area_right {
+    margin-left: 0;
+  }
+  .header_area_right > .coar_area > p > a {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .header_area_middle {
+    width: 27%;
+  }
+}
+@media (min-width: 1440px) {
+  .header_area_right {
+    margin-left: 2%;
+  }
+  .header_area_right > .coar_area > p > a {
+    padding-left: 1.75em;
+    padding-right: 1.75em;
+  }
+  .header_area_middle {
+    width: 34%;
+  }
+}

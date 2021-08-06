@@ -1,0 +1,22 @@
+.scrollBtn {
+  position: fixed;
+  width: 70px;
+  left: 94%;
+  bottom: 70px;
+  height: 70px;
+  font-size: 3rem;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.scrollBtn_img {
+  width: 40px;
+  height: 40px;
+  margin: 15px;
+}
+
+.scrollBtn_cove {
+  border-radius: 35px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
