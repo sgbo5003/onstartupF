@@ -15,7 +15,7 @@ const WriteSelectModal = (props) => {
     return (
       <li>
         <a
-          class="write_select_list"
+          className="write_select_list"
           onClick={() => {
             setCategory(data.category_text);
           }}
@@ -27,19 +27,21 @@ const WriteSelectModal = (props) => {
   });
 
   return (
-    <div class={classOnOff}>
-      <div class="write_select_popup">
+    <div className={classOnOff}>
+      <div className="write_select_popup">
         <ul>
           <li>
-            <div class="write_select_popup_title">
+            <div className="write_select_popup_title">
               분야 선택
-              <span class="write_select_popup_back" onClick={onOpenModal}>
+              <span className="write_select_popup_back" onClick={onOpenModal}>
                 <img src={BackImg} alt="back.png" />
               </span>
             </div>
-            <ul class="write_select_li" onClick={onOpenModal}>
+            <ul className="write_select_li" onClick={onOpenModal}>
               <li>
-                <a class="write_select_first_list">마이페이지 > 포트폴리오</a>
+                <a className="write_select_first_list">
+                  마이페이지 > 포트폴리오
+                </a>
               </li>
               {selectList}
             </ul>
