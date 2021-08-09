@@ -3061,7 +3061,8 @@
   margin-top: 40px;
 }
 .inq_submit_on {
-  display: none;
+  display: block;
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 76px;
@@ -5516,4 +5517,133 @@ progress::-webkit-progress-value {
 
 .reference_charge_modal_box_button:hover {
   color: rgb(189, 162, 107);
+}
+
+.coin_attd_modal_container {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 19% 35%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.coin_attd_modal_box {
+  position: relative;
+  margin: 3% auto;
+  z-index: 120;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
+  height: 693px;
+  padding: 13px 35px 0 35px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.coin_attd_modal_title_container > h2 {
+  font-size: 21px;
+  text-align: center;
+}
+
+.coin_attd_modal_back {
+  position: absolute;
+  cursor: pointer;
+  z-index: 50;
+  right: 0px;
+  top: 0px;
+  width: 60px;
+  height: 60px;
+}
+.coin_attd_modal_back > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+
+/* .coin_attd_list > li > a {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 67px;
+  height: 67px;
+  line-height: 67px;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  text-align: center;
+  background-color: #eeeeee;
+  border-radius: 33.5px;
+} */
+/* .coin_attd_list > li > p {
+  position: relative;
+  display: inline-block;
+  top: -40px;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #bea36b;
+} */
+
+.coin_attd_modal_content {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.coin_attd_modal_content_contents {
+  width: 98px;
+  height: 98px;
+}
+
+.coin_attd_modal_content_contents_top {
+  position: relative;
+  display: inline-block;
+  top: -32px;
+  width: 100%;
+  text-align: center;
+}
+
+.coin_attd_modal_content_contents_top > p {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #bea36b;
+}
+
+.coin_attd_modal_content_contents_bottom {
+  position: relative;
+  display: inline-block;
+  /* top: 50%; */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  background-color: #eeeeee;
+  border-radius: 33.5px;
+  cursor: pointer;
+}
+
+.coin_attd_modal_content_contents_bottom > p {
+  font-size: 1.3125rem;
+  font-weight: 700;
+}
+
+._coin_selected {
+  background-color: #d5b778 !important;
+}
+
+._coin_selected_text {
+  color: #ffffff !important;
 }
