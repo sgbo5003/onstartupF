@@ -10,6 +10,7 @@ import ScrollButton from "../ScrollButton";
 import viewIcon1 from "../../images/view_icon1.png";
 import viewIcon2 from "../../images/view_icon2.png";
 import defaultUserImg from "../../images/default_user.png";
+import CoinButton from "../CoinButton";
 
 const ContentPage = () => {
   const [data, setData] = useState({
@@ -77,6 +78,8 @@ const ContentPage = () => {
   //   const response = await axios.get("/get_info.php?comment=4");
   //   setData(response.data);
   // };
+
+  // /action/main/first_connect.php
 
   const getData = () => {
     const params = new FormData();
@@ -183,6 +186,7 @@ const ContentPage = () => {
             })}
           </Slider>
         </div>
+        <CoinButton />
         <ScrollButton />
       </div>
     </div>
