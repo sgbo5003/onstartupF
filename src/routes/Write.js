@@ -203,7 +203,7 @@ const Write = () => {
                   썸네일과 함께 표시됩니다.
                 </p>
                 <span>
-                  <div
+                  <span
                     className="detail_img_cove"
                     onClick={onDetailButtonClick}
                   >
@@ -212,7 +212,7 @@ const Write = () => {
                       src={BackImg}
                       alt="back.png"
                     />
-                  </div>
+                  </span>
                 </span>
               </section>
             ) : (
@@ -263,8 +263,8 @@ const Write = () => {
                     onClick={onDetailButton2Click}
                   >
                     <img
-                      className="detail_img_back2"
-                      src={selectBackImg}
+                      className="detail_img_back"
+                      src={BackImg}
                       alt="back.png"
                     />
                   </span>
