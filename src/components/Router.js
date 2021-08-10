@@ -20,7 +20,7 @@ import ReferenceStorageBox from "../pages/Reference/ReferenceStorageBox";
 import ReferenceChargeCoin from "../pages/Reference/ReferenceChargeCoin";
 import ReferenceGiftCoin from "../pages/Reference/ReferenceGiftCoin";
 import ReferenceMiddleCategory from "../pages/ReferenceMiddleCategory";
-import ReferenceProduct from "./ReferenceProduct";
+import ReferenceProduct from "./Reference/ReferenceProduct";
 import Question from "../pages/Setting/Question";
 import Sidebar from "./Sidebar";
 

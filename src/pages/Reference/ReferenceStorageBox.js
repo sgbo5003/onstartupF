@@ -1,5 +1,5 @@
 import React from "react";
-import ReferenceContent from "../../components/ReferenceContent/ReferenceContent";
+import ReferenceContent from "../../components/Reference/ReferenceContent";
 import ReferenceSidebar from "../../components/ReferenceSidebar";
 
 const ReferenceStorageBox = () => {

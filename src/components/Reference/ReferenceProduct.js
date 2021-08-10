@@ -1,6 +1,6 @@
 import React from "react";
-import ReferenceSidebar from "./ReferenceSidebar";
-import gallery1 from "../images/port_gallery6.png";
+import ReferenceSidebar from "../ReferenceSidebar";
+import gallery1 from "../../images/port_gallery6.png";
 const ReferenceProduct = () => {
   return (
     <>

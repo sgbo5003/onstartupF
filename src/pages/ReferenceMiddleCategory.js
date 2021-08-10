@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import ReferenceContent from "../components/ReferenceContent/ReferenceContent";
+import ReferenceContent from "../components/Reference/ReferenceContent";
 import ReferenceSidebar from "../components/ReferenceSidebar";
 
 const ReferenceMiddleCategory = () => {
