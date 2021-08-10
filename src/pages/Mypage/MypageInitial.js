@@ -4,7 +4,7 @@ import defaultUserImg from "../../images/default_user.png";
 import backpackImg from "../../images/backpack.png";
 import axios from "axios";
 
-const Mypage = () => {
+const MypageInitial = () => {
   const history = useHistory();
 
   const profileAddComponentArray = [
@@ -204,4 +204,4 @@ const Mypage = () => {
   );
 };
 
-export default Mypage;
+export default MypageInitial;
