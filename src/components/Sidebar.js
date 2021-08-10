@@ -30,13 +30,7 @@ const Sidebar = () => {
 
   const [checkedBottomItems, setBottomCheckedItems] = useState(new Set()); //카테고리 항목 -> 클릭 된 것들 담는 state
   const [checkedTopItems, setCheckedTopItems] = useState(new Set()); // 홈 & 저장글 항목 -> 클릭 된 것들 담는 state
-  const [categoryData, setCategoryData] = useState([
-    // category_img_root_name: [],
-    // category_lv2: [],
-    // category_order_num: [],
-    // category_parent_idx: [],
-    // category_text: [],
-  ]);
+  const [categoryData, setCategoryData] = useState([]);
 
   const mainCategoryArrayList = mainCategoryArray.map((data, index) => {
     return (
@@ -93,13 +87,9 @@ const Sidebar = () => {
 
   // 카테고리 api 연동
   const getCategoryData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "main");
     axios({
       method: "post",
-      url: "/response/get_info.php",
-      data: params,
+      url: "action/main/view_comment.php",
     })
       .then((response) => {
         console.log(response.data);
@@ -114,17 +104,17 @@ const Sidebar = () => {
     getCategoryData();
   }, []);
 
-  const sideBarSubMenuHandlerOff = () => {
+  const sideBarSubMenuHandlerOff = (data) => {
     return (
       <ul className="side_subsm_off">
-        {categoryData.map((item) => {
+        {data.sub_category.map((item) => {
           return (
             <li className="side_subsm_bar">
               <Link
-                to="/MiddleCategory"
+                to={`/MiddleCategory/${item.value}`}
                 className="side_subsm_menu commerce_menu2"
               >
-                {item.category_lv2}
+                {item.text}
               </Link>
             </li>
           );
@@ -134,17 +124,16 @@ const Sidebar = () => {
   };
 
   const sideBarSubMenuHandlerOn = (data) => {
-    const arr = data.category_lv2.split("/");
     return (
       <ul className="side_subsm_on">
-        {arr.map((item) => {
+        {data.sub_category.map((item) => {
           return (
             <li className="side_subsm_bar">
               <Link
-                to="/MiddleCategory"
+                to={`/MiddleCategory${item.value}`}
                 className="side_subsm_menu commerce_menu2"
               >
-                {item}
+                {item.text}
               </Link>
             </li>
           );
@@ -153,7 +142,7 @@ const Sidebar = () => {
     );
   };
 
-  const componentArrayList = categoryData.map((data, index) => {
+  const componentArrayList = categoryData.map((data) => {
     return (
       <li
         className="side_sub_bar"
@@ -161,10 +150,7 @@ const Sidebar = () => {
       >
         <span className="side_sub_menu">
           <span className="side_sub_menu_icon_cove">
-            <img
-              src={data.category_img_root_name}
-              className="side_sub_menu_icon"
-            />
+            <img src={data.category_file} className="side_sub_menu_icon" />
           </span>
           <span
             className={`sidemenu_text ${
