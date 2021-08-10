@@ -15,8 +15,6 @@ const Mypage = () => {
     "대표 사이트 추가하기",
   ];
 
-  //   const interestComponentArray = ["관심분야1", "관심분야2", "관심분야3"];
-
   // axios로 받아온 data들 상태관리
   const [userData, setUserData] = useState({
     user_name: "", // 이름
@@ -43,6 +41,14 @@ const Mypage = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  // 메뉴 클릭 감지 state
+  const [menuClicked, setMenuClicked] = useState(false);
+
+  // 메뉴 핸들러
+  const MenuHandler = () => {
+    setMenuClicked(!menuClicked);
   };
 
   // 프로필 사진 추가하기 , 소개글 추가하기 등 추가하기 관련 컴포넌트 Mapping
@@ -169,14 +175,21 @@ const Mypage = () => {
             <ul className="mypage_profiles_tab_cove">
               <li className="mypage_profiles_list my_comment_tab">
                 <a
-                  className="mypage_profiles_tab_btn my_comment_tab mypage_profiles_tab_btn_active"
-                  //   className="active"
+                  className={`mypage_profiles_tab_btn my_comment_tab ${
+                    menuClicked ? "" : "mypage_profiles_tab_btn_active"
+                  }`}
+                  onClick={MenuHandler}
                 >
                   작성한 코멘트
                 </a>
               </li>
               <li className="mypage_profiles_list">
-                <a className="mypage_profiles_tab_btn my_port_tab">
+                <a
+                  className={`mypage_profiles_tab_btn my_comment_tab ${
+                    menuClicked ? "mypage_profiles_tab_btn_active" : ""
+                  }`}
+                  onClick={MenuHandler}
+                >
                   포트폴리오
                 </a>
               </li>

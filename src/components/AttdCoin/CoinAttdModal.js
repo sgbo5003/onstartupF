@@ -1,5 +1,5 @@
 import React from "react";
-import BackImg from "../images/back.png";
+import BackImg from "../../images/back.png";
 
 const CoinAttdModal = (props) => {
   const arr = [
@@ -129,10 +129,7 @@ const CoinAttdModal = (props) => {
   const onAttdBtnHandler = (data) => {
     let itemSet = new Set(attdCheckedItems);
     console.log(itemSet);
-    if (attdCheckedItems.has(data)) {
-      itemSet.delete(data);
-      setAttdCheckedItems(itemSet);
-    } else {
+    if (attdCheckedItems.has(data) == false) {
       itemSet.add(data);
       setAttdCheckedItems(itemSet);
     }

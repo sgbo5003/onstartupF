@@ -10,7 +10,7 @@ import ScrollButton from "../ScrollButton";
 import viewIcon1 from "../../images/view_icon1.png";
 import viewIcon2 from "../../images/view_icon2.png";
 import defaultUserImg from "../../images/default_user.png";
-import CoinButton from "../CoinButton";
+import CoinButton from "../AttdCoin/CoinButton";
 
 const ContentPage = () => {
   const [data, setData] = useState({

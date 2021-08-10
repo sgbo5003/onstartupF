@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import coinMenu from "../images/Context_menu_icon1.png";
+import coinMenu from "../../images/Context_menu_icon1.png";
 import CoinAttdModal from "./CoinAttdModal";
 
 const CoinButton = () => {

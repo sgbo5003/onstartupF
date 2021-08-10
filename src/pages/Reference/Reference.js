@@ -1,7 +1,7 @@
 import React from "react";
-import CarouselSlider from "../components/CarouselSlider";
-import ReferenceContentPage from "../components/ReferenceContent/ReferenceContentPage";
-import ReferenceSidebar from "../components/ReferenceSidebar";
+import CarouselSlider from "../../components/CarouselSlider";
+import ReferenceContentPage from "../../components/ReferenceContent/ReferenceContentPage";
+import ReferenceSidebar from "../../components/ReferenceSidebar";
 
 const Reference = () => {
   return (

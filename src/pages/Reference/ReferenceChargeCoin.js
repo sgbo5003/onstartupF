@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ReferenceHaveCoin from "../components/Coin/ReferenceHaveCoin";
-import ReferenceHistoryCoin from "../components/Coin/ReferenceHistoryCoin";
-import ReferenceSidebar from "../components/ReferenceSidebar";
-import ContextMenuIcon from "../images/Context_menu_icon1.png";
+import ReferenceHaveCoin from "../../components/Reference/ReferenceHaveCoin";
+import ReferenceHistoryCoin from "../../components/Reference/ReferenceHistoryCoin";
+import ReferenceSidebar from "../../components/ReferenceSidebar";
+import ContextMenuIcon from "../../images/Context_menu_icon1.png";
 
 const ReferenceChargeCoin = () => {
   // 상단 메뉴 클릭 감지 state
