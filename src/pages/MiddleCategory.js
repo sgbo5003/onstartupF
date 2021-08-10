@@ -8,12 +8,15 @@ import shareIcon from "../images/icon_share.png";
 import messageBackIcon from "../images/message_back.png";
 import saveIcon from "../images/icon_sav.png";
 import saveOnIcon from "../images/icon_sav_on.png";
+import { useParams } from "react-router-dom";
 const MiddleCategory = () => {
-  // const sort = useParams
-  // useEffect((
-  //     const repsone = await axios(`/getCommersInfo/${sort}`)
-
-  // ))
+  const sort = useParams();
+  const categoryId = sort.id;
+  console.log(sort);
+  //   const sort = useParams
+  //   useEffect((
+  //       const repsone = await axios(`/getCommersInfo/${sort}`)
+  //   ))
   const renderComponents = () => {
     return (
       <div className="middle_category_content_home_tag_cove">
@@ -120,7 +123,7 @@ const MiddleCategory = () => {
       <div className="middle_category_content">
         <div className="middle_category_title_container">
           <p className="middle_category_title_main">커머스 정보</p>
-          <p className="middle_category_title_sub">중분류</p>
+          <p className="middle_category_title_sub">중분류{categoryId}</p>
         </div>
         <div className="middle_category_content_container">
           {arr.map((data) => {
