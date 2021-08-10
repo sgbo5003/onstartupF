@@ -113,9 +113,12 @@ const Mypage = () => {
                         </Link>
                       </span>
                       <span className="mypage_title_message">
-                        <a className="mypage_title_message_btn title_edit_message_btn">
+                        <Link
+                          to="/Message"
+                          className="mypage_title_message_btn title_edit_message_btn"
+                        >
                           메세지 보기
-                        </a>
+                        </Link>
                       </span>
                       <span className="logout1">
                         <a className="logout2" onClick={logoutHandler}>
