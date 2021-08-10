@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, match, matchPath, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import sideIcon1 from "../images/Side_icon1.png";
 import sideIcon2 from "../images/Side_icon2.png";
 import categoryImg1 from "../images/Category_icon1.png";
@@ -87,9 +87,13 @@ const Sidebar = () => {
 
   // 카테고리 api 연동
   const getCategoryData = () => {
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
     axios({
       method: "post",
-      url: "action/main/view_comment.php",
+      url: "action/main/osu_category.php",
+      data: params,
     })
       .then((response) => {
         console.log(response.data);
