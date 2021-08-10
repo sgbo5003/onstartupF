@@ -22,6 +22,7 @@ const ContentComponent = (props) => {
     saveNum,
     coverclass,
   } = props;
+
   return (
     <div className={coverclass}>
       <section className="home_title">

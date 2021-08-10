@@ -12,7 +12,13 @@ import categoryImg6 from "../images/Category_icon6.png";
 import categoryImg7 from "../images/Category_icon7.png";
 import categoryImg8 from "../images/Category_icon8.png";
 
+import { useDispatch, useSelector } from 'react-redux';
+import * as refreshActions from '../modules/refresh';
 const Sidebar = () => {
+
+  const allRefresh = useSelector((state) => state.refresh.get('allRefresh'));
+  const dispatch = useDispatch();
+  const jwtToken = localStorage.getItem('jwtToken');
   const mainCategoryArray = [
     {
       link: "/",
@@ -53,18 +59,29 @@ const Sidebar = () => {
 
   // 홈 & 저장글 클릭 & 색깔 변경 제어
   const onCheckedTopItemsHandler = () => {
-    let itemSet = new Set(checkedTopItems);
-    if (location.pathname === "/") {
-      itemSet.add("/");
-      setCheckedTopItems(itemSet);
-    } else if (location.pathname === "/SaveWrite") {
-      itemSet.clear();
-      itemSet.add("/SaveWrite");
-      setCheckedTopItems(itemSet);
-    } else {
-      itemSet.clear();
-      setCheckedTopItems(itemSet);
+
+    console.log(jwtToken)
+
+    if(jwtToken){
+      localStorage.removeItem("jwtToken")
+    }else{
+      localStorage.setItem('jwtToken',"1234");
     }
+    dispatch(refreshActions.setAllRefresh(allRefresh+1))
+    
+
+    // let itemSet = new Set(checkedTopItems);
+    // if (location.pathname === "/") {
+    //   itemSet.add("/");
+    //   setCheckedTopItems(itemSet);
+    // } else if (location.pathname === "/SaveWrite") {
+    //   itemSet.clear();
+    //   itemSet.add("/SaveWrite");
+    //   setCheckedTopItems(itemSet);
+    // } else {
+    //   itemSet.clear();
+    //   setCheckedTopItems(itemSet);
+    // }
   };
 
   useEffect(() => {
@@ -73,16 +90,26 @@ const Sidebar = () => {
 
   // 카테고리 선택 제어
   const onCheckedBottomItemsHandler = (data) => {
-    let itemSet = new Set(checkedBottomItems);
-    console.log(itemSet);
-    if (checkedBottomItems.has(data)) {
-      itemSet.delete(data);
-      setBottomCheckedItems(itemSet);
-    } else {
-      itemSet.add(data);
-      setBottomCheckedItems(itemSet);
+
+    console.log(jwtToken)
+
+    if(jwtToken){
+      localStorage.removeItem("jwtToken")
+    }else{
+      localStorage.setItem('jwtToken',"1234");
     }
-    console.log(data, checkedBottomItems.values());
+    dispatch(refreshActions.setAllRefresh(allRefresh+1))
+    
+    // let itemSet = new Set(checkedBottomItems);
+    // console.log(itemSet);
+    // if (checkedBottomItems.has(data)) {
+    //   itemSet.delete(data);
+    //   setBottomCheckedItems(itemSet);
+    // } else {
+    //   itemSet.add(data);
+    //   setBottomCheckedItems(itemSet);
+    // }
+    // console.log(data, checkedBottomItems.values());
   };
 
   // 카테고리 api 연동

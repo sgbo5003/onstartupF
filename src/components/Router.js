@@ -8,7 +8,7 @@ import Join from "../pages/Join";
 import Header from "./Header";
 import SaveWrite from "../pages/SaveWrite";
 import Login from "../pages/Login";
-import defaultUserImg from "../images/default_user.png";
+
 import MypageInitial from "../pages/Mypage/MypageInitial";
 import AccountManagement from "../pages/Setting/AccountManagement";
 import ChangePassword from "../pages/Setting/ChangePassword";
@@ -26,8 +26,8 @@ import Sidebar from "./Sidebar";
 import Message from "../pages/Mypage/Message";
 
 const AppRouter = () => {
+
   const [isLogin, setIsLogin] = useState(false);
-  const [isDropClick, setIsDropClick] = useState(false);
 
   function checkIsLogin() {
     if (sessionStorage.length < 1) {
@@ -38,49 +38,13 @@ const AppRouter = () => {
     }
   }
 
-  function headerIconTrue() {
-    return (
-      <h1 className="mypage_area">
-        <Link className="mypage_photo_cove" to="/MypageInitial">
-          <img
-            className="mypage_photo"
-            src={defaultUserImg}
-            alt="default_user.png"
-          />
-        </Link>
-      </h1>
-    );
-  }
-
-  function headerTextTrue() {
-    return (
-      <div className="coar_area">
-        <p>
-          <Link to="/Join">로그인</Link>
-        </p>
-      </div>
-    );
-  }
-
   useEffect(() => {
     checkIsLogin();
   });
 
   return (
     <>
-      {isLogin ? (
-        <Header
-          isDropClick={isDropClick}
-          setIsDropClick={setIsDropClick}
-          isLoginTrue={headerIconTrue()}
-        />
-      ) : (
-        <Header
-          isDropClick={isDropClick}
-          setIsDropClick={setIsDropClick}
-          isLoginTrue={headerTextTrue()}
-        />
-      )}
+      <Header/>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/MiddleCategory:id" component={MiddleCategory} />

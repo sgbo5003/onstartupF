@@ -44,11 +44,16 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "immutable": "^4.0.0-rc.14",
     "react-hook-form": "^7.10.1",
     "react-icons": "^4.2.0",
+    "react-immutable-proptypes": "^2.2.0",
     "react-material-ui-carousel": "^2.2.7",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-slick": "^0.28.1",
+    "redux": "^4.1.1",
+    "redux-actions": "^2.6.5",
     "slick-carousel": "^1.8.1"
   }
 }
