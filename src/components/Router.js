@@ -23,6 +23,7 @@ import ReferenceMiddleCategory from "../pages/ReferenceMiddleCategory";
 import ReferenceProduct from "./Reference/ReferenceProduct";
 import Question from "../pages/Setting/Question";
 import Sidebar from "./Sidebar";
+import Message from "../pages/Mypage/Message";
 
 const AppRouter = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -82,7 +83,7 @@ const AppRouter = () => {
       )}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/MiddleCategory/:id" component={MiddleCategory} />
+        <Route path="/MiddleCategory:id" component={MiddleCategory} />
         <Route path="/Community" component={Community} />
         <Route exact path="/Reference" component={Reference} />
         <Route
@@ -118,6 +119,7 @@ const AppRouter = () => {
         <Route path="/SaveWrite" component={SaveWrite} />
         <Route exact path="/Mypage" component={Mypage} />
         <Route exact path="/MypageEdit" component={MypageEdit} />
+        <Route exact path="/Message" component={Message} />
         <Route path="/AccountManagement" component={AccountManagement} />
         <Route path="/ChangePassword" component={ChangePassword} />
         <Route path="/Notice" component={Notice} />
