@@ -9,7 +9,7 @@ import Header from "./Header";
 import SaveWrite from "../pages/SaveWrite";
 import Login from "../pages/Login";
 import defaultUserImg from "../images/default_user.png";
-import Mypage from "../pages/Mypage/Mypage";
+import MypageInitial from "../pages/Mypage/MypageInitial";
 import AccountManagement from "../pages/Setting/AccountManagement";
 import ChangePassword from "../pages/Setting/ChangePassword";
 import Notice from "../pages/Setting//Notice";
@@ -41,7 +41,7 @@ const AppRouter = () => {
   function headerIconTrue() {
     return (
       <h1 className="mypage_area">
-        <Link className="mypage_photo_cove" to="/Mypage">
+        <Link className="mypage_photo_cove" to="/MypageInitial">
           <img
             className="mypage_photo"
             src={defaultUserImg}
@@ -117,7 +117,7 @@ const AppRouter = () => {
           setIsLogin={setIsLogin}
         />
         <Route path="/SaveWrite" component={SaveWrite} />
-        <Route exact path="/Mypage" component={Mypage} />
+        <Route exact path="/MypageInitial" component={MypageInitial} />
         <Route exact path="/MypageEdit" component={MypageEdit} />
         <Route exact path="/Message" component={Message} />
         <Route path="/AccountManagement" component={AccountManagement} />
