@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import Home from "../pages/Home";
-import Community from "../pages/Community";
-import Reference from "../pages/Reference/Reference";
-import Write from "../pages/Write";
-import Join from "../pages/Join";
-import Header from "./Header";
-import SaveWrite from "../pages/SaveWrite";
-import Login from "../pages/Login";
-
-import MypageInitial from "../pages/Mypage/MypageInitial";
-import AccountManagement from "../pages/Setting/AccountManagement";
-import ChangePassword from "../pages/Setting/ChangePassword";
-import Notice from "../pages/Setting//Notice";
-import Inquiry from "../pages/Setting/Inquiry";
-import MypageEdit from "../pages/Mypage/MypageEdit";
-import MiddleCategory from "../pages/MiddleCategory";
-import ReferenceStorageBox from "../pages/Reference/ReferenceStorageBox";
-import ReferenceChargeCoin from "../pages/Reference/ReferenceChargeCoin";
-import ReferenceGiftCoin from "../pages/Reference/ReferenceGiftCoin";
-import ReferenceMiddleCategory from "../pages/ReferenceMiddleCategory";
+import Home from "../components/Main/Home";
+import Community from "./Community/Community";
+import Reference from "./Reference/Reference";
+import Write from "../components/Write/Write";
+import Join from "./Join/Join";
+import Header from "./Header/Header";
+import SaveWrite from "./Write/SaveWrite";
+import Login from "./Login/Login";
+import MypageInitial from "../components/Mypage/MypageInitial";
+import AccountManagement from "../components/Setting/AccountManagement";
+import ChangePassword from "../components/Setting/ChangePassword";
+import Notice from "../components/Setting//Notice";
+import Inquiry from "../components/Setting/Inquiry";
+import MypageEdit from "../components/Mypage/MypageEdit";
+import MiddleCategory from "./Main/MiddleCategory";
+import ReferenceStorageBox from "../components/Reference/ReferenceStorageBox";
+import ReferenceChargeCoin from "../components/Reference/ReferenceChargeCoin";
+import ReferenceGiftCoin from "../components/Reference/ReferenceGiftCoin";
+import ReferenceMiddleCategory from "../components/Reference/ReferenceMiddleCategory";
 import ReferenceProduct from "./Reference/ReferenceProduct";
-import Question from "../pages/Setting/Question";
-import Sidebar from "./Sidebar";
-import Message from "../pages/Mypage/Message";
+import Question from "../components/Setting/Question";
+import Sidebar from "./Main/Sidebar";
+import Message from "../components/Mypage/Message";
+import MypageOther from "../components/Mypage/MypageOther";
 
 const AppRouter = () => {
+  //   const [isLogin, setIsLogin] = useState(false);
 
-  const [isLogin, setIsLogin] = useState(false);
+  //   function checkIsLogin() {
+  //     if (sessionStorage.length < 1) {
+  //       console.log("isLogin1 ?? :: ", isLogin);
+  //     } else {
+  //       setIsLogin(true);
+  //       // console.log("isLogin2 ?? :: ", isLogin);
+  //     }
+  //   }
 
-  function checkIsLogin() {
-    if (sessionStorage.length < 1) {
-      console.log("isLogin1 ?? :: ", isLogin);
-    } else {
-      setIsLogin(true);
-      // console.log("isLogin2 ?? :: ", isLogin);
-    }
-  }
-
-  useEffect(() => {
-    checkIsLogin();
-  });
+  //   useEffect(() => {
+  //     checkIsLogin();
+  //   });
 
   return (
     <>
-      <Header/>
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/MiddleCategory:id" component={MiddleCategory} />
@@ -71,16 +70,17 @@ const AppRouter = () => {
         <Route
           path="/Join"
           component={Join}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          //   isLogin={isLogin}
+          //   setIsLogin={setIsLogin}
         />
         <Route
           path="/Login"
           component={Login}
-          isLogin={isLogin}
-          setIsLogin={setIsLogin}
+          //   isLogin={isLogin}
+          //   setIsLogin={setIsLogin}
         />
         <Route path="/SaveWrite" component={SaveWrite} />
+        <Route path="/MypageOther" component={MypageOther} />
         <Route exact path="/MypageInitial" component={MypageInitial} />
         <Route exact path="/MypageEdit" component={MypageEdit} />
         <Route exact path="/Message" component={Message} />
