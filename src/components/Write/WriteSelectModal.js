@@ -31,7 +31,7 @@ const WriteSelectModal = (props) => {
               </li>
               {categoryData.map((data, idx) => {
                 return (
-                  <li>
+                  <li key={idx}>
                     <a
                       className="write_select_list"
                       onClick={() => {
