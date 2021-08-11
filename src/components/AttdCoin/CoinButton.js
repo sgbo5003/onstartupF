@@ -13,15 +13,15 @@ const CoinButton = () => {
   };
   return (
     <>
-      <div class="coin_pre_btn_cove" onClick={coinModalHandler}>
-        <span class="coin_pre_btn">
+      <div className="coin_pre_btn_cove" onClick={coinModalHandler}>
+        <span className="coin_pre_btn">
           <img
-            class="coin_pre_btn_img"
+            className="coin_pre_btn_img"
             src={coinMenu}
             alt="Context_menu_icon1.png"
           />
         </span>
-        <span class="coin_pre_text">출석 코인받기</span>
+        <span className="coin_pre_text">출석 코인받기</span>
       </div>
       {coinModalOn ? (
         <CoinAttdModal
