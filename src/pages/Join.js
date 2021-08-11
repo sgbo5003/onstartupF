@@ -11,6 +11,7 @@ import JoinSubmitModal from "../components/Join/JoinSubmitModal";
 import JoinSubmitQnaFirstModal from "../components/Join/JoinSubmitQnaFirstModal";
 import JoinSubmitQnaSecondModal from "../components/Join/JoinSubmitQnaSecondModal";
 import Modal from "../Modal";
+import * as fnc from "../commonFunc/CommonFunctions";
 // import { useForm } from "react-hook-form";
 
 const Join = (props) => {
@@ -214,19 +215,27 @@ const Join = (props) => {
     params.append("commerce", [...commersCheckedItems]);
     params.append("specialty", [...specialCheckedItems]);
     params.append("interesting", [...interestCheckedItems]);
-    axios({
-      method: "post",
-      url: "/response/join_member_normal.php",
+    // axios({
+    //   method: "post",
+    //   url: "/response/join_member_normal.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //     console.log(response.data.user_idx);
+    //     sessionStorage.setItem("user_idx", response.data.user_idx);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "response/join_member_normal.php",
       data: params,
-    })
-      .then((response) => {
-        console.log(response);
-        console.log(response.data.user_idx);
-        sessionStorage.setItem("user_idx", response.data.user_idx);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      current_url: location.href,
+      success: (res) => {
+        console.log(res);
+      },
+    });
   };
 
   // 실시간으로 state 변경 & 체크
