@@ -9,6 +9,7 @@ import WriteSelectModal from "./WriteSelectModal";
 import WriteConfirmModal from "./WriteConfirmModal";
 import WriteSubmitIsTrueModal from "./WriteSubmitIsTrueModal";
 import WriteSubmitIsFalseModal from "./WriteSubmitIsFalseModal";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
 const Write = () => {
   const [content, setContent] = useState("");
@@ -134,21 +135,32 @@ const Write = () => {
   };
 
   const getCategoryData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "main");
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("category response :", response.data);
-        setCategoryData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "ca");
+    // params.append("kind", "main");
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("category response :", response.data);
+    //     setCategoryData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "action/main/osu_category.php",
+      data: {},
+      current_url: location.href,
+      success: (res) => {
+        setCategoryData(res);
+      },
+      fail: (err) => {
+        console.log(err);
+      },
+    });
   };
 
   // 버튼 변경 & state 변경 실시간 감지
@@ -166,7 +178,7 @@ const Write = () => {
         <form
           className="write_view"
           // onSubmit={onSubmit}
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <h2 className="write_view_title">글쓰기</h2>
           <section className="write_comment">
@@ -234,7 +246,7 @@ const Write = () => {
                   value={image}
                   disabled
                 />
-                <label for="file">이미지 찾기</label>
+                <label htmlFor="file">이미지 찾기</label>
               </div>
             </div>
           </section>
@@ -332,26 +344,26 @@ const Write = () => {
           {buttonOn ? btnActivate() : btnDeactivate()}
           {confirmModalOn ? (
             <WriteConfirmModal
-              class="write_comment_popup_cove_on"
+              classOnOff="write_comment_popup_cove_on"
               onConfirmModal={onConfirmModal}
               onSubmitModal={onSubmitModal}
             />
           ) : (
-            <WriteConfirmModal class="write_comment_popup_cove_off" />
+            <WriteConfirmModal classOnOff="write_comment_popup_cove_off" />
           )}
           {submitIsTrueModal ? (
-            <WriteSubmitIsTrueModal class="write_comment_popup_cove_on" />
+            <WriteSubmitIsTrueModal classOnOff="write_comment_popup_cove_on" />
           ) : (
-            <WriteSubmitIsTrueModal class="write_comment_popup_cove_off" />
+            <WriteSubmitIsTrueModal classOnOff="write_comment_popup_cove_off" />
           )}
           {submitIsFalseModal ? (
             <WriteSubmitIsFalseModal
-              class="write_comment_popup_cove_on"
+              classOnOff="write_comment_popup_cove_on"
               onSubmitFalseModal={onSubmitFalseModal}
               setSubmitIsFalseModalOn={setSubmitIsFalseModalOn}
             />
           ) : (
-            <WriteSubmitIsFalseModal class="write_comment_popup_cove_off" />
+            <WriteSubmitIsFalseModal classOnOff="write_comment_popup_cove_off" />
           )}
         </form>
       </div>
