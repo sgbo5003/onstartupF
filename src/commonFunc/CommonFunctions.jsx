@@ -3,34 +3,51 @@ import axios from "axios";
 export const executeQuery = ({
   url,
   data,
-  currentUrl,
+  current_url,
   success,
-  fail,
   error,
+  fail,
 }) => {
+  const token = sessionStorage.getItem("token");
+  //   const keypass = sessionStorage.getItem("keypass");
+  axios.defaults.baseURL = "https://api.on-startup.co.kr/";
+  //   axios.defaults.withCredentials = true;
+  data.token = token;
+  //   data.keypass = keypass;
+  data.current_url = current_url;
+
   axios({
     method: "post",
-    url: "/login.php",
-    data: params,
+    url,
+    data: data || {},
   })
-    .then((response) => {
-      console.log(response.data.idx);
-      if (response.data.error === 0) {
-        sessionStorage.setItem("email", inputEmail);
-        alert("로그인 성공");
-        history.push("/");
-        return setIsLogin(!isLogin);
-        console.log("로그인 하고 난 이후 로그인 상태 : ", isLogin);
-      } else {
-        alert("로그인 에러");
-        console.log(response.data);
-        setInputEmail("");
-        setInputPassword("");
+    .then((res) => {
+      if (res.data[0].response === "error") {
+        if (error) {
+          error(res.data);
+        } else {
+          alert(res.data.msg);
+        }
       }
-      console.log(inputEmail);
-      console.log(inputPassword);
+      if (res.data[0].response === "fail") {
+        alert("서버접속에 실패하였습니다. 관리자에게 문의해주시기 바랍니다.");
+      }
+      if (res.data[0].response === "ok") {
+        success(res.data[1]);
+        console.log(res);
+      }
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      if (fail) {
+        fail(err);
+      } else {
+        alert("서버접속에 실패하였습니다. 관리자에게 문의해주시기 바랍니다.");
+      }
     });
+  // .then((response) => {
+  //   console.log(response.data);
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
 };
