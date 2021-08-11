@@ -18,21 +18,6 @@ const ReferenceHaveCoin = (props) => {
     console.log("clicked");
   };
 
-  const userHaveCoinDataList = userHaveCoinData.coin.map((data, index) => {
-    return (
-      <div
-        className="reference_coin_charge_coinlist"
-        onClick={onCoinListClicked}
-      >
-        <div>
-          <img src={ContextMenuIcon} />
-          <span>{userHaveCoinData.coin[index]} 코인</span>
-        </div>
-        <span>￦ {userHaveCoinData.price[index]}</span>
-      </div>
-    );
-  });
-
   return (
     <>
       <div className="reference_coin_charge_content_container">
@@ -43,7 +28,20 @@ const ReferenceHaveCoin = (props) => {
             <span>{userHaveCoinData.user_coin} 코인</span>
           </div>
         </div>
-        {userHaveCoinDataList}
+        {userHaveCoinData.coin.map((data, index) => {
+          return (
+            <div
+              className="reference_coin_charge_coinlist"
+              onClick={onCoinListClicked}
+            >
+              <div>
+                <img src={ContextMenuIcon} />
+                <span>{userHaveCoinData.coin[index]} 코인</span>
+              </div>
+              <span>￦ {userHaveCoinData.price[index]}</span>
+            </div>
+          );
+        })}
       </div>
       {ReferenceChargeCoinModalOn ? (
         <ReferenceChargeCoinModal

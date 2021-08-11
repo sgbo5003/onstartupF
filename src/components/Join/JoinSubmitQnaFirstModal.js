@@ -36,20 +36,6 @@ const JoinSubmitQnaFirstModal = (props) => {
     console.log(data, commersCheckedItems.values());
   };
 
-  // 커머스 관련 버튼 컴포넌트 Mapping
-  const commersButtonOnList = commerceData.category_text.map((data) => {
-    return (
-      <button
-        className={`join_member_qna_select_btn ${
-          commersCheckedItems.has(data) ? "join_btn_selected" : ""
-        }`}
-        onClick={() => onCommersHandler(data)}
-      >
-        {data}
-      </button>
-    );
-  });
-
   // 전문분야 버튼 색상변경 핸들러
   const onSpecialHandler = (data) => {
     let itemSet = new Set(specialCheckedItems);
@@ -62,20 +48,6 @@ const JoinSubmitQnaFirstModal = (props) => {
     }
     console.log(data, specialCheckedItems.values());
   };
-
-  //전문분야 관련 버튼 컴포넌트 Mapping
-  const specialButtonOnList = specialtyData.category_text.map((data) => {
-    return (
-      <button
-        className={`join_member_qna_select_btn ${
-          specialCheckedItems.has(data) ? "join_btn_selected" : ""
-        }`}
-        onClick={() => onSpecialHandler(data)}
-      >
-        {data}
-      </button>
-    );
-  });
 
   const getCommerceData = () => {
     const params = new FormData();
@@ -129,13 +101,35 @@ const JoinSubmitQnaFirstModal = (props) => {
       <div className="join_member_qna_commers_container">
         <div className="join_member_qna_commers_title">커머스</div>
         <div className="join_member_qna_commers_select_container">
-          {commersButtonOnList}
+          {commerceData.category_text.map((data) => {
+            return (
+              <button
+                className={`join_member_qna_select_btn ${
+                  commersCheckedItems.has(data) ? "join_btn_selected" : ""
+                }`}
+                onClick={() => onCommersHandler(data)}
+              >
+                {data}
+              </button>
+            );
+          })}
         </div>
       </div>
       <div className="join_member_qna_special_container">
         <div className="join_member_qna_special_title">전문분야</div>
         <div className="join_member_qna_special_select_container">
-          {specialButtonOnList}
+          {specialtyData.category_text.map((data) => {
+            return (
+              <button
+                className={`join_member_qna_select_btn ${
+                  specialCheckedItems.has(data) ? "join_btn_selected" : ""
+                }`}
+                onClick={() => onSpecialHandler(data)}
+              >
+                {data}
+              </button>
+            );
+          })}
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">

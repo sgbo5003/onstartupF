@@ -51,16 +51,6 @@ const MypageInitial = () => {
     setMenuClicked(!menuClicked);
   };
 
-  // 프로필 사진 추가하기 , 소개글 추가하기 등 추가하기 관련 컴포넌트 Mapping
-  const profileAddComponent = profileAddComponentArray.map((data) => {
-    return <button className="profile_add_section_button">{data}</button>;
-  });
-
-  // 관심분야 컴포넌트 Mapping
-  const interestComponent = userData.user_interesting.map((data) => {
-    return <span className="mypage_title_tag">{data}</span>;
-  });
-
   const logoutHandler = () => {
     console.log("clicked");
     sessionStorage.removeItem("email");
@@ -149,7 +139,11 @@ const MypageInitial = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="it">{interestComponent}</div>
+                  <div className="it">
+                    {userData.user_interesting.map((data) => {
+                      return <span className="mypage_title_tag">{data}</span>;
+                    })}
+                  </div>
                   <div className="mypage_profile_range_container">
                     <div className="profile_range_section">
                       <div className="progress_bar_container">
@@ -167,7 +161,13 @@ const MypageInitial = () => {
                       </div>
                     </div>
                     <div className="profile_add_section">
-                      {profileAddComponent}
+                      {profileAddComponentArray.map((data) => {
+                        return (
+                          <button className="profile_add_section_button">
+                            {data}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

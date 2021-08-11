@@ -23,20 +23,6 @@ const JoinSubmitQnaSecondModal = (props) => {
     console.log(data, interestCheckedItems.values());
   };
 
-  // 관심분야 관련 버튼 컴포넌트 Mapping
-  const interestButtonOnList = interestingData.category_text.map((data) => {
-    return (
-      <button
-        className={`join_member_qna_select_btn ${
-          interestCheckedItems.has(data) ? "join_btn_selected" : ""
-        }`}
-        onClick={() => onInterestHandler(data)}
-      >
-        {data}
-      </button>
-    );
-  });
-
   const getInterestingData = () => {
     const params = new FormData();
     params.append("command", "ca");
@@ -68,7 +54,18 @@ const JoinSubmitQnaSecondModal = (props) => {
       <div className="join_member_qna_special_container">
         <div className="join_member_qna_special_title">관심분야</div>
         <div className="join_member_qna_special_select_container">
-          {interestButtonOnList}
+          {interestingData.category_text.map((data) => {
+            return (
+              <button
+                className={`join_member_qna_select_btn ${
+                  interestCheckedItems.has(data) ? "join_btn_selected" : ""
+                }`}
+                onClick={() => onInterestHandler(data)}
+              >
+                {data}
+              </button>
+            );
+          })}
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">

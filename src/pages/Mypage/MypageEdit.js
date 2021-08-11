@@ -82,20 +82,6 @@ const MypageEdit = (props) => {
     console.log(interestSelectItemRenderList.values());
   };
 
-  // 관심분야 선택하기 컴포넌트 Mapping
-  const selectsInterestList = interestSelectItemList.category_text.map(
-    (data) => {
-      return (
-        <li
-          className="mypage_edit_select_interest_list"
-          onClick={() => onInterestSelectClick(data)}
-        >
-          <a className="wirte_select_list">{data}</a>
-        </li>
-      );
-    }
-  );
-
   //경력사항
   const [careerItem, setCareerItem] = useState("");
   //경력사항을 담는 배열
@@ -242,7 +228,16 @@ const MypageEdit = (props) => {
             <div className="mypage_interest_select">
               <h2 className="mypage_input_title">관심분야 선택하기</h2>
               <ul class="mypage_edit_select_interest_list_container">
-                {selectsInterestList}
+                {interestSelectItemList.category_text.map((data) => {
+                  return (
+                    <li
+                      className="mypage_edit_select_interest_list"
+                      onClick={() => onInterestSelectClick(data)}
+                    >
+                      <a className="wirte_select_list">{data}</a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

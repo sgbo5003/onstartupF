@@ -11,20 +11,6 @@ const WriteSelectModal = (props) => {
     categoryData,
     setCategoryData,
   } = props;
-  const selectList = categoryData.map((data, idx) => {
-    return (
-      <li>
-        <a
-          className="write_select_list"
-          onClick={() => {
-            setCategory(data.category_text);
-          }}
-        >
-          {data.category_text}
-        </a>
-      </li>
-    );
-  });
 
   return (
     <div className={classOnOff}>
@@ -43,7 +29,20 @@ const WriteSelectModal = (props) => {
                   마이페이지 > 포트폴리오
                 </a>
               </li>
-              {selectList}
+              {categoryData.map((data, idx) => {
+                return (
+                  <li>
+                    <a
+                      className="write_select_list"
+                      onClick={() => {
+                        setCategory(data.category_text);
+                      }}
+                    >
+                      {data.category_text}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </li>
         </ul>
