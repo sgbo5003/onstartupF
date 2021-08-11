@@ -5,25 +5,21 @@ import QmenuIconImg from "../images/Qmenu_icon1.png";
 import QmenuIcon2Img from "../images/Qmenu_icon2.png";
 import QmenuIcon3Img from "../images/Qmenu_icon3.png";
 import messageActiveImg from "../images/message_active.png";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import Qmenu from "./Qmenu";
 import Search from "./Search";
 import defaultUserImg from "../images/default_user.png";
 
 const Header = (props) => {
-  
   const [isDropClick, setIsDropClick] = useState(false);
-  const jwtToken = localStorage.getItem('jwtToken');
+  const jwtToken = sessionStorage.getItem("jwtToken");
 
-  const allRefresh = useSelector((state) => state.refresh.get('allRefresh'));
-
+  const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
 
   // const outside = useRef();
   const onDropClicked = () => {
     setIsDropClick(!isDropClick);
   };
-
-
 
   return (
     <header>
@@ -47,26 +43,29 @@ const Header = (props) => {
         </div>
       </div>
       <div className="header_area_right">
-        {/* 설정 아이콘 */}
-        
-        {!jwtToken && <div className="coar_area">
-          <p>
-            <Link to="/Join">로그인</Link>
-          </p>
-        </div>}
+        {/*  로그인 */}
+        {!jwtToken && (
+          <div className="coar_area">
+            <p>
+              <Link to="/Join">로그인</Link>
+            </p>
+          </div>
+        )}
 
-        {jwtToken && <h1 className="mypage_area">
-          <Link className="mypage_photo_cove" to="/MypageInitial">
-            <img
-              className="mypage_photo"
-              src={defaultUserImg}
-              alt="default_user.png"
-            />
-          </Link>
-        </h1>}
-
+        {jwtToken && (
+          <h1 className="mypage_area">
+            <Link className="mypage_photo_cove" to="/MypageOther">
+              <img
+                className="mypage_photo"
+                src={defaultUserImg}
+                alt="default_user.png"
+              />
+            </Link>
+          </h1>
+        )}
+        {/* 드롭다운 메뉴 */}
         <div className="Qmenu_area">
-          <p className="Qmenu_list">
+          <div className="Qmenu_list">
             <div className="Qmenu_item_cove Qmenu1" onClick={onDropClicked}>
               <img
                 className="Qmenu_item"
@@ -74,7 +73,7 @@ const Header = (props) => {
                 alt="Qmenu_icon1.png"
               />
             </div>
-          </p>
+          </div>
           {isDropClick ? (
             <Qmenu class="Qmenu_bar_on" tail="tail_on" />
           ) : (
