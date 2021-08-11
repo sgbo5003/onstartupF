@@ -24,21 +24,29 @@ const JoinSubmitQnaSecondModal = (props) => {
   };
 
   const getInterestingData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "interesting");
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("interesting response :", response.data);
-        setInterestingData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "ca");
+    // params.append("kind", "interesting");
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("interesting response :", response.data);
+    //     setInterestingData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "action/member/join.php",
+      data: {},
+      current_url: location.href,
+      success: (res) => {
+        setInterestingData(res);
+      },
+    });
   };
 
   useEffect(() => {

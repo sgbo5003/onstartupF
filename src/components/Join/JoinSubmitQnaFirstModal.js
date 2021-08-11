@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
 const JoinSubmitQnaFirstModal = (props) => {
   const {
@@ -50,39 +51,55 @@ const JoinSubmitQnaFirstModal = (props) => {
   };
 
   const getCommerceData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "commerce");
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("commerce response :", response.data);
-        setCommerceData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "ca");
+    // params.append("kind", "commerce");
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("commerce response :", response.data);
+    //     setCommerceData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "action/member/join.php",
+      data: {},
+      current_url: location.href,
+      success: (res) => {
+        setCommerceData(res);
+      },
+    });
   };
 
   const getSpecialtyData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "specialty");
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("specialty response :", response.data);
-        setSpecialtyData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "ca");
+    // params.append("kind", "specialty");
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("specialty response :", response.data);
+    //     setSpecialtyData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "action/member/join.php",
+      data: {},
+      current_url: location.href,
+      success: (res) => {
+        setSpecialtyData(res);
+      },
+    });
   };
 
   useEffect(() => {

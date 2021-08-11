@@ -209,9 +209,9 @@ const Join = (props) => {
   // 데이터 POST 방식으로 보내기
   const pushData = () => {
     const params = new FormData();
-    params.append("user_name", name);
-    params.append("user_email", email);
-    params.append("user_password", password);
+    params.append("name", name);
+    params.append("email", email);
+    params.append("password", password);
     params.append("commerce", [...commersCheckedItems]);
     params.append("specialty", [...specialCheckedItems]);
     params.append("interesting", [...interestCheckedItems]);
@@ -229,7 +229,7 @@ const Join = (props) => {
     //     console.log(error);
     //   });
     fnc.executeQuery({
-      url: "response/join_member_normal.php",
+      url: "action/member/join.php",
       data: params,
       current_url: location.href,
       success: (res) => {
