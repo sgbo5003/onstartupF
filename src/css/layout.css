@@ -1347,6 +1347,7 @@
   display: inline-block;
   float: left;
   margin-right: 1.4625em;
+  cursor: pointer;
 }
 .mypage_title_message {
   position: absolute;
@@ -5650,4 +5651,22 @@ progress::-webkit-progress-value {
 
 ._user_selected {
   background-color: #d5b778;
+}
+
+.mypage_other_comment_view_cove {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.mypage_other_comment_view_content_cove {
+  border: 1px solid rgba(152, 152, 152, 0.5);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  width: 29%;
+  margin-right: 1.5%;
 }
