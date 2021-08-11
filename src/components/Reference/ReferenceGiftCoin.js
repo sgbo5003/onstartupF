@@ -1,5 +1,5 @@
 import React from "react";
-import ReferenceSidebar from "../../components/ReferenceSidebar";
+import ReferenceSidebar from "./ReferenceSidebar";
 
 const ReferenceGiftCoin = () => {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import ContentComponent from "../../components/ContentComponent";
-const MypagePortfolio = () => {
+import ContentComponent from "../common/ContentComponent";
+const MypageComment = () => {
   useEffect(() => {
-    console.log("portfoliopage");
+    console.log("commentpage");
   }, []);
   const commentComponentArray = [1, 2, 3, 4, 5, 6];
   return commentComponentArray.map((data) => {
@@ -13,4 +13,4 @@ const MypagePortfolio = () => {
   });
 };
 
-export default MypagePortfolio;
+export default MypageComment;

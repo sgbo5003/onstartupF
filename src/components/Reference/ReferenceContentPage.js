@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ScrollButton from "../ScrollButton";
+import ScrollButton from "../common/ScrollButton";
 import viewIcon1 from "../../images/view_icon1.png";
 import viewIcon2 from "../../images/view_icon2.png";
 import ReferenceContent from "./ReferenceContent";

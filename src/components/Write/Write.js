@@ -1,14 +1,14 @@
 // git commit test
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import detailClickImg from "../images/detaile_click.png";
-import selectBackImg from "../images/select_back.png";
-import BackImg from "../images/back.png";
+import detailClickImg from "../../images/detaile_click.png";
+import selectBackImg from "../../images/select_back.png";
+import BackImg from "../../images/back.png";
 import axios from "axios";
-import WriteSelectModal from "../components//Write/WriteSelectModal";
-import WriteConfirmModal from "../components/Write/WriteConfirmModal";
-import WriteSubmitIsTrueModal from "../components/Write/WriteSubmitIsTrueModal";
-import WriteSubmitIsFalseModal from "../components/Write/WriteSubmitIsFalseModal";
+import WriteSelectModal from "./WriteSelectModal";
+import WriteConfirmModal from "./WriteConfirmModal";
+import WriteSubmitIsTrueModal from "./WriteSubmitIsTrueModal";
+import WriteSubmitIsFalseModal from "./WriteSubmitIsFalseModal";
 
 const Write = () => {
   const [content, setContent] = useState("");

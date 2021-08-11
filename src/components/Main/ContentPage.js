@@ -6,11 +6,11 @@ import Slider from "react-slick";
 // import "../css/_slick.css";
 import "../../css/_slick-theme.css";
 import "../../css/slick.css";
-import ScrollButton from "../ScrollButton";
+import ScrollButton from "../common/ScrollButton";
 import viewIcon1 from "../../images/view_icon1.png";
 import viewIcon2 from "../../images/view_icon2.png";
 import defaultUserImg from "../../images/default_user.png";
-import CoinButton from "../AttdCoin/CoinButton";
+import CoinButton from "./CoinButton";
 
 const ContentPage = () => {
   const [data, setData] = useState({
@@ -55,6 +55,7 @@ const ContentPage = () => {
     }
   }
 
+  // slider 세팅
   const settings = {
     dots: true,
     infinite: true,

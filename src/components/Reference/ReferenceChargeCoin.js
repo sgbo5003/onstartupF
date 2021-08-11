@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ReferenceHaveCoin from "../../components/Reference/ReferenceHaveCoin";
-import ReferenceHistoryCoin from "../../components/Reference/ReferenceHistoryCoin";
-import ReferenceSidebar from "../../components/ReferenceSidebar";
+import ReferenceHaveCoin from "./ReferenceHaveCoin";
+import ReferenceHistoryCoin from "./ReferenceHistoryCoin";
+import ReferenceSidebar from "./ReferenceSidebar";
 import ContextMenuIcon from "../../images/Context_menu_icon1.png";
 
 const ReferenceChargeCoin = () => {

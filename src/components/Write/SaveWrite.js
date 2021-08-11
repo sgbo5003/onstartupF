@@ -1,6 +1,6 @@
 import React from "react";
-import ContentComponent from "../components/ContentComponent";
-import Sidebar from "../components/Sidebar";
+import ContentComponent from "../common/ContentComponent";
+import Sidebar from "../Main/Sidebar";
 
 const SaveWrite = () => {
   const arr = [1, 2, 3, 4];

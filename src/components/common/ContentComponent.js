@@ -1,12 +1,12 @@
 import React from "react";
-import defaultUserImg from "../images/default_user.png";
-import commentIcon from "../images/icon_comment.png";
-import likeIcon from "../images/icon_like.png";
-import likeOnIcon from "../images/icon_like_on.png";
-import shareIcon from "../images/icon_share.png";
-import messageBackIcon from "../images/message_back.png";
-import saveIcon from "../images/icon_sav.png";
-import saveOnIcon from "../images/icon_sav_on.png";
+import defaultUserImg from "../../images/default_user.png";
+import commentIcon from "../../images/icon_comment.png";
+import likeIcon from "../../images/icon_like.png";
+import likeOnIcon from "../../images/icon_like_on.png";
+import shareIcon from "../../images/icon_share.png";
+import messageBackIcon from "../../images/message_back.png";
+import saveIcon from "../../images/icon_sav.png";
+import saveOnIcon from "../../images/icon_sav_on.png";
 
 const ContentComponent = (props) => {
   const {

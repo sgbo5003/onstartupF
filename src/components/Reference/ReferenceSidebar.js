@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ContextMenuIcon from "../images/Context_menu_icon1.png";
-import sideIcon1 from "../images/Side_icon1.png";
-import sideIcon2 from "../images/Side_icon2.png";
+import ContextMenuIcon from "../../images/Context_menu_icon1.png";
+import sideIcon1 from "../../images/Side_icon1.png";
+import sideIcon2 from "../../images/Side_icon2.png";
 
 const ReferenceSidebar = () => {
   const categoryArray = [

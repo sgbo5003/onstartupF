@@ -1,5 +1,5 @@
 import React from "react";
-import BackImg from "../images/back.png";
+import BackImg from "../../images/back.png";
 
 const InquirySelectModal = (props) => {
   const arr = [1, 2, 3, 4, 5];

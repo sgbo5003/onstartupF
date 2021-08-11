@@ -4,7 +4,7 @@ import emailCheckedImg from "../../images/email_checked.png";
 import emailCheckImg from "../../images/email_check.png";
 import selectBackImg from "../../images/select_back.png";
 import { Link } from "react-router-dom";
-import InquirySelectModal from "../../components/InquirySelectModal";
+import InquirySelectModal from "./InquirySelectModal";
 
 const inquiry = () => {
   const [email, setEmail] = useState(""); // 이메일 주소

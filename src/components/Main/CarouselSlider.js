@@ -2,10 +2,10 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@material-ui/core";
 import House from "@material-ui/icons/Home";
-import "../css/carousel.css";
-import squareImg from "../images/square400.png";
-import rightArrowImg from "../images/home_slide_right.png";
-import leftArrowImg from "../images/home_slide_left.png";
+import "../../css/carousel.css";
+import squareImg from "../../images/square400.png";
+import rightArrowImg from "../../images/home_slide_right.png";
+import leftArrowImg from "../../images/home_slide_left.png";
 
 const CarouselSlider = () => {
   const items = [

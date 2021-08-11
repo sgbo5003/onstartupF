@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../css/scrollButton.css";
-import scrollIcon from "../images/scroll_top.png";
+import "../../css/scrollButton.css";
+import scrollIcon from "../../images/scroll_top.png";
 
 const ScrollButton = () => {
   const [visible, setVisible] = useState(false);

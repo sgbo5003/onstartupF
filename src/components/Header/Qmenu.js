@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import tailImg from "../images/tail.png";
+import tailImg from "../../images/tail.png";
 
 const Qmenu = (props) => {
   const qmenuList = [

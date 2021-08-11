@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Main/Sidebar";
 import defaultUserImg from "../../images/default_user.png";
 import commentIcon from "../../images/icon_comment.png";
 import likeIcon from "../../images/icon_like.png";

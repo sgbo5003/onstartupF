@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import naverImg from "../images/naver.png";
-import googleImg from "../images/google.png";
-import kakaoImg from "../images/kakao.png";
+import naverImg from "../../images/naver.png";
+import googleImg from "../../images/google.png";
+import kakaoImg from "../../images/kakao.png";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import { KAKAO_AUTH_URL } from "../OAuth";
-import { NAVER_AUTH_URL } from "../OAuth";
-import JoinSubmitModal from "../components/Join/JoinSubmitModal";
-import JoinSubmitQnaFirstModal from "../components/Join/JoinSubmitQnaFirstModal";
-import JoinSubmitQnaSecondModal from "../components/Join/JoinSubmitQnaSecondModal";
-import Modal from "../Modal";
-import * as fnc from "../commonFunc/CommonFunctions";
+import { KAKAO_AUTH_URL } from "../../OAuth";
+import { NAVER_AUTH_URL } from "../../OAuth";
+import JoinSubmitModal from "./JoinSubmitModal";
+import JoinSubmitQnaFirstModal from "./JoinSubmitQnaFirstModal";
+import JoinSubmitQnaSecondModal from "./JoinSubmitQnaSecondModal";
+import Modal from "../../Modal";
+import * as fnc from "../../commonFunc/CommonFunctions";
 // import { useForm } from "react-hook-form";
 
 const Join = (props) => {
@@ -310,6 +310,7 @@ const Join = (props) => {
                   type="password"
                   name="join_member_pass"
                   placeholder="비밀번호 입력"
+                  //최소 8글자 제한
                   value={password}
                   required
                   onChange={onChangePassword}

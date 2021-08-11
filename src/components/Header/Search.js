@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import searchImg from "../images/search_icon1.png";
+import searchImg from "../../images/search_icon1.png";
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
 
