@@ -17,10 +17,12 @@ import * as fnc from "../../commonFunc/CommonFunctions";
 const Join = (props) => {
   const { naver } = window;
   const [name, setName] = useState(""); // 이름
+  const [nameError, setNameError] = useState(false); // 이름 오류체크
   const [email, setEmail] = useState(""); // 이메일
   const [password, setPassword] = useState(""); // 비밀번호
-  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [passwordError, setPasswordError] = useState(false); // 비밀번호 오류체크
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false); // 비밀번호확인 오류체크
   const [emailError, setEmailError] = useState(false); // 이메일 오류체크
   const [buttonOn, setButtonOn] = useState(false); // 버튼 활성화 & 비활성화 체크
   const [joinSubmitModalOn, setJoinSubmitModalOn] = useState(false); // 회원가입 성공 모달 on & off 체크
@@ -147,19 +149,25 @@ const Join = (props) => {
 
   // submit
   const onJoinSubmitModal = (e) => {
-    // 비밀번호 & 비밀번호 유효성 검사
-    if (password !== confirmPassword) {
-      return setPasswordError(true);
+    if (emailError || passwordError || confirmPasswordError || nameError) {
+      alert("형식을 다시 확인해주세요");
+      return;
     }
-    if (emailError) return;
     console.log({ name, email, password, confirmPassword });
-
     //회원가입 조건 다 만족 시 회원가입진행
     if (password && email && name && confirmPassword) {
       //   sessionStorage.setItem("email", email);
       //    pushData();
       //   history.push("/");
       //   setIsLogin(!isLogin);
+      fnc.executeQuery({
+        url: "action/main/osu_category.php",
+        data: {},
+        currenturl: "http://localhost:8080/Join",
+        success: (res) => {
+          // setCommerceData(res);
+        },
+      });
       setJoinSubmitModalOn(true);
     }
   };
@@ -182,7 +190,43 @@ const Join = (props) => {
       /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/i;
     if (regExp.test(email)) {
       return false;
+    } else if (email === "") {
+      return false;
     } else {
+      return true;
+    }
+  };
+
+  // 이름 유효성 검사
+  const validateName = (name) => {
+    const reg = /^[가-힣]{2,4}$/;
+    if (reg.test(name)) {
+      return false;
+    } else if (name === "") {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  // 비밀번호 유효성 검사
+  const validatePassword = (password) => {
+    if (password.length > 8 && password.length < 20) {
+      return false;
+    } else if (password === "") {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  // 비밀번호 일치 확인 유효성 검사
+  const validateConfirmPassword = (confirmPassword, password) => {
+    if (password == "" && confirmPassword == "") {
+      return false;
+    }
+    // 비밀번호 & 비밀번호 유효성 검사
+    if (password !== confirmPassword) {
       return true;
     }
   };
@@ -190,58 +234,65 @@ const Join = (props) => {
   // 이름 변경 감지
   const onChangeName = (e) => {
     setName(e.target.value);
+    setNameError(validateName(e.target.value));
   };
   // 이메일 변경 감지
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
     setEmailError(validateEmail(e.target.value));
+    console.log(e.target.value);
   };
   // 비밀번호 변경 감지
   const onChangePassword = (e) => {
     setPassword(e.target.value);
+    setPasswordError(validatePassword(e.target.value));
+    console.log(e.target.value);
   };
   // 비밀번호 확인 변경 감지
   const onChangeConfirmPassword = (e) => {
-    setPasswordError(e.target.value !== password);
     setConfirmPassword(e.target.value);
+    setConfirmPasswordError(e.target.value !== password);
+    console.log(e.target.value);
   };
 
-  // 데이터 POST 방식으로 보내기
-  const pushData = () => {
-    const params = new FormData();
-    params.append("name", name);
-    params.append("email", email);
-    params.append("password", password);
-    params.append("commerce", [...commersCheckedItems]);
-    params.append("specialty", [...specialCheckedItems]);
-    params.append("interesting", [...interestCheckedItems]);
-    // axios({
-    //   method: "post",
-    //   url: "/response/join_member_normal.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     console.log(response.data.user_idx);
-    //     sessionStorage.setItem("user_idx", response.data.user_idx);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    fnc.executeQuery({
-      url: "action/member/join.php",
-      data: params,
-      current_url: location.href,
-      success: (res) => {
-        console.log(res);
-      },
-    });
-  };
+  //   // 데이터 POST 방식으로 보내기
+  //   const pushData = () => {
+  //     const params = new FormData();
+  //     params.append("name", name);
+  //     params.append("email", email);
+  //     params.append("password", password);
+  //     params.append("commerce", [...commersCheckedItems]);
+  //     params.append("specialty", [...specialCheckedItems]);
+  //     params.append("interesting", [...interestCheckedItems]);
+  //     // axios({
+  //     //   method: "post",
+  //     //   url: "/response/join_member_normal.php",
+  //     //   data: params,
+  //     // })
+  //     //   .then((response) => {
+  //     //     console.log(response);
+  //     //     console.log(response.data.user_idx);
+  //     //     sessionStorage.setItem("user_idx", response.data.user_idx);
+  //     //   })
+  //     //   .catch((error) => {
+  //     //     console.log(error);
+  //     //   });
+  //     fnc.executeQuery({
+  //       url: "action/member/join.php",
+  //       data: params,
+  //       currenturl: location.href,
+  //       success: (res) => {},
+  //     });
+  //   };
 
   // 실시간으로 state 변경 & 체크
   useEffect(() => {
     checkBtnOn();
   });
+
+  useEffect(() => {
+    if (password == "" && confirmPassword == "") setConfirmPasswordError(false);
+  }, [password, confirmPassword]);
 
   return (
     <>
@@ -287,6 +338,11 @@ const Join = (props) => {
                   required
                   onChange={onChangeName}
                 />
+                {nameError && (
+                  <div style={{ color: "red" }}>
+                    이름은 한글로만 가능합니다.
+                  </div>
+                )}
                 <p>이메일</p>
                 <div className="result-email"></div>
                 <input
@@ -315,6 +371,11 @@ const Join = (props) => {
                   required
                   onChange={onChangePassword}
                 />
+                {passwordError && (
+                  <div style={{ color: "red" }}>
+                    비밀번호는 최소 8~20글자 입력해주세요
+                  </div>
+                )}
                 <p>비밀번호 확인</p>
                 <div className="result-re-pass"></div>
                 <input
@@ -326,7 +387,7 @@ const Join = (props) => {
                   required
                   onChange={onChangeConfirmPassword}
                 />
-                {passwordError && (
+                {confirmPasswordError && (
                   <div style={{ color: "red" }}>
                     비밀번호가 일치하지 않습니다.
                   </div>
