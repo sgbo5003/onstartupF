@@ -82,28 +82,28 @@ const ContentPage = () => {
 
   // /action/main/first_connect.php
 
-  const getData = () => {
-    const params = new FormData();
-    params.append("command", 4);
+  //   const getData = () => {
+  //     const params = new FormData();
+  //     params.append("command", 4);
 
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log(response);
-        // data 받아온거 담기
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //     axios({
+  //       method: "post",
+  //       url: "/response/get_info.php",
+  //       data: params,
+  //     })
+  //       .then((response) => {
+  //         console.log(response);
+  //         // data 받아온거 담기
+  //         setData(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  //   useEffect(() => {
+  //     getData();
+  //   }, []);
 
   return (
     <div className="wap home_wap">
