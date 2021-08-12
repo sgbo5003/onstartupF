@@ -38,17 +38,6 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
-  // // 개발 서버 설정
-  // devServer: {
-  //   contentBase: path.join(__dirname, "public"),
-  //   host: "localhost",
-  //   overlay: true,
-  //   inline: true,
-  //   port: 8080,
-  //   open: true,
-  //   historyApiFallback: true,
-  //   hot: true,
-  // },'
   devServer: {
     // dist 디렉토리를 웹 서버의 기본 호스트 위치로 설정
     contentBase: path.join(__dirname, "public"),
@@ -60,5 +49,6 @@ module.exports = {
     open: true,
     historyApiFallback: true,
     hot: true,
+    disableHostCheck: true,
   },
 };
