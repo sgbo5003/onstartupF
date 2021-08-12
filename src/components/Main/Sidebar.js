@@ -82,12 +82,9 @@ const Sidebar = () => {
     fnc.executeQuery({
       url: "action/main/osu_category.php",
       data: {},
-      current_url: location.href,
+      currenturl: location.href,
       success: (res) => {
         setCategoryData(res);
-      },
-      fail: (err) => {
-        console.log(err);
       },
     });
   };
