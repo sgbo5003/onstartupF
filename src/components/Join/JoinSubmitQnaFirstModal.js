@@ -11,16 +11,12 @@ const JoinSubmitQnaFirstModal = (props) => {
     onJoinSubmitQnaSecondModal,
   } = props;
 
-  const [commerceData, setCommerceData] = useState({
+  const [joinCategoryData, setJoinCategoryData] = useState({
+    sort: [],
     category_order_num: [],
-    category_parent_idx: [],
     category_text: [],
-  });
-
-  const [specialtyData, setSpecialtyData] = useState({
-    category_order_num: [],
-    category_parent_idx: [],
-    category_text: [],
+    category_file: [],
+    sub_category: [],
   });
 
   // 커머스 버튼 색상변경 핸들러
@@ -50,33 +46,7 @@ const JoinSubmitQnaFirstModal = (props) => {
     console.log(data, specialCheckedItems.values());
   };
 
-  const getCommerceData = () => {
-    // const params = new FormData();
-    // params.append("command", "ca");
-    // params.append("kind", "commerce");
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("commerce response :", response.data);
-    //     setCommerceData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    fnc.executeQuery({
-      url: "action/member/join.php",
-      data: {},
-      current_url: location.href,
-      success: (res) => {
-        setCommerceData(res);
-      },
-    });
-  };
-
-  const getSpecialtyData = () => {
+  const getJoinCategoryData = () => {
     // const params = new FormData();
     // params.append("command", "ca");
     // params.append("kind", "specialty");
@@ -93,18 +63,17 @@ const JoinSubmitQnaFirstModal = (props) => {
     //     console.log(error);
     //   });
     fnc.executeQuery({
-      url: "action/member/join.php",
+      url: "action/main/osu_category.php",
       data: {},
-      current_url: location.href,
+      currenturl: location.href,
       success: (res) => {
-        setSpecialtyData(res);
+        setJoinCategoryData(res);
       },
     });
   };
 
   useEffect(() => {
-    getCommerceData();
-    getSpecialtyData();
+    getJoinCategoryData();
   }, []);
 
   return (
@@ -118,7 +87,7 @@ const JoinSubmitQnaFirstModal = (props) => {
       <div className="join_member_qna_commers_container">
         <div className="join_member_qna_commers_title">커머스</div>
         <div className="join_member_qna_commers_select_container">
-          {commerceData.category_text.map((data) => {
+          {/* {joinCategoryData.category_text.map((data) => {
             return (
               <button
                 className={`join_member_qna_select_btn ${
@@ -129,13 +98,26 @@ const JoinSubmitQnaFirstModal = (props) => {
                 {data}
               </button>
             );
-          })}
+          })} */}
+          {joinCategoryData.sort == "commerce" &&
+            joinCategoryData.category_text.map((data) => {
+              return (
+                <button
+                  className={`join_member_qna_select_btn ${
+                    commersCheckedItems.has(data) ? "join_btn_selected" : ""
+                  }`}
+                  onClick={() => onCommersHandler(data)}
+                >
+                  {data}
+                </button>
+              );
+            })}
         </div>
       </div>
       <div className="join_member_qna_special_container">
         <div className="join_member_qna_special_title">전문분야</div>
         <div className="join_member_qna_special_select_container">
-          {specialtyData.category_text.map((data) => {
+          {/* {specialtyData.category_text.map((data) => {
             return (
               <button
                 className={`join_member_qna_select_btn ${
@@ -146,7 +128,7 @@ const JoinSubmitQnaFirstModal = (props) => {
                 {data}
               </button>
             );
-          })}
+          })} */}
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">
