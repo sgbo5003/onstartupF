@@ -47,7 +47,7 @@ const Header = (props) => {
         {!jwtToken && (
           <div className="coar_area">
             <p>
-              <Link to="/Join">로그인</Link>
+              <Link to="/Login">로그인</Link>
             </p>
           </div>
         )}
