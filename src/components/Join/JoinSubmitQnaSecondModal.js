@@ -40,7 +40,7 @@ const JoinSubmitQnaSecondModal = (props) => {
     //     console.log(error);
     //   });
     fnc.executeQuery({
-      url: "action/member/join.php",
+      url: "action/main/osu_category.php",
       data: {},
       current_url: location.href,
       success: (res) => {
