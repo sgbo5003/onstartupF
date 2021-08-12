@@ -3463,6 +3463,7 @@ select::-ms-expand {
   font-weight: 700;
   color: #fff;
   background-color: #bea36b;
+  cursor: pointer;
 }
 .logout1 {
   position: absolute;
