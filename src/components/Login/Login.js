@@ -84,7 +84,7 @@ const Login = (props) => {
               type="email"
               placeholder="이메일 입력"
               name="new_email"
-              maxlength="20"
+              maxLength="20"
               value={inputEmail}
               onChange={onChangeInputEmail}
               required
@@ -96,7 +96,7 @@ const Login = (props) => {
               type="password"
               placeholder="비밀번호 입력"
               name="new_pass"
-              maxlength="20"
+              maxLength="20"
               value={inputPassword}
               onChange={onChangeInputPassword}
               required
