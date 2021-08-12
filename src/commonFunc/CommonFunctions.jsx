@@ -3,7 +3,7 @@ import axios from "axios";
 export const executeQuery = ({
   url,
   data,
-  current_url,
+  currenturl,
   success,
   error,
   fail,
@@ -14,7 +14,7 @@ export const executeQuery = ({
   //   axios.defaults.withCredentials = true;
   data.token = token;
   //   data.keypass = keypass;
-  data.current_url = current_url;
+  data.currenturl = currenturl;
 
   axios({
     method: "post",
@@ -31,6 +31,7 @@ export const executeQuery = ({
       }
       if (res.data[0].response === "fail") {
         alert("서버접속에 실패하였습니다. 관리자에게 문의해주시기 바랍니다.");
+        console.log(res.data);
       }
       if (res.data[0].response === "ok") {
         success(res.data[1]);
@@ -44,10 +45,4 @@ export const executeQuery = ({
         alert("서버접속에 실패하였습니다. 관리자에게 문의해주시기 바랍니다.");
       }
     });
-  // .then((response) => {
-  //   console.log(response.data);
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
 };
