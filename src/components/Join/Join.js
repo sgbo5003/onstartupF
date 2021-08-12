@@ -12,7 +12,6 @@ import JoinSubmitQnaFirstModal from "./JoinSubmitQnaFirstModal";
 import JoinSubmitQnaSecondModal from "./JoinSubmitQnaSecondModal";
 import Modal from "../../Modal";
 import * as fnc from "../../commonFunc/CommonFunctions";
-// import { useForm } from "react-hook-form";
 
 const Join = (props) => {
   const { naver } = window;
@@ -163,7 +162,7 @@ const Join = (props) => {
       fnc.executeQuery({
         url: "action/main/osu_category.php",
         data: {},
-        currenturl: "http://localhost:8080/Join",
+        currenturl: location.href,
         success: (res) => {
           // setCommerceData(res);
         },
