@@ -3,16 +3,56 @@ import { Link, useHistory } from "react-router-dom";
 import defaultUserImg from "../../images/default_user.png";
 import backpackImg from "../../images/backpack.png";
 import axios from "axios";
+import ProfileImgAddModal from "./profileImgAddModal";
+import IntroductionModal from "./IntroductionModal";
+import CareerModal from "./CareerModal";
+import AcademicModal from "./AcademicModal";
+import SiteModal from "./SiteModal";
 
 const MypageInitial = () => {
   const history = useHistory();
 
   const profileAddComponentArray = [
-    "프로필 사진 추가하기",
-    "소개글 추가하기",
-    "경력 추가하기",
-    "학력 추가하기",
-    "대표 사이트 추가하기",
+    {
+      text: "프로필 사진 추가하기",
+      handler: () => {
+        profileImgModalHandler();
+      },
+      modalon: profileImgModalOn,
+      link: <ProfileImgAddModal />,
+    },
+    {
+      text: "소개글 추가하기",
+      handler: () => {
+        introductionModalHandler();
+      },
+      modalon: introductionModalOn,
+      link: <IntroductionModal />,
+    },
+    {
+      text: "경력 추가하기",
+      handler: () => {
+        careerModalHandler();
+      },
+      modalon: careerModalOn,
+      link: <CareerModal />,
+    },
+    {
+      text: "학력 추가하기",
+      handler: () => {
+        academicModalHandler();
+      },
+      modalon: academicModalOn,
+      link: <AcademicModal />,
+    },
+    {
+      text: "대표 사이트 추가하기",
+      handler: () => {
+        siteModalHandler();
+      },
+      modalon: siteModalOn,
+      link: <SiteModal />,
+    },
   ];
 
   // axios로 받아온 data들 상태관리
@@ -25,26 +65,53 @@ const MypageInitial = () => {
     user_interesting: [],
   });
 
-  const getUserData = () => {
-    const params = new FormData();
-    params.append("command", "uinfo");
-    params.append("idx", sessionStorage.getItem("user_idx"));
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("alldata response :", response.data);
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   const getUserData = () => {
+  //     const params = new FormData();
+  //     params.append("command", "uinfo");
+  //     params.append("idx", sessionStorage.getItem("user_idx"));
+  //     axios({
+  //       method: "post",
+  //       url: "/response/get_info.php",
+  //       data: params,
+  //     })
+  //       .then((response) => {
+  //         console.log("alldata response :", response.data);
+  //         setUserData(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
-  // 메뉴 클릭 감지 state
-  const [menuClicked, setMenuClicked] = useState(false);
+  const [profileImgModalOn, setProfileImgModalOn] = useState(false); // 프로필 사진 추가하기 Modal 감지 state
+  const [introductionModalOn, setIntroductionModalOn] = useState(false); // 소개글 추가하기 Modal 감지 state
+  const [careerModalOn, setCareerModalOn] = useState(false); // 경력 추가하기 Modal 감지 state
+  const [academicModalOn, setAcademicModalOn] = useState(false); // 학력 추가하기 Modal 감지 state
+  const [siteModalOn, setSiteModalOn] = useState(false); // 대표 사이트 추가하기 Modal 감지 state
+  const [menuClicked, setMenuClicked] = useState(false); // 메뉴 클릭 감지 state
+
+  const profileImgModalHandler = () => {
+    setProfileImgModalOn(!profileImgModalOn);
+    console.log(profileImgModalOn);
+    console.log("프로필clicked");
+  };
+  const introductionModalHandler = () => {
+    setIntroductionModalOn(!introductionModalOn);
+    console.log(introductionModalOn);
+    console.log("소개글clicked");
+  };
+  const careerModalHandler = () => {
+    setCareerModalOn(!careerModalOn);
+    console.log("clicked");
+  };
+  const academicModalHandler = () => {
+    setAcademicModalOn(!academicModalOn);
+    console.log("clicked");
+  };
+  const siteModalHandler = () => {
+    setSiteModalOn(!siteModalOn);
+    console.log("clicked");
+  };
 
   // 메뉴 핸들러
   const MenuHandler = () => {
@@ -57,9 +124,9 @@ const MypageInitial = () => {
     history.push("/");
   };
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+  //   useEffect(() => {
+  //     getUserData();
+  //   }, []);
   return (
     <div className="wap mypage_wap">
       <div className="mypage_content">
@@ -147,7 +214,7 @@ const MypageInitial = () => {
                   <div className="mypage_profile_range_container">
                     <div className="profile_range_section">
                       <div className="progress_bar_container">
-                        <label for="progress_bar">
+                        <label htmlFor="progress_bar">
                           프로필 작성 단계
                           <span className="progress_bar_num">0/5</span>
                         </label>
@@ -163,9 +230,15 @@ const MypageInitial = () => {
                     <div className="profile_add_section">
                       {profileAddComponentArray.map((data) => {
                         return (
-                          <button className="profile_add_section_button">
-                            {data}
-                          </button>
+                          <>
+                            <button
+                              className="profile_add_section_button"
+                              onClick={data.handler}
+                            >
+                              {data.text}
+                            </button>
+                            {data.modalon ? "1" : "2"}
+                          </>
                         );
                       })}
                     </div>
