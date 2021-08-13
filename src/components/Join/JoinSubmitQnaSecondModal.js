@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const JoinSubmitQnaSecondModal = (props) => {
-  const { interestCheckedItems, setInterestCheckedItems, onSubmit } = props;
-
-  const [interestingData, setInterestingData] = useState({
-    category_order_num: [],
-    category_parent_idx: [],
-    category_text: [],
-  });
+  const {
+    interestCheckedItems,
+    setInterestCheckedItems,
+    onSubmit,
+    joinCategoryData,
+    setJoinCategoryData,
+  } = props;
 
   // 관심분야 item들을 제어하는 함수
   const onInterestHandler = (data) => {
@@ -23,34 +23,50 @@ const JoinSubmitQnaSecondModal = (props) => {
     console.log(data, interestCheckedItems.values());
   };
 
-  const getInterestingData = () => {
+  const getJoinCategoryData = () => {
     // const params = new FormData();
     // params.append("command", "ca");
-    // params.append("kind", "interesting");
+    // params.append("kind", "specialty");
     // axios({
     //   method: "post",
     //   url: "/response/get_info.php",
     //   data: params,
     // })
     //   .then((response) => {
-    //     console.log("interesting response :", response.data);
-    //     setInterestingData(response.data);
+    //     console.log("specialty response :", response.data);
+    //     setSpecialtyData(response.data);
     //   })
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    fnc.executeQuery({
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+
+    axios({
+      method: "post",
       url: "action/main/osu_category.php",
-      data: {},
-      current_url: location.href,
-      success: (res) => {
-        setInterestingData(res);
-      },
-    });
+      data: params,
+    })
+      .then((response) => {
+        console.log("category response :", response.data[1]);
+        setJoinCategoryData(response.data[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // fnc.executeQuery({
+    //   url: "action/main/osu_category.php",
+    //   data: {},
+    //   currenturl: location.href,
+    //   success: (res) => {
+    //     setJoinCategoryData(res);
+    //   },
+    // });
   };
 
   useEffect(() => {
-    getInterestingData();
+    getJoinCategoryData();
   }, []);
 
   return (
@@ -62,16 +78,21 @@ const JoinSubmitQnaSecondModal = (props) => {
       <div className="join_member_qna_special_container">
         <div className="join_member_qna_special_title">관심분야</div>
         <div className="join_member_qna_special_select_container">
-          {interestingData.category_text.map((data) => {
+          {joinCategoryData.map((data, idx) => {
             return (
-              <button
-                className={`join_member_qna_select_btn ${
-                  interestCheckedItems.has(data) ? "join_btn_selected" : ""
-                }`}
-                onClick={() => onInterestHandler(data)}
-              >
-                {data}
-              </button>
+              data.sort === "interesting" && (
+                <button
+                  className={`join_member_qna_select_btn ${
+                    interestCheckedItems.has(data.category_text)
+                      ? "join_btn_selected"
+                      : ""
+                  }`}
+                  onClick={() => onInterestHandler(data.category_text)}
+                  key={idx}
+                >
+                  {data.category_text}
+                </button>
+              )
             );
           })}
         </div>

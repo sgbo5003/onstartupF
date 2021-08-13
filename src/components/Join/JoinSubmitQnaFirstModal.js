@@ -9,16 +9,11 @@ const JoinSubmitQnaFirstModal = (props) => {
     specialCheckedItems,
     setSpecialCheckedItems,
     onJoinSubmitQnaSecondModal,
+    joinCategoryData,
+    setJoinCategoryData,
   } = props;
 
-  const [joinCategoryData, setJoinCategoryData] = useState({
-    sort: [],
-    category_order_num: [],
-    category_text: [],
-    category_file: [],
-    sub_category: [],
-  });
-
+  const [buttonOn, setButtonOn] = useState(false);
   // 커머스 버튼 색상변경 핸들러
   const onCommersHandler = (data) => {
     let itemSet = new Set(commersCheckedItems);
@@ -62,14 +57,30 @@ const JoinSubmitQnaFirstModal = (props) => {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    fnc.executeQuery({
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+
+    axios({
+      method: "post",
       url: "action/main/osu_category.php",
-      data: {},
-      currenturl: location.href,
-      success: (res) => {
-        setJoinCategoryData(res);
-      },
-    });
+      data: params,
+    })
+      .then((response) => {
+        console.log("category response :", response.data[1]);
+        setJoinCategoryData(response.data[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // fnc.executeQuery({
+    //   url: "action/main/osu_category.php",
+    //   data: {},
+    //   currenturl: location.href,
+    //   success: (res) => {
+    //     setJoinCategoryData(res);
+    //   },
+    // });
   };
 
   useEffect(() => {
@@ -87,53 +98,50 @@ const JoinSubmitQnaFirstModal = (props) => {
       <div className="join_member_qna_commers_container">
         <div className="join_member_qna_commers_title">커머스</div>
         <div className="join_member_qna_commers_select_container">
-          {/* {joinCategoryData.category_text.map((data) => {
+          {joinCategoryData.map((data, idx) => {
             return (
-              <button
-                className={`join_member_qna_select_btn ${
-                  commersCheckedItems.has(data) ? "join_btn_selected" : ""
-                }`}
-                onClick={() => onCommersHandler(data)}
-              >
-                {data}
-              </button>
-            );
-          })} */}
-          {joinCategoryData.sort == "commerce" &&
-            joinCategoryData.category_text.map((data) => {
-              return (
+              data.sort === "commerce" && (
                 <button
                   className={`join_member_qna_select_btn ${
-                    commersCheckedItems.has(data) ? "join_btn_selected" : ""
+                    commersCheckedItems.has(data.category_text)
+                      ? "join_btn_selected"
+                      : ""
                   }`}
-                  onClick={() => onCommersHandler(data)}
+                  onClick={() => onCommersHandler(data.category_text)}
+                  key={idx}
                 >
-                  {data}
+                  {data.category_text}
                 </button>
-              );
-            })}
+              )
+            );
+          })}
         </div>
       </div>
       <div className="join_member_qna_special_container">
         <div className="join_member_qna_special_title">전문분야</div>
         <div className="join_member_qna_special_select_container">
-          {/* {specialtyData.category_text.map((data) => {
+          {joinCategoryData.map((data, idx) => {
             return (
-              <button
-                className={`join_member_qna_select_btn ${
-                  specialCheckedItems.has(data) ? "join_btn_selected" : ""
-                }`}
-                onClick={() => onSpecialHandler(data)}
-              >
-                {data}
-              </button>
+              data.sort === "specialty" && (
+                <button
+                  className={`join_member_qna_select_btn ${
+                    specialCheckedItems.has(data.category_text)
+                      ? "join_btn_selected"
+                      : ""
+                  }`}
+                  onClick={() => onSpecialHandler(data.category_text)}
+                  key={idx}
+                >
+                  {data.category_text}
+                </button>
+              )
             );
-          })} */}
+          })}
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">
         <a
-          className="join_member_qna_select_confirm_btn"
+          className="join_member_qna_select_confirm_first_btn"
           onClick={onJoinSubmitQnaSecondModal}
         >
           다음으로
