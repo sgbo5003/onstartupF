@@ -24,6 +24,7 @@ import Question from "../components/Setting/Question";
 import Sidebar from "./Main/Sidebar";
 import Message from "../components/Mypage/Message";
 import MypageOther from "../components/Mypage/MypageOther";
+import FindPassword from "./Login/FindPassword";
 
 const AppRouter = () => {
   //   const [isLogin, setIsLogin] = useState(false);
@@ -79,6 +80,7 @@ const AppRouter = () => {
           //   isLogin={isLogin}
           //   setIsLogin={setIsLogin}
         />
+        <Route path="/FindPassword" component={FindPassword} />
         <Route path="/SaveWrite" component={SaveWrite} />
         <Route path="/MypageOther" component={MypageOther} />
         <Route exact path="/MypageInitial" component={MypageInitial} />
