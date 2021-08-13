@@ -113,9 +113,14 @@ const MypageInitial = () => {
     console.log("clicked");
   };
 
-  // 메뉴 핸들러
-  const MenuHandler = () => {
-    setMenuClicked(!menuClicked);
+  // 작성한 코멘트 메뉴 핸들러
+  const commentMenuHandler = () => {
+    setMenuClicked(false);
+  };
+
+  // 포트폴리오 메뉴 핸들러
+  const portfolioMenuHandler = () => {
+    setMenuClicked(true);
   };
 
   const logoutHandler = () => {
@@ -254,7 +259,7 @@ const MypageInitial = () => {
                   className={`mypage_profiles_tab_btn my_comment_tab ${
                     menuClicked ? "" : "mypage_profiles_tab_btn_active"
                   }`}
-                  onClick={MenuHandler}
+                  onClick={commentMenuHandler}
                 >
                   작성한 코멘트
                 </a>
@@ -264,7 +269,7 @@ const MypageInitial = () => {
                   className={`mypage_profiles_tab_btn my_comment_tab ${
                     menuClicked ? "mypage_profiles_tab_btn_active" : ""
                   }`}
-                  onClick={MenuHandler}
+                  onClick={portfolioMenuHandler}
                 >
                   포트폴리오
                 </a>

@@ -58,8 +58,12 @@ const ReferenceChargeCoin = () => {
       });
   };
 
-  const headerMenuHandler = () => {
-    setHeaderMenuClicked(!headerMenuClicked);
+  const headerHaveMenuHandler = () => {
+    setHeaderMenuClicked(false);
+  };
+
+  const headerHistoryMenuHandler = () => {
+    setHeaderMenuClicked(true);
   };
 
   useEffect(() => {
@@ -81,7 +85,7 @@ const ReferenceChargeCoin = () => {
                     className={`mypage_profiles_tab_btn my_comment_tab ${
                       headerMenuClicked ? "" : "mypage_profiles_tab_btn_active"
                     }`}
-                    onClick={headerMenuHandler}
+                    onClick={headerHaveMenuHandler}
                   >
                     보유코인
                   </a>
@@ -91,7 +95,7 @@ const ReferenceChargeCoin = () => {
                     className={`mypage_profiles_tab_btn my_comment_tab ${
                       headerMenuClicked ? "mypage_profiles_tab_btn_active" : ""
                     }`}
-                    onClick={headerMenuHandler}
+                    onClick={headerHistoryMenuHandler}
                   >
                     코인 내역
                   </a>
