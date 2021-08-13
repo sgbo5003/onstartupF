@@ -13,11 +13,21 @@ const JoinSubmitQnaFirstModal = (props) => {
     setJoinCategoryData,
   } = props;
 
-  const [buttonOn, setButtonOn] = useState(false);
+  const [buttonOn, setButtonOn] = useState(true);
+
+  //   useEffect(() => {
+  //     if (commersCheckedItems.has(commersCheckedItems) == false) {
+  //       console.log("setButtonOn : false");
+  //       setButtonOn(false);
+  //     } else {
+  //       setButtonOn(true);
+  //       console.log("setButtonOn : true");
+  //     }
+  //   });
+
   // 커머스 버튼 색상변경 핸들러
   const onCommersHandler = (data) => {
     let itemSet = new Set(commersCheckedItems);
-    console.log(itemSet);
     if (commersCheckedItems.has(data)) {
       itemSet.delete(data);
       setCommersCheckedItems(itemSet);
@@ -25,7 +35,6 @@ const JoinSubmitQnaFirstModal = (props) => {
       itemSet.add(data);
       setCommersCheckedItems(itemSet);
     }
-    console.log(data, commersCheckedItems.values());
   };
 
   // 전문분야 버튼 색상변경 핸들러
@@ -39,6 +48,29 @@ const JoinSubmitQnaFirstModal = (props) => {
       setSpecialCheckedItems(itemSet);
     }
     console.log(data, specialCheckedItems.values());
+  };
+
+  const btnActivate = () => {
+    return (
+      <button
+        className="join_member_qna_select_confirm_first_btn_on"
+        onClick={onJoinSubmitQnaSecondModal}
+      >
+        다음으로
+      </button>
+    );
+  };
+
+  const btnDeactivate = () => {
+    return (
+      <button
+        className="join_member_qna_select_confirm_first_btn_off"
+        onClick={onJoinSubmitQnaSecondModal}
+        disabled
+      >
+        다음으로
+      </button>
+    );
   };
 
   const getJoinCategoryData = () => {
@@ -140,12 +172,7 @@ const JoinSubmitQnaFirstModal = (props) => {
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">
-        <a
-          className="join_member_qna_select_confirm_first_btn"
-          onClick={onJoinSubmitQnaSecondModal}
-        >
-          다음으로
-        </a>
+        {buttonOn ? btnActivate() : btnDeactivate()}
       </div>
     </>
   );
