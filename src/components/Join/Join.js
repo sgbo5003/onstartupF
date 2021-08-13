@@ -38,6 +38,9 @@ const Join = (props) => {
   // 관심분야 -> 체크된 버튼들을 담는 state
   const [interestCheckedItems, setInterestCheckedItems] = useState(new Set());
 
+  // 커머스 & 전문분야 & 관심분야 카테고리 저장
+  const [joinCategoryData, setJoinCategoryData] = useState([]);
+
   // 카카오 로그인
   const kakaoLoginHandler = () => {
     axios
@@ -156,17 +159,9 @@ const Join = (props) => {
     //회원가입 조건 다 만족 시 회원가입진행
     if (password && email && name && confirmPassword) {
       //   sessionStorage.setItem("email", email);
-      //    pushData();
+      // pushData();
       //   history.push("/");
       //   setIsLogin(!isLogin);
-      fnc.executeQuery({
-        url: "action/main/osu_category.php",
-        data: {},
-        currenturl: location.href,
-        success: (res) => {
-          // setCommerceData(res);
-        },
-      });
       setJoinSubmitModalOn(true);
     }
   };
@@ -174,7 +169,6 @@ const Join = (props) => {
   // 마지막 제출 기능 함수로 구현
   const onSubmit = (e) => {
     pushData();
-    console.log("회원가입 완료");
     // jwt token
     // const { accessToken } = response.data;
     //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
@@ -254,35 +248,36 @@ const Join = (props) => {
     console.log(e.target.value);
   };
 
-  //   // 데이터 POST 방식으로 보내기
-  //   const pushData = () => {
-  //     const params = new FormData();
-  //     params.append("name", name);
-  //     params.append("email", email);
-  //     params.append("password", password);
-  //     params.append("commerce", [...commersCheckedItems]);
-  //     params.append("specialty", [...specialCheckedItems]);
-  //     params.append("interesting", [...interestCheckedItems]);
-  //     // axios({
-  //     //   method: "post",
-  //     //   url: "/response/join_member_normal.php",
-  //     //   data: params,
-  //     // })
-  //     //   .then((response) => {
-  //     //     console.log(response);
-  //     //     console.log(response.data.user_idx);
-  //     //     sessionStorage.setItem("user_idx", response.data.user_idx);
-  //     //   })
-  //     //   .catch((error) => {
-  //     //     console.log(error);
-  //     //   });
-  //     fnc.executeQuery({
-  //       url: "action/member/join.php",
-  //       data: params,
-  //       currenturl: location.href,
-  //       success: (res) => {},
-  //     });
-  //   };
+  // 회원가입 data 보내기
+  const pushData = () => {
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+    params.append("name", name);
+    params.append("id", email);
+    params.append("password", password);
+    params.append("commerce", JSON.stringify([...commersCheckedItems]));
+    params.append("specialty", JSON.stringify([...specialCheckedItems]));
+    params.append("interesting", JSON.stringify([...interestCheckedItems]));
+    axios({
+      method: "post",
+      url: "action/member/join.php",
+      data: params,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // fnc.executeQuery({
+    //   url: "action/member/join.php",
+    //   data: params,
+    //   currenturl: location.href,
+    //   success: (res) => {},
+    // });
+    console.log([...commersCheckedItems]);
+  };
 
   // 실시간으로 state 변경 & 체크
   useEffect(() => {
@@ -446,6 +441,8 @@ const Join = (props) => {
           setCommersCheckedItems={setCommersCheckedItems}
           specialCheckedItems={specialCheckedItems}
           setSpecialCheckedItems={setSpecialCheckedItems}
+          joinCategoryData={joinCategoryData}
+          setJoinCategoryData={setJoinCategoryData}
         />
       </Modal>
       <Modal
@@ -456,6 +453,8 @@ const Join = (props) => {
           onSubmit={onSubmit}
           interestCheckedItems={interestCheckedItems}
           setInterestCheckedItems={setInterestCheckedItems}
+          joinCategoryData={joinCategoryData}
+          setJoinCategoryData={setJoinCategoryData}
         />
       </Modal>
     </>

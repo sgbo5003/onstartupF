@@ -135,32 +135,32 @@ const Write = () => {
   };
 
   const getCategoryData = () => {
-    // const params = new FormData();
-    // params.append("command", "ca");
-    // params.append("kind", "main");
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("category response :", response.data);
-    //     setCategoryData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    fnc.executeQuery({
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+    axios({
+      method: "post",
       url: "action/main/osu_category.php",
-      data: {},
-      currenturl: location.href,
-      success: (res) => {
-        setCategoryData(res);
-      },
-      fail: (err) => {
-        console.log(err);
-      },
-    });
+      data: params,
+    })
+      .then((response) => {
+        console.log("categoryData response :", response.data[1]);
+        setCategoryData(response.data[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // fnc.executeQuery({
+    //   url: "action/main/osu_category.php",
+    //   data: {},
+    //   currenturl: location.href,
+    //   success: (res) => {
+    //     setCategoryData(res);
+    //   },
+    //   fail: (err) => {
+    //     console.log(err);
+    //   },
+    // });
   };
 
   // 버튼 변경 & state 변경 실시간 감지

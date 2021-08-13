@@ -16,9 +16,9 @@ import * as fnc from "../../commonFunc/CommonFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import * as refreshActions from "../../modules/refresh";
 const Sidebar = () => {
-  const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
-  const dispatch = useDispatch();
-  const jwtToken = sessionStorage.getItem("jwtToken");
+  //   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
+  //   const dispatch = useDispatch();
+  //   const jwtToken = sessionStorage.getItem("jwtToken");
   const mainCategoryArray = [
     {
       link: "/",
@@ -79,14 +79,30 @@ const Sidebar = () => {
 
   // 카테고리 api 연동
   const getCategoryData = () => {
-    fnc.executeQuery({
+    // fnc.executeQuery({
+    //   url: "action/main/osu_category.php",
+    //   data: {},
+    //   currenturl: location.href,
+    //   success: (res) => {
+    //     setCategoryData(res);
+    //   },
+    // });
+    const params = new FormData();
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+
+    axios({
+      method: "post",
       url: "action/main/osu_category.php",
-      data: {},
-      currenturl: location.href,
-      success: (res) => {
-        setCategoryData(res);
-      },
-    });
+      data: params,
+    })
+      .then((response) => {
+        console.log("categoryData response :", response.data[1]);
+        setCategoryData(response.data[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -166,6 +182,7 @@ const Sidebar = () => {
                             <Link
                               to={`/MiddleCategory${item.value}`}
                               className="side_subsm_menu commerce_menu2"
+                              key={item}
                             >
                               {item.text}
                             </Link>
