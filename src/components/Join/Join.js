@@ -158,6 +158,7 @@ const Join = (props) => {
     console.log({ name, email, password, confirmPassword });
     //회원가입 조건 다 만족 시 회원가입진행
     if (password && email && name && confirmPassword) {
+      //
       //   sessionStorage.setItem("email", email);
       // pushData();
       //   history.push("/");
@@ -233,19 +234,16 @@ const Join = (props) => {
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
     setEmailError(validateEmail(e.target.value));
-    console.log(e.target.value);
   };
   // 비밀번호 변경 감지
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     setPasswordError(validatePassword(e.target.value));
-    console.log(e.target.value);
   };
   // 비밀번호 확인 변경 감지
   const onChangeConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
     setConfirmPasswordError(e.target.value !== password);
-    console.log(e.target.value);
   };
 
   // 회원가입 data 보내기

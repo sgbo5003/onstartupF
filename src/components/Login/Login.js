@@ -122,7 +122,9 @@ const Login = (props) => {
           {/* </form> */}
           <div className="login_help_group">
             <a className="service_center_login_btn">고객센터</a>
-            <a className="help_pass_btn">비밀번호를 잊으셨나요?</a>
+            <Link to="/FindPassword" className="help_pass_btn">
+              비밀번호를 잊으셨나요?
+            </Link>
           </div>
         </div>
       </div>
