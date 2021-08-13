@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import ContextMenuIcon from "../../images/Context_menu_icon1.png";
 import sideIcon1 from "../../images/Side_icon1.png";
 import sideIcon2 from "../../images/Side_icon2.png";
+import CategoryIcon1 from "../../images/Category_icon9.png";
+import CategoryIcon2 from "../../images/Category_icon10.png";
 
 const ReferenceSidebar = () => {
   const categoryArray = [
     {
-      src: "src/images/Context_menu_icon1.png",
+      src: CategoryIcon1,
       title: "PDF 교재",
     },
     {
-      src: "src/images/Context_menu_icon1.png",
+      src: CategoryIcon2,
       title: "상세페이지 제작",
     },
     {
@@ -93,9 +95,9 @@ const ReferenceSidebar = () => {
                   }`}
                   onClick={onCheckedTopItemsHandler}
                 >
-                  <span className="home_img_cove side_img_cove">
+                  <span className="reference_img_side_cove">
                     <img
-                      className="home_img"
+                      className="reference_img"
                       alt={data.imgAlt}
                       src={data.imgSrc}
                     />
