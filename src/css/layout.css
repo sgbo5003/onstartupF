@@ -5693,24 +5693,7 @@ progress::-webkit-progress-value {
   transform: translate(-50%, -50%);
 }
 
-/* 버튼 비활성화 css
-.join_member_submit_off {
-    position: relative;
-    width: 100%;
-    height: 70px;
-    line-height: 70px;
-    font-size: 1.625rem;
-    font-weight: 500;
-    text-align: center;
-    background-color: #bbb;
-    color: #fff;
-    border: 0px;
-    border-radius: 6px;
-}
-
-*/
-
-.join_member_qna_select_confirm_first_btn {
+.join_member_qna_select_confirm_first_btn_off {
   display: inline-block;
   height: 37px;
   line-height: 32px;
@@ -5724,5 +5707,20 @@ progress::-webkit-progress-value {
   box-sizing: border-box;
   margin-left: 37px;
   width: 79%;
-  cursor: pointer;
+}
+
+.join_member_qna_select_confirm_first_btn_on {
+  display: inline-block;
+  height: 37px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #d5b778;
+  border: 0px;
+  box-sizing: border-box;
+  margin-left: 37px;
+  width: 79%;
 }
