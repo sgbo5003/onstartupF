@@ -4711,6 +4711,7 @@ select::-ms-expand {
 
 .join_btn_selected {
   background-color: #bda26b;
+  color: #ffffff;
 }
 
 .join_member_qna_select_confirm_btn_container {
@@ -5670,4 +5671,58 @@ progress::-webkit-progress-value {
   margin-bottom: 1em;
   width: 29%;
   margin-right: 1.5%;
+}
+
+.reference_img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+}
+
+.reference_img_side_cove {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 70px;
+  height: 70px;
+  margin-left: 2%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 버튼 비활성화 css
+.join_member_submit_off {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    font-size: 1.625rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: #bbb;
+    color: #fff;
+    border: 0px;
+    border-radius: 6px;
+}
+
+*/
+
+.join_member_qna_select_confirm_first_btn {
+  display: inline-block;
+  height: 37px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #bbb;
+  border: 0px;
+  box-sizing: border-box;
+  margin-left: 37px;
+  width: 79%;
+  cursor: pointer;
 }
