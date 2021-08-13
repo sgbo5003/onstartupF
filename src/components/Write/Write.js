@@ -16,6 +16,7 @@ const Write = () => {
   const [image, setImage] = useState();
   const [url, setUrl] = useState("");
   const [selectModalOn, setSelectModalOn] = useState(false); // 분야 선택을 띄우기 위해 체크할 수 있는 state
+  const [portfolioModalOn, setPortfolioModalOn] = useState(false); // 분야 선택 -> 포트폴리오 관련 모달을 띄우기 위해 체크할 수 있는 state
   const [confirmModalOn, setConfirmModalOn] = useState(false); // confirmModal을 띄우기 위해 체크할 수 있는 state
   const [submitIsTrueModal, setSubmitIsTrueModalOn] = useState(false); // 등록하기 => true 체크
   const [submitIsFalseModal, setSubmitIsFalseModalOn] = useState(false); // 등록하기 => false 체크
