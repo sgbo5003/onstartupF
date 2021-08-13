@@ -10,6 +10,7 @@ import WriteConfirmModal from "./WriteConfirmModal";
 import WriteSubmitIsTrueModal from "./WriteSubmitIsTrueModal";
 import WriteSubmitIsFalseModal from "./WriteSubmitIsFalseModal";
 import * as fnc from "../../commonFunc/CommonFunctions";
+import WritePortfolioModal from "./WritePortfolioModal";
 
 const Write = () => {
   const [content, setContent] = useState("");
@@ -26,6 +27,7 @@ const Write = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [category, setCategory] = useState([]);
 
+  console.log(selectModalOn);
   const onDetailButtonClick = () => {
     setDetailBtnOn(!detailBtnOn);
   };
@@ -51,11 +53,17 @@ const Write = () => {
   };
 
   const onOpenModal = () => {
+    console.log("clicked");
     setSelectModalOn(!selectModalOn);
   };
 
   const onConfirmModal = () => {
     setConfirmModalOn(!confirmModalOn);
+  };
+
+  const onPortfolioModal = () => {
+    setPortfolioModalOn(true);
+    setSelectModalOn(false);
   };
 
   const onSubmitFalseModal = () => {
@@ -169,9 +177,9 @@ const Write = () => {
     checkBtnOn();
   });
 
-  useEffect(() => {
-    getCategoryData();
-  }, []);
+  //   useEffect(() => {
+  //     getCategoryData();
+  //   }, []);
 
   return (
     <div className="wap write_wap">
@@ -287,7 +295,6 @@ const Write = () => {
             ) : (
               ""
             )}
-
             <div name="write_url_form">
               <input
                 type="text"
@@ -328,6 +335,7 @@ const Write = () => {
                     selectModalOn={selectModalOn}
                     categoryData={categoryData}
                     setCategoryData={setCategoryData}
+                    onPortfolioModal={onPortfolioModal}
                   />
                 ) : (
                   <WriteSelectModal
@@ -339,6 +347,7 @@ const Write = () => {
                     setCategoryData={setCategoryData}
                   />
                 )}
+                {portfolioModalOn ? <WritePortfolioModal /> : ""}
               </div>
             </div>
           </section>

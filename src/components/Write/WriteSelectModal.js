@@ -10,6 +10,7 @@ const WriteSelectModal = (props) => {
     selectModalOn,
     categoryData,
     setCategoryData,
+    onPortfolioModal,
   } = props;
 
   return (
@@ -23,15 +24,18 @@ const WriteSelectModal = (props) => {
                 <img src={BackImg} alt="back.png" />
               </span>
             </div>
-            <ul className="write_select_li" onClick={onOpenModal}>
+            <ul className="write_select_li">
               <li>
-                <a className="write_select_first_list">
+                <a
+                  className="write_select_first_list"
+                  onClick={onPortfolioModal}
+                >
                   마이페이지 > 포트폴리오
                 </a>
               </li>
               {categoryData.slice(1).map((data, idx) => {
                 return (
-                  <li key={idx}>
+                  <li key={idx} onClick={onOpenModal}>
                     <a
                       className="write_select_list"
                       onClick={() => {
