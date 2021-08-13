@@ -29,7 +29,7 @@ const WriteSelectModal = (props) => {
                   마이페이지 > 포트폴리오
                 </a>
               </li>
-              {categoryData.map((data, idx) => {
+              {categoryData.slice(1).map((data, idx) => {
                 return (
                   <li key={idx}>
                     <a
