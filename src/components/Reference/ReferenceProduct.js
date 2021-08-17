@@ -71,7 +71,13 @@ const ReferenceProduct = () => {
           </div>
         </div>
       </div>
-      {referenceChargeCoinModalOn ? <ReferenceChargeCoinConfirmModal /> : ""}
+      {referenceChargeCoinModalOn ? (
+        <ReferenceChargeCoinConfirmModal
+          setReferenceChargeCoinModalOn={setReferenceChargeCoinModalOn}
+        />
+      ) : (
+        ""
+      )}
     </>
   );
 };
