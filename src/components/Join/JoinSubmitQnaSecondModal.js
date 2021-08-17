@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import * as fnc from "../../commonFunc/CommonFunctions";
 import _ from "lodash";
 
 const JoinSubmitQnaSecondModal = (props) => {
@@ -53,26 +54,25 @@ const JoinSubmitQnaSecondModal = (props) => {
     params.append("token", sessionStorage.getItem("token"));
     params.append("currenturl", location.href);
 
-    axios({
-      method: "post",
+    // axios({
+    //   method: "post",
+    //   url: "action/main/osu_category.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("category response :", response.data[1]);
+    //     setJoinCategoryData(response.data[1]);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
       url: "action/main/osu_category.php",
       data: params,
-    })
-      .then((response) => {
-        console.log("category response :", response.data[1]);
-        setJoinCategoryData(response.data[1]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // fnc.executeQuery({
-    //   url: "action/main/osu_category.php",
-    //   data: {},
-    //   currenturl: location.href,
-    //   success: (res) => {
-    //     setJoinCategoryData(res);
-    //   },
-    // });
+      success: (res) => {
+        setJoinCategoryData(res);
+      },
+    });
   };
 
   useEffect(() => {

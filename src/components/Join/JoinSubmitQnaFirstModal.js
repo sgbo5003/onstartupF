@@ -122,13 +122,13 @@ const JoinSubmitQnaFirstModal = (props) => {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    // const params = new FormData();
-    // params.append("currenturl", location.href);
-    // params.append("token", sessionStorage.getItem("token"));
+    const params = new FormData();
+    params.append("currenturl", location.href);
+    params.append("token", sessionStorage.getItem("token"));
 
     fnc.executeQuery({
       url: "action/main/osu_category.php",
-      data: {},
+      data: params,
       success: (res) => {
         setJoinCategoryData(res);
       },

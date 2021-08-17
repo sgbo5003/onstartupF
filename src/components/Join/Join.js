@@ -175,7 +175,9 @@ const Join = (props) => {
     //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
     // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     // history.push("/");
-    // location.reload();
+    // // location.reload();
+    // alert("회원가입 완료");
+    // history.push("/Login");
   };
 
   // 이메일 유효성 검사
@@ -248,33 +250,39 @@ const Join = (props) => {
 
   // 회원가입 data 보내기
   const pushData = () => {
-    const params = new FormData();
-    params.append("token", sessionStorage.getItem("token"));
-    params.append("currenturl", location.href);
-    params.append("name", name);
-    params.append("id", email);
-    params.append("password", password);
-    params.append("commerce", JSON.stringify([...commersCheckedItems]));
-    params.append("specialty", JSON.stringify([...specialCheckedItems]));
-    params.append("interesting", JSON.stringify([...interestCheckedItems]));
-    axios({
-      method: "post",
-      url: "action/member/join.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // fnc.executeQuery({
+    // const params = new FormData();
+    // params.append("token", sessionStorage.getItem("token"));
+    // params.append("currenturl", location.href);
+    // params.append("name", name);
+    // params.append("id", email);
+    // params.append("password", password);
+    // params.append("commerce", JSON.stringify([...commersCheckedItems]));
+    // params.append("specialty", JSON.stringify([...specialCheckedItems]));
+    // params.append("interesting", JSON.stringify([...interestCheckedItems]));
+    // axios({
+    //   method: "post",
     //   url: "action/member/join.php",
     //   data: params,
-    //   currenturl: location.href,
-    //   success: (res) => {},
-    // });
-    console.log([...commersCheckedItems]);
+    // })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    fnc.executeQuery({
+      url: "action/member/join.php",
+      data: {
+        id: email,
+        name: name,
+        password: password,
+        commerce: JSON.stringify([...commersCheckedItems]),
+        specialty: JSON.stringify([...specialCheckedItems]),
+        interesting: JSON.stringify([...interestCheckedItems]),
+      },
+      success: (res) => {},
+    });
   };
 
   // 실시간으로 state 변경 & 체크
