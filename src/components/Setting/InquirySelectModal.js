@@ -6,13 +6,13 @@ const InquirySelectModal = (props) => {
   const { selectModalHandler, setCategory } = props;
 
   return (
-    <div class="write_select_popup_cove_on">
-      <div class="write_select_popup">
+    <div className="write_select_popup_cove_on">
+      <div className="write_select_popup">
         <ul>
           <li>
-            <div class="write_select_popup_title">
+            <div className="write_select_popup_title">
               분야 선택
-              <span class="write_select_popup_back">
+              <span className="write_select_popup_back">
                 <img
                   src={BackImg}
                   alt="back.png"
@@ -20,12 +20,12 @@ const InquirySelectModal = (props) => {
                 />
               </span>
             </div>
-            <ul class="write_select_li">
+            <ul className="write_select_li">
               {arr.map((data) => {
                 return (
                   <li>
                     <a
-                      class="write_select_list"
+                      className="write_select_list"
                       onClick={() => {
                         setCategory(data);
                       }}
