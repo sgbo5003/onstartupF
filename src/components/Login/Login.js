@@ -25,35 +25,39 @@ const Login = (props) => {
 
   const getData = () => {
     const params = new FormData();
-    params.append("user_email", inputEmail);
-    params.append("user_password", inputPassword);
+    params.append("token", sessionStorage.getItem("token"));
+    params.append("currenturl", location.href);
+    params.append("id", inputEmail);
+    params.append("password", inputPassword);
+
     axios({
       method: "post",
-      url: "/response/login.php",
+      url: "action/member/login.php",
       data: params,
     })
       .then((response) => {
-        console.log(response.data.idx);
-        if (response.data.error === 0) {
-          sessionStorage.setItem("user_idx", response.data.user_idx);
-          alert("로그인 성공");
-          console.log(response.data);
-          //   history.push("/");
-          //   return setIsLogin(!isLogin);
-          console.log("로그인 하고 난 이후 로그인 상태 : ", isLogin);
+        // console.log(response.data.idx);
+        // if (response.data.error === 0) {
+        //   sessionStorage.setItem("user_idx", response.data.user_idx);
+        //   alert("로그인 성공");
+        //   console.log(response.data);
+        //   //   history.push("/");
+        //   //   return setIsLogin(!isLogin);
+        //   console.log("로그인 하고 난 이후 로그인 상태 : ", isLogin);
 
-          // jwt token
-          // const { accessToken } = response.data;
-          //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-          // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        } else {
-          alert("로그인 에러");
-          console.log(response.data);
-          setInputEmail("");
-          setInputPassword("");
-        }
-        console.log(inputEmail);
-        console.log(inputPassword);
+        //   // jwt token
+        //   // const { accessToken } = response.data;
+        //   //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        //   // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        // } else {
+        //   alert("로그인 에러");
+        //   console.log(response.data);
+        //   setInputEmail("");
+        //   setInputPassword("");
+        // }
+        // console.log(inputEmail);
+        // console.log(inputPassword);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -84,7 +88,7 @@ const Login = (props) => {
               type="email"
               placeholder="이메일 입력"
               name="new_email"
-              maxLength="20"
+              maxLength="30"
               value={inputEmail}
               onChange={onChangeInputEmail}
               required
