@@ -7,3 +7,7 @@
 .jss1 .carousel {
   height: 500px;
 }
+
+.CarouselItem > div > div img {
+  width: 100%;
+}

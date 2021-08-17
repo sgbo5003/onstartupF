@@ -64,7 +64,7 @@
 .home_slide_cove {
   position: relative;
   width: 100%;
-  margin-top: 80px;
+  /* margin-top: 80px; */
 }
 /* .home_slide_arrow {
   position: absolute;
@@ -893,7 +893,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 540px;
   height: 356px;
   border-radius: 6px;
   background-color: #fff;
@@ -1113,7 +1113,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  /* width: 100%; */
+  width: 489px;
+  height: 395px;
   border-radius: 6px;
   background-color: #fff;
 }
@@ -3083,6 +3085,7 @@
 .notice_wap {
   padding-left: 20.625em;
   padding-right: 20.625em;
+  padding-top: 6%;
   margin-bottom: 119px;
 }
 .notice_content {
@@ -4024,9 +4027,11 @@ select::-ms-expand {
   position: relative;
   margin: 0 auto;
   top: 50%;
-  left: 50%;
+  /* left: 50%; */
+  left: 30%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  /* width: 100%; */
+  width: 470px;
   height: 356px;
   border-radius: 6px;
   background-color: #fff;
@@ -4652,10 +4657,13 @@ select::-ms-expand {
   margin: 0 auto;
   z-index: 120;
   top: 50%;
-  left: 50%;
+  /* left: 50%; */
+  left: 30%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 67%;
+  /* width: 100%;
+  height: 67%; */
+  width: 510px;
+  height: 450px;
   padding: 20px;
   border-radius: 6px;
   background-color: #fff;
@@ -4664,6 +4672,10 @@ select::-ms-expand {
 .join_member_qna_title_container {
   margin-right: 32px;
   margin-bottom: 18px;
+}
+
+.join_member_qna_commers_container {
+  margin-bottom: 30px;
 }
 .join_member_qna_Qtitle {
   font-size: 1.275rem;
@@ -4719,7 +4731,7 @@ select::-ms-expand {
   position: relative;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 .join_member_qna_select_confirm_btn {
   display: inline-block;
@@ -5724,4 +5736,29 @@ progress::-webkit-progress-value {
   box-sizing: border-box;
   margin-left: 37px;
   width: 79%;
+}
+
+.write_portfolio_modal_popup {
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+  height: 356px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.write_portfolio_modal_popup > div {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  padding: 1.25em;
+}
+.write_portfolio_modal_popup > div > p:first-child {
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
 }
