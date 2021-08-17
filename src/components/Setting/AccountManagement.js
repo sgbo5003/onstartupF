@@ -60,7 +60,7 @@ const AccountManagement = () => {
               id="userEmail"
               type="email"
               name="new_email"
-              maxlength="20"
+              maxLength="20"
               placeholder="이메일 입력"
               onChange={onChangeInputEmail}
             />

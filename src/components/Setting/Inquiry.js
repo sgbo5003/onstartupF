@@ -68,7 +68,7 @@ const inquiry = () => {
                   placeholder="이메일 주소"
                   value={email}
                   onChange={onChangeEmail}
-                  maxlength="20"
+                  maxLength="20"
                   className="comment_inquiry_group inq_email_text inq_text_checked inquiry_text_box"
                 />
                 <div

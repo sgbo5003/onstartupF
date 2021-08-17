@@ -12,7 +12,7 @@ const ChangePassword = () => {
               className="regit_pass_text_box now_pass_text"
               type="password"
               name="now_pass"
-              maxlength="12"
+              maxLength="12"
               placeholder="현재 비밀번호 입력"
             />
             <p>새 비밀번호</p>
@@ -20,7 +20,7 @@ const ChangePassword = () => {
               className="regit_pass_text_box new_pass_text"
               type="password"
               name="new_pass"
-              maxlength="12"
+              maxLength="12"
               placeholder="새 비밀번호 입력"
             />
             <div id="error_pass" className="result-pass result-check"></div>
@@ -29,7 +29,7 @@ const ChangePassword = () => {
               className="regit_pass_text_box re_pass_text"
               type="password"
               name="re_pass"
-              maxlength="12"
+              maxLength="12"
               placeholder="새 비밀번호 입력"
             />
             <div
