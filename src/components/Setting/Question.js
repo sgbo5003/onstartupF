@@ -1,17 +1,48 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Question = () => {
+  const boardList = [
+    {
+      boardNo: 1,
+      boardWriter: "박상준",
+      boardCategory: "카테고리1",
+      boardTitle: "게시글1",
+      boardDate: new Date(),
+    },
+    {
+      boardNo: 2,
+      boardWriter: "홍길동",
+      boardCategory: "카테고리2",
+      boardTitle: "게시글2",
+      boardDate: new Date(),
+    },
+    {
+      boardNo: 3,
+      boardWriter: "아무개",
+      boardCategory: "카테고리3",
+      boardTitle: "게시글3",
+      boardDate: new Date(),
+    },
+    {
+      boardNo: 4,
+      boardWriter: "세종대왕",
+      boardCategory: "카테고리4",
+      boardTitle: "게시글4",
+      boardDate: new Date(),
+    },
+  ];
   return (
-    <div class="wap fq_wap">
-      <div class="fq_content">
-        <div class="fq_view">
-          <div class="fq_top_bar">
-            <h2 class="fq_view_title">
+    <div className="wap fq_wap">
+      <div className="fq_content">
+        <div className="fq_view">
+          <div className="fq_top_bar">
+            <h2 className="fq_view_title">
               자주 묻는 질문
               <span>고객님들께서 가장 자주 묻는 질문들을 모았습니다.</span>
             </h2>
-            <div class="fq_category_selectbox">
-              <select class="fq_category_select">
+            <div className="fq_category_selectbox">
+              <select className="fq_category_select">
                 <option selected disabled>
                   카테고리 선택
                 </option>
@@ -22,81 +53,44 @@ const Question = () => {
               </select>
             </div>
           </div>
-          <section class="fq_con fq_sty">
-            <table class="fq_table_list">
+          <section className="fq_con fq_sty">
+            <table className="fq_table_list">
               <thead>
                 <tr>
                   <th>번호</th>
                   <th>카테고리</th>
                   <th>제목</th>
+                  <th>작성일</th>
                 </tr>
               </thead>
-              <tbody class="tbody_num">
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">1</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">2</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">3</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">4</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">5</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">6</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">7</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">8</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">9</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
-                <tr onMouseOut=" window.status = '' ">
-                  <td class="fq_tr_num">10</td>
-                  <td class="fq_tr_ctn">카테고리명</td>
-                  <td class="fq_tr_tit">Lorem ipsum dolor sit amet</td>
-                </tr>
+              <tbody className="tbody_num">
+                {boardList.map((data) => {
+                  return (
+                    <tr onMouseOut=" window.status = '' ">
+                      <td className="fq_tr_num">{data.boardNo}</td>
+                      <td className="fq_tr_ctn">{data.boardCategory}</td>
+                      <td className="fq_tr_tit">{data.boardTitle}</td>
+                      <td className="fq_tr_tit">
+                        {data.boardDate.toLocaleDateString("ko-KR")}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
-            <div class="no_paging">
-              <span class="prev">
-                <a class="pasing_arrow">&lt;</a>
+            <div className="no_paging">
+              <span className="prev">
+                <a className="pasing_arrow">&lt;</a>
               </span>
-              <a class="no_paging_active">1</a>
+              <a className="no_paging_active">1</a>
               <a>2</a>
               <a>3</a>
-              <span class="next">
-                <a class="pasing_arrow">&gt;</a>
+              <span className="next">
+                <a className="pasing_arrow">&gt;</a>
               </span>
             </div>
-            <div class="no_write_btn">
-              <a>글쓰기</a>
+            <div className="no_write_btn">
+              <Link to="/QuestionWrite">글쓰기</Link>
             </div>
           </section>
         </div>
