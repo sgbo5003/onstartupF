@@ -27,7 +27,6 @@ const Write = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [category, setCategory] = useState([]);
 
-  console.log(selectModalOn);
   const onDetailButtonClick = () => {
     setDetailBtnOn(!detailBtnOn);
   };
@@ -53,7 +52,6 @@ const Write = () => {
   };
 
   const onOpenModal = () => {
-    console.log("clicked");
     setSelectModalOn(!selectModalOn);
   };
 
@@ -144,32 +142,28 @@ const Write = () => {
   };
 
   const getCategoryData = () => {
-    const params = new FormData();
-    params.append("token", sessionStorage.getItem("token"));
-    params.append("currenturl", location.href);
-    axios({
-      method: "post",
-      url: "action/main/osu_category.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("categoryData response :", response.data[1]);
-        setCategoryData(response.data[1]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // fnc.executeQuery({
+    // const params = new FormData();
+    // params.append("token", sessionStorage.getItem("token"));
+    // params.append("currenturl", location.href);
+    // axios({
+    //   method: "post",
     //   url: "action/main/osu_category.php",
-    //   data: {},
-    //   currenturl: location.href,
-    //   success: (res) => {
-    //     setCategoryData(res);
-    //   },
-    //   fail: (err) => {
-    //     console.log(err);
-    //   },
-    // });
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("categoryData response :", response.data[1]);
+    //     setCategoryData(response.data[1]);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
+      url: "action/main/osu_category.php",
+      data: {},
+      success: (res) => {
+        setCategoryData(res);
+      },
+    });
   };
 
   // 버튼 변경 & state 변경 실시간 감지
@@ -177,9 +171,9 @@ const Write = () => {
     checkBtnOn();
   });
 
-  //   useEffect(() => {
-  //     getCategoryData();
-  //   }, []);
+  useEffect(() => {
+    getCategoryData();
+  }, []);
 
   return (
     <div className="wap write_wap">

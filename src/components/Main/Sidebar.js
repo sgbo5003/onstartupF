@@ -79,30 +79,30 @@ const Sidebar = () => {
 
   // 카테고리 api 연동
   const getCategoryData = () => {
-    // fnc.executeQuery({
-    //   url: "action/main/osu_category.php",
-    //   data: {},
-    //   currenturl: location.href,
-    //   success: (res) => {
-    //     setCategoryData(res);
-    //   },
-    // });
-    const params = new FormData();
-    params.append("token", sessionStorage.getItem("token"));
-    params.append("currenturl", location.href);
-
-    axios({
-      method: "post",
+    fnc.executeQuery({
       url: "action/main/osu_category.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("categoryData response :", response.data[1]);
-        setCategoryData(response.data[1]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      data: {},
+      currenturl: location.href,
+      success: (res) => {
+        setCategoryData(res);
+      },
+    });
+    // const params = new FormData();
+    // params.append("token", sessionStorage.getItem("token"));
+    // params.append("currenturl", location.href);
+
+    // axios({
+    //   method: "post",
+    //   url: "action/main/osu_category.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("categoryData response :", response.data);
+    //     setCategoryData(response.data[1]);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   useEffect(() => {
@@ -143,7 +143,7 @@ const Sidebar = () => {
             <li className="side_title">CATEGORY</li>
             {/*카테고리 하위 항목들 */}
             <ul className="side_sub">
-              {categoryData.map((data, index) => {
+              {categoryData.slice(1).map((data, index) => {
                 return (
                   <li
                     className="side_sub_bar"

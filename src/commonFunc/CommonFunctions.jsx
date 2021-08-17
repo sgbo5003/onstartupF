@@ -8,18 +8,25 @@ export const executeQuery = ({
   error,
   fail,
 }) => {
-  const token = sessionStorage.getItem("token");
+  //   const token = sessionStorage.getItem("token");
   //   const keypass = sessionStorage.getItem("keypass");
   axios.defaults.baseURL = "https://api.on-startup.co.kr/";
   //   axios.defaults.withCredentials = true;
-  data.token = token;
+  //   data.token = token;
+
+  //   data = new FormData();
+
   //   data.keypass = keypass;
-  data.currenturl = currenturl;
+  //   data.currenturl = currenturl;
+
+  const params = new FormData();
+  params.append("currenturl", location.href);
+  params.append("token", sessionStorage.getItem("token"));
 
   axios({
     method: "post",
     url,
-    data: data || {},
+    data: params || {},
   })
     .then((res) => {
       if (res.data[0].response === "error") {
