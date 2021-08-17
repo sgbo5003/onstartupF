@@ -45,6 +45,7 @@
     "axios": "^0.21.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "immutable": "^4.0.0-rc.14",
+    "lodash": "^4.17.21",
     "react-hook-form": "^7.10.1",
     "react-icons": "^4.2.0",
     "react-immutable-proptypes": "^2.2.0",

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 
 const JoinSubmitQnaSecondModal = (props) => {
   const {
@@ -10,6 +11,15 @@ const JoinSubmitQnaSecondModal = (props) => {
     setJoinCategoryData,
   } = props;
 
+  const [buttonOn, setButtonOn] = useState(true);
+
+  useEffect(() => {
+    if (_.isEmpty(interestCheckedItems) == true) {
+      setButtonOn(false);
+    } else {
+      setButtonOn(true);
+    }
+  }, [interestCheckedItems]);
   // 관심분야 item들을 제어하는 함수
   const onInterestHandler = (data) => {
     let itemSet = new Set(interestCheckedItems);
@@ -69,6 +79,29 @@ const JoinSubmitQnaSecondModal = (props) => {
     getJoinCategoryData();
   }, []);
 
+  const btnActivate = () => {
+    return (
+      <button
+        className="join_member_qna_select_confirm_first_btn_on"
+        onClick={onSubmit}
+      >
+        선택완료
+      </button>
+    );
+  };
+
+  const btnDeactivate = () => {
+    return (
+      <button
+        className="join_member_qna_select_confirm_first_btn_off"
+        onClick={onSubmit}
+        disabled
+      >
+        선택완료
+      </button>
+    );
+  };
+
   return (
     <>
       <div className="join_member_qna_title_container">
@@ -98,9 +131,7 @@ const JoinSubmitQnaSecondModal = (props) => {
         </div>
       </div>
       <div className="join_member_qna_select_confirm_btn_container">
-        <a className="join_member_qna_select_confirm_btn" onClick={onSubmit}>
-          선택완료
-        </a>
+        {buttonOn ? btnActivate() : btnDeactivate()}
       </div>
     </>
   );
