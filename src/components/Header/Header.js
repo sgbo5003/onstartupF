@@ -12,6 +12,7 @@ import defaultUserImg from "../../images/default_user.png";
 
 const Header = (props) => {
   const [isDropClick, setIsDropClick] = useState(false);
+  const [alarmClick, setAlarmClick] = useState(false);
   const jwtToken = sessionStorage.getItem("jwtToken");
 
   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
@@ -19,6 +20,10 @@ const Header = (props) => {
   // const outside = useRef();
   const onDropClicked = () => {
     setIsDropClick(!isDropClick);
+  };
+
+  const onAlarmClicked = () => {
+    setAlarmClick(!alarmClick);
   };
 
   return (
@@ -82,20 +87,24 @@ const Header = (props) => {
           )}
           {/*알림 아이콘*/}
           <p className="Qmenu_list">
-            <a className="Qmenu_item_cove Qmenu2">
+            <a className="Qmenu_item_cove Qmenu2" onClick={onAlarmClicked}>
               <img
                 className="Qmenu_item Qmenu_padding"
                 src={QmenuIcon2Img}
                 alt="Qmenu_icon2.png"
               />
             </a>
-            <a className="message_active_cove">
-              <img
-                className="message_active"
-                src={messageActiveImg}
-                alt="message_active"
-              />
-            </a>
+            {alarmClick ? (
+              <a className="message_active_cove">
+                <img
+                  className="message_active"
+                  src={messageActiveImg}
+                  alt="message_active"
+                />
+              </a>
+            ) : (
+              ""
+            )}
           </p>
           {/* <div className="Qmenu_bar2" id="alram_cove">
               <span className="tail" id="alram_tail">
