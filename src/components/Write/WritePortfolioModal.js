@@ -1,7 +1,10 @@
 import React from "react";
 const WritePortfolioModal = (props) => {
+  const { setPortfolioModalOn } = props;
+  const onClickButton = () => {
+    setPortfolioModalOn(false);
+  };
   return (
-    // <div className={props.classOnOff}>
     <div className="write_comment_popup_cove_on">
       <div className="write_portfolio_modal_popup">
         <h3 className="write_comment_title">
@@ -10,7 +13,12 @@ const WritePortfolioModal = (props) => {
         </h3>
         <div>
           <p>
-            <a className="comment_write_btn comment_write_regi">확인</a>
+            <a
+              className="comment_write_btn comment_write_regi"
+              onClick={onClickButton}
+            >
+              확인
+            </a>
           </p>
         </div>
       </div>
