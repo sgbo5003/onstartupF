@@ -56,10 +56,9 @@ const Header = (props) => {
             </p>
           </div>
         )}
-
         {jwtToken && (
           <h1 className="mypage_area">
-            <Link className="mypage_photo_cove" to="/MypageOther">
+            <Link className="mypage_photo_cove" to="/MypageInitial">
               <img
                 className="mypage_photo"
                 src={defaultUserImg}
