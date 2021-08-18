@@ -4,9 +4,7 @@ import googleImg from "../../images/google.png";
 import kakaoImg from "../../images/kakao.png";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
-import { KAKAO_AUTH_URL } from "../../OAuth";
-import { NAVER_AUTH_URL } from "../../OAuth";
+import KakaoLogin from "react-kakao-login";
 import JoinSubmitModal from "./JoinSubmitModal";
 import JoinSubmitQnaFirstModal from "./JoinSubmitQnaFirstModal";
 import JoinSubmitQnaSecondModal from "./JoinSubmitQnaSecondModal";
@@ -16,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as refreshActions from "../../modules/refresh";
 
 const Join = (props) => {
+  const kakaoAppKey = "bd83d0a39d192921732e44fd8f838bdd";
   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
   const dispatch = useDispatch();
   const { naver } = window;
@@ -45,64 +44,42 @@ const Join = (props) => {
   // 커머스 & 전문분야 & 관심분야 카테고리 저장
   const [joinCategoryData, setJoinCategoryData] = useState([]);
 
-  // 카카오 로그인
-  const kakaoLoginHandler = () => {
-    axios
-      .get(KAKAO_AUTH_URL)
-      .then((response) => {
-        console.log(response);
-        if (response.data.error === 3) {
-          sessionStorage.setItem(
-            "kakaoLoginStatus",
-            JSON.stringify(response.data.error)
-          );
-          history.push("/");
-          window.location.replace("/");
-        } else if (response.data.error === 2) {
-          alert("필수항목을 체크해주세요.");
-        } else if (response.data.error === 1) {
-          alert("토큰오류");
-        } else {
-          location.replace(
-            "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost:8080%26client_id%3D4626efd0ab72ba3533e4947b9b02c37f"
-          );
-          sessionStorage.setItem("kakaoLogin", "true");
-          window.location.replace("/");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const kakaoSuccess = (data) => {
+    const social_id = data.profile.id;
+
+    console.log(social_id);
+    console.log(data);
+    // setJoinSubmitQnaModalOn(true);
   };
 
-  //네이버 로그인
-  const NaverLoginHandler = () => {
-    axios
-      .get(NAVER_AUTH_URL)
-      .then((response) => {
-        console.log(response);
-        if (response.data.error === 3) {
-          sessionStorage.setItem(
-            "naverLoginStatus",
-            JSON.stringify(response.data.error)
-          );
-          history.push("/");
-          window.location.replace("/");
-          console.log(response.data.error);
-        } else if (response.data.error === 2) {
-          alert("필수항목을 체크해주세요.");
-        } else if (response.data.error === 1) {
-          alert("토큰오류");
-        } else {
-          location.replace(
-            "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=jxNOYlz8FOqMBba83QbQ&redirect_uri=http://localhost:8080"
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   //네이버 로그인
+  //   const NaverLoginHandler = () => {
+  //     axios
+  //       .get(NAVER_AUTH_URL)
+  //       .then((response) => {
+  //         console.log(response);
+  //         if (response.data.error === 3) {
+  //           sessionStorage.setItem(
+  //             "naverLoginStatus",
+  //             JSON.stringify(response.data.error)
+  //           );
+  //           history.push("/");
+  //           window.location.replace("/");
+  //           console.log(response.data.error);
+  //         } else if (response.data.error === 2) {
+  //           alert("필수항목을 체크해주세요.");
+  //         } else if (response.data.error === 1) {
+  //           alert("토큰오류");
+  //         } else {
+  //           location.replace(
+  //             "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=jxNOYlz8FOqMBba83QbQ&redirect_uri=http://localhost:8080"
+  //           );
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
   // 회원가입 버튼 비활성화
   function btnDeactivate() {
@@ -300,11 +277,15 @@ const Join = (props) => {
                 </p>
               </section>
 
-              <section className="kakao_form" onClick={kakaoLoginHandler}>
-                <p>
+              <section className="kakao_form">
+                <KakaoLogin
+                  token={kakaoAppKey}
+                  onSuccess={kakaoSuccess}
+                  onFail={console.log}
+                >
                   <img src={kakaoImg} alt="kakao" />
                   카카오 3초만에 가입하기
-                </p>
+                </KakaoLogin>
               </section>
               <section className="login_form_line">
                 <p>또는</p>
@@ -401,7 +382,6 @@ const Join = (props) => {
               <section
                 className="naver_form"
                 // id="naverIdLogin"
-                onClick={NaverLoginHandler}
               >
                 <p>
                   <img src={naverImg} alt="naver" />
