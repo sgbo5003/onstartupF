@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import combineReducers from "./modules/index";
 
 // axios.defaults.baseURL = "http://15.164.227.114/web/src/php/get_info.php?comment=1";
-axios.defaults.baseURL = "https://api.on-startup.co.kr/";
+// axios.defaults.baseURL = "https://api.on-startup.co.kr/";
 
 // refreshToken cookie를 주고받을 수 있다.
 // axios.defaults.withCredentials = true;
