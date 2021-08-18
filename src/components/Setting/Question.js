@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Question = () => {
+  const history = useHistory();
   const boardList = [
     {
       boardNo: 1,
@@ -66,7 +67,12 @@ const Question = () => {
               <tbody className="tbody_num">
                 {boardList.map((data) => {
                   return (
-                    <tr onMouseOut=" window.status = '' ">
+                    <tr
+                      onMouseOut=" window.status = '' "
+                      onClick={() => {
+                        history.push("/QuestionDetail");
+                      }}
+                    >
                       <td className="fq_tr_num">{data.boardNo}</td>
                       <td className="fq_tr_ctn">{data.boardCategory}</td>
                       <td className="fq_tr_tit">{data.boardTitle}</td>
