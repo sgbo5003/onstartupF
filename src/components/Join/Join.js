@@ -12,8 +12,12 @@ import JoinSubmitQnaFirstModal from "./JoinSubmitQnaFirstModal";
 import JoinSubmitQnaSecondModal from "./JoinSubmitQnaSecondModal";
 import Modal from "../../Modal";
 import * as fnc from "../../commonFunc/CommonFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import * as refreshActions from "../../modules/refresh";
 
 const Join = (props) => {
+  const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
+  const dispatch = useDispatch();
   const { naver } = window;
   const [name, setName] = useState(""); // 이름
   const [nameError, setNameError] = useState(false); // 이름 오류체크
@@ -170,14 +174,16 @@ const Join = (props) => {
   // 마지막 제출 기능 함수로 구현
   const onSubmit = (e) => {
     pushData();
-    // jwt token
-    // const { accessToken } = response.data;
-    //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    // history.push("/");
-    // // location.reload();
-    // alert("회원가입 완료");
+
+    // 회원가입 성공 시 로그인 화면으로 이동
+    // alert("회원가입 성공");
     // history.push("/Login");
+    // location.reload();
+
+    // redux 사용
+    sessionStorage.setItem("jwtToken", "1234");
+    dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+    history.push("/");
   };
 
   // 이메일 유효성 검사
@@ -250,27 +256,6 @@ const Join = (props) => {
 
   // 회원가입 data 보내기
   const pushData = () => {
-    // const params = new FormData();
-    // params.append("token", sessionStorage.getItem("token"));
-    // params.append("currenturl", location.href);
-    // params.append("name", name);
-    // params.append("id", email);
-    // params.append("password", password);
-    // params.append("commerce", JSON.stringify([...commersCheckedItems]));
-    // params.append("specialty", JSON.stringify([...specialCheckedItems]));
-    // params.append("interesting", JSON.stringify([...interestCheckedItems]));
-    // axios({
-    //   method: "post",
-    //   url: "action/member/join.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     fnc.executeQuery({
       url: "action/member/join.php",
       data: {
@@ -281,7 +266,9 @@ const Join = (props) => {
         specialty: JSON.stringify([...specialCheckedItems]),
         interesting: JSON.stringify([...interestCheckedItems]),
       },
-      success: (res) => {},
+      success: (res) => {
+        alert(JSON.stringify(res));
+      },
     });
   };
 

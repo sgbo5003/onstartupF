@@ -8,9 +8,13 @@ import IntroductionModal from "./IntroductionModal";
 import CareerModal from "./CareerModal";
 import AcademicModal from "./AcademicModal";
 import SiteModal from "./SiteModal";
+import { useDispatch, useSelector } from "react-redux";
+import * as refreshActions from "../../modules/refresh";
 
 const MypageInitial = () => {
+  const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const profileAddComponentArray = [
     {
@@ -92,25 +96,25 @@ const MypageInitial = () => {
 
   const profileImgModalHandler = () => {
     setProfileImgModalOn(!profileImgModalOn);
-    console.log(profileImgModalOn);
+    console.log("profileImgModalOn:", profileImgModalOn);
     console.log("프로필clicked");
   };
   const introductionModalHandler = () => {
     setIntroductionModalOn(!introductionModalOn);
-    console.log(introductionModalOn);
+    console.log("introductionModalOn:", introductionModalOn);
     console.log("소개글clicked");
   };
   const careerModalHandler = () => {
-    setCareerModalOn(!careerModalOn);
-    console.log("clicked");
+    setCareerModalOn("careerModalOn:", !careerModalOn);
+    console.log("경력clicked");
   };
   const academicModalHandler = () => {
-    setAcademicModalOn(!academicModalOn);
-    console.log("clicked");
+    setAcademicModalOn("academicModalOn:", !academicModalOn);
+    console.log("학력clicked");
   };
   const siteModalHandler = () => {
-    setSiteModalOn(!siteModalOn);
-    console.log("clicked");
+    setSiteModalOn("siteModalOn:", !siteModalOn);
+    console.log("대표사이트clicked");
   };
 
   // 작성한 코멘트 메뉴 핸들러
@@ -123,9 +127,11 @@ const MypageInitial = () => {
     setMenuClicked(true);
   };
 
+  // 로그아웃
   const logoutHandler = () => {
     console.log("clicked");
-    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("jwtToken");
+    dispatch(refreshActions.setAllRefresh(allRefresh + 1));
     history.push("/");
   };
 
@@ -233,7 +239,7 @@ const MypageInitial = () => {
                       </div>
                     </div>
                     <div className="profile_add_section">
-                      {profileAddComponentArray.map((data) => {
+                      {profileAddComponentArray.map((data, idx) => {
                         return (
                           <>
                             <button
@@ -242,10 +248,16 @@ const MypageInitial = () => {
                             >
                               {data.text}
                             </button>
-                            {data.modalon ? "1" : "2"}
+                            {/* {data.modalon ? <div>hi</div> : ""}
+                            {profileImgModalOn ? <div>hi</div> : ""} */}
                           </>
                         );
                       })}
+                      {profileImgModalOn ? <ProfileImgAddModal /> : ""}
+                      {introductionModalOn ? <IntroductionModal /> : ""}
+                      {careerModalOn ? <CareerModal /> : ""}
+                      {academicModalOn ? <AcademicModal /> : ""}
+                      {siteModalOn ? <SiteModal /> : ""}
                     </div>
                   </div>
                 </div>
