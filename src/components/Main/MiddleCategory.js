@@ -17,9 +17,9 @@ const MiddleCategory = () => {
   //   useEffect((
   //       const repsone = await axios(`/getCommersInfo/${sort}`)
   //   ))
-  const renderComponents = () => {
+  const renderComponents = (idx) => {
     return (
-      <div className="middle_category_content_home_tag_cove">
+      <div className="middle_category_content_home_tag_cove" key={idx}>
         <section className="home_title">
           <h2 className="hidden">view title</h2>
           <p>
@@ -125,8 +125,8 @@ const MiddleCategory = () => {
           <p className="middle_category_title_sub">중분류{categoryId}</p>
         </div>
         <div className="middle_category_content_container">
-          {arr.map((data) => {
-            return renderComponents();
+          {arr.map((data, idx) => {
+            return renderComponents(idx);
           })}
         </div>
       </div>
