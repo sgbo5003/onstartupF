@@ -27,6 +27,8 @@ import MypageOther from "../components/Mypage/MypageOther";
 import FindPassword from "./Login/FindPassword";
 import QuestionWrite from "./Setting/QuestionWrite";
 import NoticeWrite from "./Setting/NoticeWrite";
+import NoticeDetail from "./Setting/NoticeDetail";
+import QuestionDetail from "./Setting/QuestionDetail";
 
 const AppRouter = () => {
   //   const [isLogin, setIsLogin] = useState(false);
@@ -92,9 +94,11 @@ const AppRouter = () => {
         <Route path="/ChangePassword" component={ChangePassword} />
         <Route path="/Notice" component={Notice} />
         <Route path="/NoticeWrite" component={NoticeWrite} />
+        <Route path="/NoticeDetail" component={NoticeDetail} />
         <Route path="/Inquiry" component={Inquiry} />
         <Route path="/Question" component={Question} />
         <Route path="/QuestionWrite" component={QuestionWrite} />
+        <Route path="/QuestionDetail" component={QuestionDetail} />
       </Switch>
     </>
   );
