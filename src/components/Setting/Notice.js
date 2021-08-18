@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Notice = () => {
+  const history = useHistory();
   const boardList = [
     {
       boardNo: 1,
@@ -29,14 +30,14 @@ const Notice = () => {
     },
   ];
   return (
-    <div class="wap notice_wap">
-      <div class="notice_content">
-        <div class="notice_view">
-          <h2 class="notice_view_title">
+    <div className="wap notice_wap">
+      <div className="notice_content">
+        <div className="notice_view">
+          <h2 className="notice_view_title">
             공지사항<span>새로운 소식들을 확인하세요.</span>
           </h2>
-          <section class="notice_con notice_sty">
-            <table class="notice_table_list">
+          <section className="notice_con notice_sty">
+            <table className="notice_table_list">
               <thead>
                 <tr>
                   <th>번호</th>
@@ -45,36 +46,38 @@ const Notice = () => {
                   <th>조회수</th>
                 </tr>
               </thead>
-              <tbody class="tbody_num">
+              <tbody className="tbody_num">
                 {boardList.map((data) => {
                   return (
                     <tr
-                      onClick=" location.href='notice_detail.html' "
+                      onClick={() => {
+                        history.push("/NoticeDetail");
+                      }}
                       onMouseOut=" window.status = '' "
                     >
-                      <td class="no_tr_num">{data.boardNo}</td>
-                      <td class="no_tr_tit">{data.boardTitle}</td>
-                      <td class="no_tr_dat">
+                      <td className="no_tr_num">{data.boardNo}</td>
+                      <td className="no_tr_tit">{data.boardTitle}</td>
+                      <td className="no_tr_dat">
                         {data.boardDate.toLocaleDateString()}
                       </td>
-                      <td class="no_tr_view">{data.boardViews}</td>
+                      <td className="no_tr_view">{data.boardViews}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
-            <div class="no_paging">
-              <span class="prev">
-                <a class="pasing_arrow">&lt;</a>
+            <div className="no_paging">
+              <span className="prev">
+                <a className="pasing_arrow">&lt;</a>
               </span>
-              <a class="no_paging_active">1</a>
+              <a className="no_paging_active">1</a>
               <a>2</a>
               <a>3</a>
-              <span class="next">
-                <a class="pasing_arrow">&gt;</a>
+              <span className="next">
+                <a className="pasing_arrow">&gt;</a>
               </span>
             </div>
-            <div class="no_write_btn">
+            <div className="no_write_btn">
               <Link to="/NoticeWrite">글쓰기</Link>
             </div>
           </section>
