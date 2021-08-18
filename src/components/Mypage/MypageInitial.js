@@ -10,6 +10,7 @@ import AcademicModal from "./AcademicModal";
 import SiteModal from "./SiteModal";
 import { useDispatch, useSelector } from "react-redux";
 import * as refreshActions from "../../modules/refresh";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
 const MypageInitial = () => {
   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
@@ -127,12 +128,17 @@ const MypageInitial = () => {
     setMenuClicked(true);
   };
 
-  // 로그아웃
-  const logoutHandler = () => {
-    console.log("clicked");
-    sessionStorage.removeItem("jwtToken");
-    dispatch(refreshActions.setAllRefresh(allRefresh + 1));
-    history.push("/");
+  // axios 와 연동해 로그아웃
+  const getLogOutData = () => {
+    fnc.executeQuery({
+      url: "action/member/logout.php",
+      data: {},
+      success: (res) => {
+        sessionStorage.removeItem("token");
+        dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+        history.push("/");
+      },
+    });
   };
 
   //   useEffect(() => {
@@ -189,7 +195,7 @@ const MypageInitial = () => {
                         </Link>
                       </span>
                       <span className="logout1">
-                        <a className="logout2" onClick={logoutHandler}>
+                        <a className="logout2" onClick={getLogOutData}>
                           로그아웃
                         </a>
                       </span>

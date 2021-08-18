@@ -179,11 +179,6 @@ const Join = (props) => {
     // alert("회원가입 성공");
     // history.push("/Login");
     // location.reload();
-
-    // redux 사용
-    sessionStorage.setItem("jwtToken", "1234");
-    dispatch(refreshActions.setAllRefresh(allRefresh + 1));
-    history.push("/");
   };
 
   // 이메일 유효성 검사
@@ -268,6 +263,10 @@ const Join = (props) => {
       },
       success: (res) => {
         alert(JSON.stringify(res));
+        sessionStorage.setItem("token", res.token);
+        // redux 사용
+        dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+        history.push("/");
       },
     });
   };

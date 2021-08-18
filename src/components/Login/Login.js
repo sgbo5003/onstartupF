@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import * as fnc from "../../commonFunc/CommonFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import * as refreshActions from "../../modules/refresh";
 
 const Login = (props) => {
+  const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
+  const dispatch = useDispatch();
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const history = useHistory();
   const { isLogin, setIsLogin } = props;
 
   const onChangeInputEmail = (e) => {
@@ -22,36 +27,18 @@ const Login = (props) => {
     alert("로그인");
   };
 
-  const history = useHistory();
-
   const getData = () => {
-    // const params = new FormData();
-    // params.append("id", inputEmail);
-    // params.append("password", inputPassword);
-    //   .then((response) => {
-    // if (response.data.error === 0) {
-    //   sessionStorage.setItem("user_idx", response.data.user_idx);
-    // alert("로그인 성공");
-    //   history.push("/");
-    //   return setIsLogin(!isLogin);
-
-    // } else {
-    //   alert("로그인 에러");
-    //   console.log(response.data);
-    //   setInputEmail("");
-    //   setInputPassword("");
-    // }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     fnc.executeQuery({
       url: "action/member/login.php",
       data: {
         id: inputEmail,
         password: inputPassword,
       },
-      success: (res) => {},
+      success: (res) => {
+        sessionStorage.setItem("token", res.token);
+        dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+        history.push("/");
+      },
     });
   };
 

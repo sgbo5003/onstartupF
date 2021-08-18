@@ -13,7 +13,7 @@ import defaultUserImg from "../../images/default_user.png";
 const Header = (props) => {
   const [isDropClick, setIsDropClick] = useState(false);
   const [alarmClick, setAlarmClick] = useState(false);
-  const jwtToken = sessionStorage.getItem("jwtToken");
+  const token = sessionStorage.getItem("token");
 
   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
 
@@ -49,14 +49,15 @@ const Header = (props) => {
       </div>
       <div className="header_area_right">
         {/*  로그인 */}
-        {!jwtToken && (
+        {!token && (
           <div className="coar_area">
             <p>
               <Link to="/Login">로그인</Link>
             </p>
           </div>
         )}
-        {jwtToken && (
+
+        {token && (
           <h1 className="mypage_area">
             <Link className="mypage_photo_cove" to="/MypageInitial">
               <img
