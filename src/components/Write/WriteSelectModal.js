@@ -5,11 +5,8 @@ const WriteSelectModal = (props) => {
   const {
     classOnOff,
     onOpenModal,
-    category,
     setCategory,
-    selectModalOn,
     categoryData,
-    setCategoryData,
     onPortfolioModal,
   } = props;
 

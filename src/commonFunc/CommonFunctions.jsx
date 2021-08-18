@@ -30,10 +30,10 @@ export const executeQuery = ({
       if (res.data.response === "error") {
         if (error) {
           error(res.data);
-          console.log("error", res);
+          console.log("error1", res);
         } else {
           alert(res.data.msg);
-          console.log("error", res);
+          console.log("error2", res);
         }
       }
       if (res.data.response === "fail") {
@@ -50,7 +50,7 @@ export const executeQuery = ({
       if (fail) {
         fail(err);
       } else {
-        console.log("fail2", err.stack);
+        console.log("fail2", err);
         alert("서버접속에 실패하였습니다. 관리자에게 문의해주시기 바랍니다.");
       }
     });

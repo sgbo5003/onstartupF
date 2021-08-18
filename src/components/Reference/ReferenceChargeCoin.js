@@ -23,39 +23,39 @@ const ReferenceChargeCoin = () => {
   });
 
   const getUserHaveCoinData = () => {
-    const params = new FormData();
-    params.append("command", "co");
-    params.append("idx", sessionStorage.getItem("user_idx"));
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("보유코인 data :", response.data);
-        setUserHaveCoinData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "co");
+    // params.append("idx", sessionStorage.getItem("user_idx"));
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("보유코인 data :", response.data);
+    //     setUserHaveCoinData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const getUserHistoryCoinData = () => {
-    const params = new FormData();
-    params.append("command", "co_use");
-    params.append("idx", sessionStorage.getItem("user_idx"));
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("코인내역 data :", response.data);
-        setUserHistoryCoinData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "co_use");
+    // params.append("idx", sessionStorage.getItem("user_idx"));
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("코인내역 data :", response.data);
+    //     setUserHistoryCoinData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const headerHaveMenuHandler = () => {

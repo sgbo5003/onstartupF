@@ -4,39 +4,39 @@ import defaultUserImg from "../../images/default_user.png";
 import editTagImg from "../../images/edit_tag_cancel.png";
 const MypageEdit = (props) => {
   const getUserData = () => {
-    const params = new FormData();
-    params.append("command", "uinfo");
-    params.append("idx", sessionStorage.getItem("user_idx"));
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("alldata response :", response.data);
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "uinfo");
+    // params.append("idx", sessionStorage.getItem("user_idx"));
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("alldata response :", response.data);
+    //     setUserData(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const getInterestingData = () => {
-    const params = new FormData();
-    params.append("command", "ca");
-    params.append("kind", "interesting");
-    axios({
-      method: "post",
-      url: "/response/get_info.php",
-      data: params,
-    })
-      .then((response) => {
-        console.log("interesting response :", response.data);
-        setInterestSelectItemList(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const params = new FormData();
+    // params.append("command", "ca");
+    // params.append("kind", "interesting");
+    // axios({
+    //   method: "post",
+    //   url: "/response/get_info.php",
+    //   data: params,
+    // })
+    //   .then((response) => {
+    //     console.log("interesting response :", response.data);
+    //     setInterestSelectItemList(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   // axios로 받아온 data들 상태관리
