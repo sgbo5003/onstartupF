@@ -12,7 +12,6 @@ import categoryImg6 from "../../images/Category_icon6.png";
 import categoryImg7 from "../../images/Category_icon7.png";
 import categoryImg8 from "../../images/Category_icon8.png";
 import * as fnc from "../../commonFunc/CommonFunctions";
-
 import { useDispatch, useSelector } from "react-redux";
 import * as refreshActions from "../../modules/refresh";
 const Sidebar = () => {
@@ -66,7 +65,6 @@ const Sidebar = () => {
     // dispatch(refreshActions.setAllRefresh(allRefresh + 1));
 
     let itemSet = new Set(checkedBottomItems);
-    console.log(itemSet);
     if (checkedBottomItems.has(data)) {
       itemSet.delete(data);
       setBottomCheckedItems(itemSet);
@@ -74,7 +72,6 @@ const Sidebar = () => {
       itemSet.add(data);
       setBottomCheckedItems(itemSet);
     }
-    console.log(data, checkedBottomItems.values());
   };
 
   // 카테고리 api 연동
@@ -82,27 +79,10 @@ const Sidebar = () => {
     fnc.executeQuery({
       url: "action/main/osu_category.php",
       data: {},
-      currenturl: location.href,
       success: (res) => {
-        setCategoryData(res);
+        setCategoryData(res.category);
       },
     });
-    // const params = new FormData();
-    // params.append("token", sessionStorage.getItem("token"));
-    // params.append("currenturl", location.href);
-
-    // axios({
-    //   method: "post",
-    //   url: "action/main/osu_category.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("categoryData response :", response.data);
-    //     setCategoryData(response.data[1]);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   useEffect(() => {

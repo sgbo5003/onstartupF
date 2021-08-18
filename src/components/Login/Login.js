@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
 const Login = (props) => {
   const [inputEmail, setInputEmail] = useState("");
@@ -24,44 +25,34 @@ const Login = (props) => {
   const history = useHistory();
 
   const getData = () => {
-    const params = new FormData();
-    params.append("token", sessionStorage.getItem("token"));
-    params.append("currenturl", location.href);
-    params.append("id", inputEmail);
-    params.append("password", inputPassword);
+    // const params = new FormData();
+    // params.append("id", inputEmail);
+    // params.append("password", inputPassword);
+    //   .then((response) => {
+    // if (response.data.error === 0) {
+    //   sessionStorage.setItem("user_idx", response.data.user_idx);
+    // alert("로그인 성공");
+    //   history.push("/");
+    //   return setIsLogin(!isLogin);
 
-    axios({
-      method: "post",
+    // } else {
+    //   alert("로그인 에러");
+    //   console.log(response.data);
+    //   setInputEmail("");
+    //   setInputPassword("");
+    // }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    fnc.executeQuery({
       url: "action/member/login.php",
-      data: params,
-    })
-      .then((response) => {
-        // console.log(response.data.idx);
-        // if (response.data.error === 0) {
-        //   sessionStorage.setItem("user_idx", response.data.user_idx);
-        //   alert("로그인 성공");
-        //   console.log(response.data);
-        //   //   history.push("/");
-        //   //   return setIsLogin(!isLogin);
-        //   console.log("로그인 하고 난 이후 로그인 상태 : ", isLogin);
-
-        //   // jwt token
-        //   // const { accessToken } = response.data;
-        //   //  API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-        //   // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        // } else {
-        //   alert("로그인 에러");
-        //   console.log(response.data);
-        //   setInputEmail("");
-        //   setInputPassword("");
-        // }
-        // console.log(inputEmail);
-        // console.log(inputPassword);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      data: {
+        id: inputEmail,
+        password: inputPassword,
+      },
+      success: (res) => {},
+    });
   };
 
   return (

@@ -17,8 +17,6 @@ const JoinSubmitQnaFirstModal = (props) => {
   const [buttonOn, setButtonOn] = useState(true);
 
   useEffect(() => {
-    // console.log(Object.keys(commersCheckedItems.values()).length);
-    console.log(_.isEmpty(commersCheckedItems), _.isEmpty(specialCheckedItems));
     if (
       _.isEmpty(commersCheckedItems) == true ||
       _.isEmpty(specialCheckedItems) == true
@@ -28,11 +26,6 @@ const JoinSubmitQnaFirstModal = (props) => {
       setButtonOn(true);
     }
   }, [commersCheckedItems, specialCheckedItems]);
-
-  const obj = { name1: "hello", name2: "hi", name3: "bye" };
-  useEffect(() => {
-    console.log("obj : ", Object.keys(obj).length);
-  }, []);
 
   //커머스 버튼 색상변경 핸들러
   const onCommersHandler = (data) => {
@@ -44,10 +37,6 @@ const JoinSubmitQnaFirstModal = (props) => {
       itemSet.add(data);
       setCommersCheckedItems(itemSet);
     }
-    console.log(
-      "커머스 객체 길이 :",
-      Object.keys(commersCheckedItems.values()).length
-    );
   };
 
   // 전문분야 버튼 색상변경 핸들러
@@ -60,11 +49,6 @@ const JoinSubmitQnaFirstModal = (props) => {
       itemSet.add(data);
       setSpecialCheckedItems(itemSet);
     }
-    // console.log(data, specialCheckedItems.values());
-    console.log(
-      "전문분야 객체 길이 :",
-      Object.keys(specialCheckedItems.values()).length
-    );
   };
 
   const btnActivate = () => {
@@ -91,46 +75,11 @@ const JoinSubmitQnaFirstModal = (props) => {
   };
 
   const getJoinCategoryData = () => {
-    // const params = new FormData();
-    // params.append("command", "ca");
-    // params.append("kind", "specialty");
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("specialty response :", response.data);
-    //     setSpecialtyData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // const params = {token:};
-    // params.append("token", sessionStorage.getItem("token"));
-    // params.append("currenturl", location.href);
-
-    // axios({
-    //   method: "post",
-    //   url: "action/main/osu_category.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("category response :", response);
-    //     setJoinCategoryData(response.data[1]);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    const params = new FormData();
-    params.append("currenturl", location.href);
-    params.append("token", sessionStorage.getItem("token"));
-
     fnc.executeQuery({
       url: "action/main/osu_category.php",
-      data: params,
+      data: {},
       success: (res) => {
-        setJoinCategoryData(res);
+        setJoinCategoryData(res.category);
       },
     });
   };

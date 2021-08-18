@@ -31,46 +31,14 @@ const JoinSubmitQnaSecondModal = (props) => {
       itemSet.add(data);
       setInterestCheckedItems(itemSet);
     }
-    console.log(data, interestCheckedItems.values());
   };
 
   const getJoinCategoryData = () => {
-    // const params = new FormData();
-    // params.append("command", "ca");
-    // params.append("kind", "specialty");
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("specialty response :", response.data);
-    //     setSpecialtyData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    const params = new FormData();
-    params.append("token", sessionStorage.getItem("token"));
-    params.append("currenturl", location.href);
-
-    // axios({
-    //   method: "post",
-    //   url: "action/main/osu_category.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("category response :", response.data[1]);
-    //     setJoinCategoryData(response.data[1]);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
     fnc.executeQuery({
       url: "action/main/osu_category.php",
-      data: params,
+      data: {},
       success: (res) => {
-        setJoinCategoryData(res);
+        setJoinCategoryData(res.category);
       },
     });
   };

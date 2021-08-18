@@ -114,54 +114,39 @@ const Write = () => {
     }
   }
   const pushData = () => {
-    const params = new FormData();
-    params.append("comment_text", content);
-    params.append("img_file", image);
-    params.append("comment_url", url);
-    params.append("comment_select", category);
-    params.append("user_idx", sessionStorage.getItem("user_idx"));
-    axios({
-      method: "post",
-      url: "/response/write_text_in_db.php",
-      data: params,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then((response) => {
-        console.log(response);
-        if (response.data.complete === 0) {
-          console.log("성공");
-          setSubmitIsTrueModalOn(true);
-        } else {
-          console.log("실패");
-          setSubmitIsFalseModalOn(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getCategoryData = () => {
     // const params = new FormData();
-    // params.append("token", sessionStorage.getItem("token"));
-    // params.append("currenturl", location.href);
+    // params.append("comment_text", content);
+    // params.append("img_file", image);
+    // params.append("comment_url", url);
+    // params.append("comment_select", category);
+    // params.append("user_idx", sessionStorage.getItem("user_idx"));
     // axios({
     //   method: "post",
-    //   url: "action/main/osu_category.php",
+    //   url: "/response/write_text_in_db.php",
     //   data: params,
+    //   headers: { "Content-Type": "multipart/form-data" },
     // })
     //   .then((response) => {
-    //     console.log("categoryData response :", response.data[1]);
-    //     setCategoryData(response.data[1]);
+    //     console.log(response);
+    //     if (response.data.complete === 0) {
+    //       console.log("성공");
+    //       setSubmitIsTrueModalOn(true);
+    //     } else {
+    //       console.log("실패");
+    //       setSubmitIsFalseModalOn(true);
+    //     }
     //   })
     //   .catch((error) => {
     //     console.log(error);
     //   });
+  };
+
+  const getCategoryData = () => {
     fnc.executeQuery({
       url: "action/main/osu_category.php",
       data: {},
       success: (res) => {
-        setCategoryData(res);
+        setCategoryData(res.category);
       },
     });
   };
