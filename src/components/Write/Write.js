@@ -13,19 +13,20 @@ import * as fnc from "../../commonFunc/CommonFunctions";
 import WritePortfolioModal from "./WritePortfolioModal";
 
 const Write = () => {
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState();
-  const [url, setUrl] = useState("");
+  const [content, setContent] = useState(""); // 코멘트
+  const [image, setImage] = useState(); // 파일
+  const [imageName, setImageName] = useState(""); // 파일 이름
+  const [url, setUrl] = useState(""); // url
+  const [category, setCategory] = useState(""); // 분야
   const [selectModalOn, setSelectModalOn] = useState(false); // 분야 선택을 띄우기 위해 체크할 수 있는 state
   const [portfolioModalOn, setPortfolioModalOn] = useState(false); // 분야 선택 -> 포트폴리오 관련 모달을 띄우기 위해 체크할 수 있는 state
   const [confirmModalOn, setConfirmModalOn] = useState(false); // confirmModal을 띄우기 위해 체크할 수 있는 state
   const [submitIsTrueModal, setSubmitIsTrueModalOn] = useState(false); // 등록하기 => true 체크
   const [submitIsFalseModal, setSubmitIsFalseModalOn] = useState(false); // 등록하기 => false 체크
   const [buttonOn, setButtonOn] = useState(false); // 버튼 disable & enable 변경을 위해 필요한 state
-  const [detailBtnOn, setDetailBtnOn] = useState(false);
-  const [detailBtn2On, setDetailBtn2On] = useState(false);
-  const [categoryData, setCategoryData] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [detailBtnOn, setDetailBtnOn] = useState(false); // 느낌표 박스 on & off
+  const [detailBtn2On, setDetailBtn2On] = useState(false); // 느낌표 박스 on & off
+  const [categoryData, setCategoryData] = useState([]); // axios에서 받아온 category data들
 
   const onDetailButtonClick = () => {
     setDetailBtnOn(!detailBtnOn);
@@ -37,18 +38,15 @@ const Write = () => {
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
-    console.log(e.target.value);
   };
 
   const onChangeUrl = (e) => {
     setUrl(e.target.value);
-    console.log(e.target.value);
   };
 
   const onChangeImg = (e) => {
     setImage(e.target.files[0]);
-    console.log(e.target.files[0].name);
-    console.log(image);
+    setImageName(e.target.files[0].name);
   };
 
   const onOpenModal = () => {
@@ -156,6 +154,7 @@ const Write = () => {
     checkBtnOn();
   });
 
+  // axios
   useEffect(() => {
     getCategoryData();
   }, []);
@@ -231,7 +230,7 @@ const Write = () => {
                 <input
                   className="comment_group upload-name comment_file_text write_text_box"
                   placeholder="파일선택"
-                  value={image}
+                  value={imageName}
                   disabled
                 />
                 <label htmlFor="file">이미지 찾기</label>
@@ -309,24 +308,25 @@ const Write = () => {
                   <WriteSelectModal
                     classOnOff="write_select_popup_cove_on"
                     onOpenModal={onOpenModal}
-                    category={category}
                     setCategory={setCategory}
-                    selectModalOn={selectModalOn}
                     categoryData={categoryData}
-                    setCategoryData={setCategoryData}
                     onPortfolioModal={onPortfolioModal}
                   />
                 ) : (
                   <WriteSelectModal
                     classOnOff="write_select_popup_cove_off"
                     onOpenModal={onOpenModal}
-                    category={category}
                     setCategory={setCategory}
                     categoryData={categoryData}
-                    setCategoryData={setCategoryData}
                   />
                 )}
-                {portfolioModalOn ? <WritePortfolioModal /> : ""}
+                {portfolioModalOn ? (
+                  <WritePortfolioModal
+                    setPortfolioModalOn={setPortfolioModalOn}
+                  />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </section>
