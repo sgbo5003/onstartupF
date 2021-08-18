@@ -9,12 +9,9 @@ export const executeQuery = ({
   fail,
 }) => {
   //   const token = sessionStorage.getItem("token");
-  //   const keypass = sessionStorage.getItem("keypass");
   axios.defaults.baseURL = "https://api.on-startup.co.kr/";
   //   axios.defaults.withCredentials = true;
   //   data.token = token;
-
-  //   data.keypass = keypass;
   //   data.currenturl = currenturl;
 
   const params = new FormData();
@@ -26,26 +23,17 @@ export const executeQuery = ({
 
   axios({
     method: "post",
-    url: url,
+    url,
     data: params || {},
   })
     .then((res) => {
-      /* 백에서 넘어오는 response.data가 통일되어 있어야 하는데 다르게 넘어와서
-           if (res.data[0].response === "ok") {
-        success(res.data[1]);
-        console.log(res);
-      } 
-      이쪽 부분에서 response가 ok 일때 res.data가 배열이 아니라
-      에러가 떠서 catch로 빠져나갔다.
-      해결 방법: 아예 처음부터 객체로 통일하던지, 배열로 통일하던지
-        */
-      console.log(res);
       if (res.data.response === "error") {
         if (error) {
           error(res.data);
           console.log("error", res);
         } else {
           alert(res.data.msg);
+          console.log("error", res);
         }
       }
       if (res.data.response === "fail") {
@@ -53,11 +41,10 @@ export const executeQuery = ({
         console.log("fail1", res);
         console.log(res.data);
       }
-      if (res.data[0].response === "ok") {
-        success(res.data[1]);
+      if (res.data.response === "ok") {
         console.log(res);
+        success(res.data);
       }
-      console.log(res);
     })
     .catch((err) => {
       if (fail) {
