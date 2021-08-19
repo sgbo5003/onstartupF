@@ -3783,13 +3783,18 @@ select::-ms-expand {
   width: 100%;
   height: 70px;
   line-height: 30px;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   padding-bottom: 20px;
   text-align: center;
   background-color: #fbe300;
   border-radius: 6px;
   margin-bottom: 60px;
   cursor: pointer;
+}
+
+.KaKaoLogin {
+  width: 100% !important;
+  height: 70px !important;
 }
 .naver_form {
   position: relative;
