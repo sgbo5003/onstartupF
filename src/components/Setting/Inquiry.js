@@ -100,8 +100,8 @@ const inquiry = () => {
                 {selectModalOn ? (
                   <InquirySelectModal
                     selectModalHandler={selectModalHandler}
-                    category={category}
                     setCategory={setCategory}
+                    setSelectModalOn={setSelectModalOn}
                   />
                 ) : (
                   ""

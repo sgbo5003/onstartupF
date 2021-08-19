@@ -3,7 +3,12 @@ import BackImg from "../../images/back.png";
 
 const InquirySelectModal = (props) => {
   const arr = [1, 2, 3, 4, 5];
-  const { selectModalHandler, setCategory } = props;
+  const { selectModalHandler, setCategory, setSelectModalOn } = props;
+
+  const inquirySelectClicked = (data) => {
+    setCategory(data);
+    setSelectModalOn(false);
+  };
 
   return (
     <div className="write_select_popup_cove_on">
@@ -21,13 +26,13 @@ const InquirySelectModal = (props) => {
               </span>
             </div>
             <ul className="write_select_li">
-              {arr.map((data) => {
+              {arr.map((data, idx) => {
                 return (
-                  <li>
+                  <li key={idx}>
                     <a
                       className="write_select_list"
                       onClick={() => {
-                        setCategory(data);
+                        inquirySelectClicked(data);
                       }}
                     >
                       {data}
