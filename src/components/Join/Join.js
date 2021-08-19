@@ -17,6 +17,9 @@ const Join = (props) => {
   const kakaoAppKey = "bd83d0a39d192921732e44fd8f838bdd";
   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
   const dispatch = useDispatch();
+  const [generalLogin, setGeneralLogin] = useState(false); // 일반 로그인 체크
+  const [socialLogin, setSocialLogin] = useState(false); // 소셜 로그인 체크
+  const [socialToken, setSocialToken] = useState(""); // 소셜 로그인을 이용하기 위한 토큰
   const { naver } = window;
   const [name, setName] = useState(""); // 이름
   const [nameError, setNameError] = useState(false); // 이름 오류체크
@@ -44,42 +47,35 @@ const Join = (props) => {
   // 커머스 & 전문분야 & 관심분야 카테고리 저장
   const [joinCategoryData, setJoinCategoryData] = useState([]);
 
+  // 카카오 로그인 -> 동의하기 -> 완료 시 실행되는 함수
   const kakaoSuccess = (data) => {
-    const social_id = data.profile.id;
+    const social_id = data.profile.id; // 고유번호
+    const social_name = data.profile.properties.nickname; // 이름
+    const social_email = data.profile.kakao_account.email; // 이메일
+    const social_profileImg = data.profile.properties.profile_image; // 프로필 이미지
 
-    console.log(social_id);
-    console.log(data);
-    // setJoinSubmitQnaModalOn(true);
+    fnc.executeQuery({
+      url: "action/member/social_join.php",
+      data: {
+        id: social_id,
+        name: social_name,
+        email: social_email,
+        profile_image_url: social_profileImg,
+        social_sort: "kakao",
+      },
+      success: (res) => {
+        setJoinSubmitQnaModalOn(true);
+        setSocialLogin(true);
+        setSocialToken(res.token);
+        console.log(res.token);
+      },
+      error: (res) => {
+        // redux 사용
+        dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+        history.push("/");
+      },
+    });
   };
-
-  //   //네이버 로그인
-  //   const NaverLoginHandler = () => {
-  //     axios
-  //       .get(NAVER_AUTH_URL)
-  //       .then((response) => {
-  //         console.log(response);
-  //         if (response.data.error === 3) {
-  //           sessionStorage.setItem(
-  //             "naverLoginStatus",
-  //             JSON.stringify(response.data.error)
-  //           );
-  //           history.push("/");
-  //           window.location.replace("/");
-  //           console.log(response.data.error);
-  //         } else if (response.data.error === 2) {
-  //           alert("필수항목을 체크해주세요.");
-  //         } else if (response.data.error === 1) {
-  //           alert("토큰오류");
-  //         } else {
-  //           location.replace(
-  //             "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=jxNOYlz8FOqMBba83QbQ&redirect_uri=http://localhost:8080"
-  //           );
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
 
   // 회원가입 버튼 비활성화
   function btnDeactivate() {
@@ -102,7 +98,6 @@ const Join = (props) => {
         // type="submit"
         type="button"
         onClick={onJoinSubmitModal}
-        // onSubmit={onSubmit}
         name="join_member_submit"
         value="회원가입"
       />
@@ -139,23 +134,53 @@ const Join = (props) => {
     console.log({ name, email, password, confirmPassword });
     //회원가입 조건 다 만족 시 회원가입진행
     if (password && email && name && confirmPassword) {
-      //
-      //   sessionStorage.setItem("email", email);
-      // pushData();
-      //   history.push("/");
-      //   setIsLogin(!isLogin);
       setJoinSubmitModalOn(true);
+      setGeneralLogin(true);
     }
   };
 
   // 마지막 제출 기능 함수로 구현
   const onSubmit = (e) => {
-    pushData();
-
-    // 회원가입 성공 시 로그인 화면으로 이동
-    // alert("회원가입 성공");
-    // history.push("/Login");
-    // location.reload();
+    // 일반 로그인 시
+    if (generalLogin == true) {
+      pushData();
+    }
+    // 소셜 로그인 시
+    if (socialLogin == true) {
+      //   fnc.executeQuery({
+      //     url: "action/member/social_join.php",
+      //     data: {
+      //       commerce: JSON.stringify([...commersCheckedItems]),
+      //       specialty: JSON.stringify([...specialCheckedItems]),
+      //       interesting: JSON.stringify([...interestCheckedItems]),
+      //       token: socialToken,
+      //     },
+      //     success: (res) => {
+      //       alert(JSON.stringify(res));
+      //     },
+      //   });
+      const params = new FormData();
+      params.append("currenturl", location.href);
+      params.append("commerce", JSON.stringify([...commersCheckedItems]));
+      params.append("specialty", JSON.stringify([...specialCheckedItems]));
+      params.append("interesting", JSON.stringify([...interestCheckedItems]));
+      params.append("token", socialToken);
+      axios({
+        method: "post",
+        url: "action/member/social_join.php",
+        data: params,
+      })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem("token", response.data.token);
+          // redux 사용
+          dispatch(refreshActions.setAllRefresh(allRefresh + 1));
+          history.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   // 이메일 유효성 검사
@@ -276,15 +301,15 @@ const Join = (props) => {
                   </Link>
                 </p>
               </section>
-
               <section className="kakao_form">
                 <KakaoLogin
+                  className="KaKaoLogin"
                   token={kakaoAppKey}
                   onSuccess={kakaoSuccess}
                   onFail={console.log}
                 >
-                  <img src={kakaoImg} alt="kakao" />
-                  카카오 3초만에 가입하기
+                  {/* <img src={kakaoImg} alt="kakao" />
+                  카카오 3초만에 가입하기 */}
                 </KakaoLogin>
               </section>
               <section className="login_form_line">
