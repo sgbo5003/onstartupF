@@ -148,9 +148,9 @@ const CoinAttdModal = (props) => {
           {arr
             .slice(0)
             .reverse()
-            .map((data) => {
+            .map((data, idx) => {
               return (
-                <div className="coin_attd_modal_content_contents">
+                <div className="coin_attd_modal_content_contents" key={idx}>
                   <div className="coin_attd_modal_content_contents_top">
                     <p>{data.coin}</p>
                   </div>
