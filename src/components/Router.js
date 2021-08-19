@@ -31,21 +31,6 @@ import NoticeDetail from "./Setting/NoticeDetail";
 import QuestionDetail from "./Setting/QuestionDetail";
 
 const AppRouter = () => {
-  //   const [isLogin, setIsLogin] = useState(false);
-
-  //   function checkIsLogin() {
-  //     if (sessionStorage.length < 1) {
-  //       console.log("isLogin1 ?? :: ", isLogin);
-  //     } else {
-  //       setIsLogin(true);
-  //       // console.log("isLogin2 ?? :: ", isLogin);
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     checkIsLogin();
-  //   });
-
   return (
     <>
       <Header />
@@ -72,18 +57,8 @@ const AppRouter = () => {
         />
         <Route exact path="/ReferenceProduct" component={ReferenceProduct} />
         <Route path="/Write" component={Write} />
-        <Route
-          path="/Join"
-          component={Join}
-          //   isLogin={isLogin}
-          //   setIsLogin={setIsLogin}
-        />
-        <Route
-          path="/Login"
-          component={Login}
-          //   isLogin={isLogin}
-          //   setIsLogin={setIsLogin}
-        />
+        <Route path="/Join" component={Join} />
+        <Route path="/Login" component={Login} />
         <Route path="/FindPassword" component={FindPassword} />
         <Route path="/SaveWrite" component={SaveWrite} />
         <Route path="/MypageOther" component={MypageOther} />
