@@ -70,24 +70,6 @@ const MypageInitial = () => {
     user_interesting: [],
   });
 
-  //   const getUserData = () => {
-  //     const params = new FormData();
-  //     params.append("command", "uinfo");
-  //     params.append("idx", sessionStorage.getItem("user_idx"));
-  //     axios({
-  //       method: "post",
-  //       url: "/response/get_info.php",
-  //       data: params,
-  //     })
-  //       .then((response) => {
-  //         console.log("alldata response :", response.data);
-  //         setUserData(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
-
   const [profileImgModalOn, setProfileImgModalOn] = useState(false); // 프로필 사진 추가하기 Modal 감지 state
   const [introductionModalOn, setIntroductionModalOn] = useState(false); // 소개글 추가하기 Modal 감지 state
   const [careerModalOn, setCareerModalOn] = useState(false); // 경력 추가하기 Modal 감지 state
@@ -127,6 +109,24 @@ const MypageInitial = () => {
   const portfolioMenuHandler = () => {
     setMenuClicked(true);
   };
+
+  //   const getUserData = () => {
+  //     const params = new FormData();
+  //     params.append("command", "uinfo");
+  //     params.append("idx", sessionStorage.getItem("user_idx"));
+  //     axios({
+  //       method: "post",
+  //       url: "/response/get_info.php",
+  //       data: params,
+  //     })
+  //       .then((response) => {
+  //         console.log("alldata response :", response.data);
+  //         setUserData(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
   // axios 와 연동해 로그아웃
   const getLogOutData = () => {
