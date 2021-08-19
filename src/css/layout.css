@@ -2554,7 +2554,7 @@
   background-color: #bbbbbb;
 }
 .regit_pass_submit_active {
-  display: none;
+  /* display: none; */
   position: absolute;
   left: 0px;
   top: 0px;
@@ -2567,6 +2567,7 @@
   font-weight: 700;
   color: #fff;
   background-color: #bea36b;
+  cursor: pointer;
 }
 /*=============================================
   =    Section regit_pass_alert_pop block     =
@@ -3795,6 +3796,7 @@ select::-ms-expand {
 .KaKaoLogin {
   width: 100% !important;
   height: 70px !important;
+  cursor: pointer;
 }
 .naver_form {
   position: relative;
