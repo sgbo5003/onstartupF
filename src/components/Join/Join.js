@@ -273,6 +273,22 @@ const Join = (props) => {
     });
   };
 
+  //   const disconnect = () => {
+  //       const params = new FormData();
+  //       params.append("target_id_type", "user_id");
+  //       params.append("target_id", "user_id");
+  //       axios({
+  //           method: "post",
+  //           url: "https://kapi.kakao.com/v1/user/unlink",
+  //           data: params,
+  //       }).then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+
   // 실시간으로 state 변경 & 체크
   useEffect(() => {
     checkBtnOn();
@@ -311,6 +327,9 @@ const Join = (props) => {
                   {/* <img src={kakaoImg} alt="kakao" />
                   카카오 3초만에 가입하기 */}
                 </KakaoLogin>
+                {/* <div>
+                  <button onClick={disconnect}>연결끊기</button>
+                </div> */}
               </section>
               <section className="login_form_line">
                 <p>또는</p>
