@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 const Question = () => {
   const history = useHistory();
   const boardList = [
+    {
+      boardNo: 0,
+      boardWriter: "",
+      boardCategory: "카테고리 선택",
+      boardTitle: "",
+      boardDate: new Date(),
+    },
     {
       boardNo: 1,
       boardWriter: "박상준",
@@ -33,6 +40,9 @@ const Question = () => {
       boardDate: new Date(),
     },
   ];
+
+  const [categorySelected, setCategorySelected] = useState("");
+
   return (
     <div className="wap fq_wap">
       <div className="fq_content">
@@ -43,14 +53,20 @@ const Question = () => {
               <span>고객님들께서 가장 자주 묻는 질문들을 모았습니다.</span>
             </h2>
             <div className="fq_category_selectbox">
-              <select className="fq_category_select">
+              <select
+                className="fq_category_select"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setCategorySelected(e.target.value);
+                }}
+              >
                 <option selected disabled>
                   카테고리 선택
                 </option>
                 <option>전체보기</option>
-                <option>카테고리 (1)</option>
-                <option>카테고리 (2)</option>
-                <option>카테고리 (3)</option>
+                {boardList.slice(1).map((data, idx) => {
+                  return <option key={idx}>{data.boardCategory}</option>;
+                })}
               </select>
             </div>
           </div>
@@ -65,23 +81,37 @@ const Question = () => {
                 </tr>
               </thead>
               <tbody className="tbody_num">
-                {boardList.map((data) => {
-                  return (
-                    <tr
-                      onMouseOut=" window.status = '' "
-                      onClick={() => {
-                        history.push("/QuestionDetail");
-                      }}
-                    >
-                      <td className="fq_tr_num">{data.boardNo}</td>
-                      <td className="fq_tr_ctn">{data.boardCategory}</td>
-                      <td className="fq_tr_tit">{data.boardTitle}</td>
-                      <td className="fq_tr_tit">
-                        {data.boardDate.toLocaleDateString("ko-KR")}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {boardList
+                  .slice(1)
+                  .filter((val) => {
+                    if (
+                      categorySelected == "" ||
+                      categorySelected == "전체보기"
+                    ) {
+                      return val;
+                    } else if (val.boardCategory.includes(categorySelected)) {
+                      return val;
+                    }
+                  })
+
+                  .map((data, idx) => {
+                    return (
+                      <tr
+                        //   onMouseOut=" window.status = '' "
+                        onClick={() => {
+                          history.push("/QuestionDetail");
+                        }}
+                        key={idx}
+                      >
+                        <td className="fq_tr_num">{data.boardNo}</td>
+                        <td className="fq_tr_ctn">{data.boardCategory}</td>
+                        <td className="fq_tr_tit">{data.boardTitle}</td>
+                        <td className="fq_tr_tit">
+                          {data.boardDate.toLocaleDateString("ko-KR")}
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
             <div className="no_paging">
