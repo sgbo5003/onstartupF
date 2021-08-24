@@ -4404,8 +4404,9 @@ select::-ms-expand {
 =============================================*/
 .messenger_wap {
   padding-top: 6%;
-  padding-left: 20.625em;
-  padding-right: 20.625em;
+  /* padding-left: 20.625em; */
+  padding-left: 3.625em;
+  /* padding-right: 20.625em; */
   padding-bottom: 55px;
 }
 .write_content {
@@ -4501,7 +4502,16 @@ select::-ms-expand {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
 }
-.messenger_right {
+/* .m_message_chatBox {
+  display: flex;
+  flex-direction: column-reverse;
+} */
+.m_message_chatBox {
+  display: flex;
+  flex-direction: column;
+  height: 91%;
+}
+/* .messenger_right {
   display: block;
   position: relative;
   overflow: auto;
@@ -4512,14 +4522,42 @@ select::-ms-expand {
   padding-bottom: 30px;
   padding-left: 26px;
   padding-right: 26px;
+} */
+.messenger_right {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: auto;
+  float: left;
+  width: 65%;
+  height: 900px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 26px;
+  padding-right: 26px;
+  /* padding-right: 4px; */
 }
+/* .m_reply_message_area {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+} */
 .m_reply_message_area {
   position: relative;
   display: inline-block;
   width: 100%;
+  height: 100%;
+  overflow: auto;
 }
-.m_reply_message_area > div {
+
+.m_reply_message_area::-webkit-scrollbar {
+  display: none;
+}
+/* .m_reply_message_area > div {
   float: left;
+} */
+.m_reply_message_area > div {
+  float: right;
 }
 .m_reply_message_area > div:last-child {
   margin-bottom: 0;
@@ -4583,9 +4621,18 @@ select::-ms-expand {
   position: absolute;
   transition: (-50%, -50%);
 }
-.messenger_chat_bar {
+/* .messenger_chat_bar {
   position: sticky;
   bottom: 0px;
+  width: 100%;
+  height: 60px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  box-sizing: border-box;
+  border-radius: 30px;
+} */
+.messenger_chat_bar {
+  position: relative;
   width: 100%;
   height: 60px;
   border: 1px solid #aaa;
@@ -4629,6 +4676,7 @@ select::-ms-expand {
   width: 52px;
   height: 52px;
   margin: 4px;
+  cursor: pointer;
 }
 .m_message_enter > img {
   position: absolute;
@@ -5769,4 +5817,8 @@ progress::-webkit-progress-value {
   height: 70px;
   line-height: 70px;
   text-align: center;
+}
+
+.MypageInitial_add_button {
+  margin-left: 20px;
 }
