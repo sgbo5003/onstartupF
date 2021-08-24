@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import defaultUserImg from "../../images/default_user.png";
 import backpackImg from "../../images/backpack.png";
 import axios from "axios";
-import ProfileImgAddModal from "./profileImgAddModal";
+import ProfileImgAddModal from "./ProfileImgAddModal";
 import IntroductionModal from "./IntroductionModal";
 import CareerModal from "./CareerModal";
 import AcademicModal from "./AcademicModal";
@@ -76,6 +76,7 @@ const MypageInitial = () => {
   const [academicModalOn, setAcademicModalOn] = useState(false); // 학력 추가하기 Modal 감지 state
   const [siteModalOn, setSiteModalOn] = useState(false); // 대표 사이트 추가하기 Modal 감지 state
   const [menuClicked, setMenuClicked] = useState(false); // 메뉴 클릭 감지 state
+  const [count, setCount] = useState(0); // 단계
 
   const profileImgModalHandler = () => {
     setProfileImgModalOn(!profileImgModalOn);
@@ -144,6 +145,10 @@ const MypageInitial = () => {
   //   useEffect(() => {
   //     getUserData();
   //   }, []);
+
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
   return (
     <div className="wap mypage_wap">
       <div className="mypage_content">
@@ -233,14 +238,16 @@ const MypageInitial = () => {
                       <div className="progress_bar_container">
                         <label htmlFor="progress_bar">
                           프로필 작성 단계
-                          <span className="progress_bar_num">0/5</span>
+                          <span className="progress_bar_num">
+                            {count <= 5 ? count : 5}/5
+                          </span>
                         </label>
                       </div>
                       <div>
                         <progress
                           id="progress_bar"
                           max="5"
-                          value="0"
+                          value={count}
                         ></progress>
                       </div>
                     </div>
@@ -259,11 +266,51 @@ const MypageInitial = () => {
                           </>
                         );
                       })}
-                      {profileImgModalOn ? <ProfileImgAddModal /> : ""}
-                      {introductionModalOn ? <IntroductionModal /> : ""}
-                      {careerModalOn ? <CareerModal /> : ""}
-                      {academicModalOn ? <AcademicModal /> : ""}
-                      {siteModalOn ? <SiteModal /> : ""}
+                      {profileImgModalOn ? (
+                        <ProfileImgAddModal
+                          setProfileImgModalOn={setProfileImgModalOn}
+                          setCount={setCount}
+                          count={count}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {introductionModalOn ? (
+                        <IntroductionModal
+                          setIntroductionModalOn={setIntroductionModalOn}
+                          setCount={setCount}
+                          count={count}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {careerModalOn ? (
+                        <CareerModal
+                          setCareerModalOn={setCareerModalOn}
+                          setCount={setCount}
+                          count={count}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {academicModalOn ? (
+                        <AcademicModal
+                          setAcademicModalOn={setAcademicModalOn}
+                          setCount={setCount}
+                          count={count}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {siteModalOn ? (
+                        <SiteModal
+                          setSiteModalOn={setSiteModalOn}
+                          setCount={setCount}
+                          count={count}
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
