@@ -227,7 +227,7 @@ const MypageEdit = (props) => {
             </div>
             <div className="mypage_interest_select">
               <h2 className="mypage_input_title">관심분야 선택하기</h2>
-              <ul class="mypage_edit_select_interest_list_container">
+              <ul className="mypage_edit_select_interest_list_container">
                 {interestSelectItemList.category_text.map((data) => {
                   return (
                     <li

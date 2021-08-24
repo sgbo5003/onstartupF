@@ -80,25 +80,18 @@ const MypageInitial = () => {
 
   const profileImgModalHandler = () => {
     setProfileImgModalOn(!profileImgModalOn);
-    console.log("profileImgModalOn:", profileImgModalOn);
-    console.log("프로필clicked");
   };
   const introductionModalHandler = () => {
     setIntroductionModalOn(!introductionModalOn);
-    console.log("introductionModalOn:", introductionModalOn);
-    console.log("소개글clicked");
   };
   const careerModalHandler = () => {
     setCareerModalOn("careerModalOn:", !careerModalOn);
-    console.log("경력clicked");
   };
   const academicModalHandler = () => {
     setAcademicModalOn("academicModalOn:", !academicModalOn);
-    console.log("학력clicked");
   };
   const siteModalHandler = () => {
     setSiteModalOn("siteModalOn:", !siteModalOn);
-    console.log("대표사이트clicked");
   };
 
   // 작성한 코멘트 메뉴 핸들러
@@ -146,9 +139,6 @@ const MypageInitial = () => {
   //     getUserData();
   //   }, []);
 
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
   return (
     <div className="wap mypage_wap">
       <div className="mypage_content">

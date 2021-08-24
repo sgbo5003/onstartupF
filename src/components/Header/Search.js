@@ -19,7 +19,7 @@ const Search = () => {
           onChange={onChangeInputHandler}
           value={searchInput}
         />
-        <span id="search_img" href="search_list.php">
+        <span id="search_img">
           <img className="search" src={searchImg} alt="search_icon1.png" />
         </span>
       </form>
