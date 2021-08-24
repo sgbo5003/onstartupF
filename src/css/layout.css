@@ -5822,3 +5822,7 @@ progress::-webkit-progress-value {
 .MypageInitial_add_button {
   margin-left: 20px;
 }
+
+.paging_number {
+  cursor: pointer;
+}
