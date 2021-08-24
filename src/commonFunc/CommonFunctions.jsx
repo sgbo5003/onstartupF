@@ -31,6 +31,9 @@ export const executeQuery = ({
         if (error) {
           error(res.data);
           console.log("error1", res);
+        } else if (res.data.msg === "이미 사용중인 E-mail 주소입니다.") {
+          error(res.data);
+          console.log(res);
         } else {
           alert(res.data.msg);
           console.log("error2", res);
