@@ -17,7 +17,7 @@ const Qmenu = (props) => {
       text: "문의하기",
     },
     {
-      link: "/Notice",
+      link: "/Notice?page=1",
       text: "공지사항",
     },
   ];
