@@ -36,7 +36,7 @@ const AppRouter = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/MiddleCategory:id" component={MiddleCategory} />
+        <Route path="/MiddleCategory" component={MiddleCategory} />
         <Route path="/Community" component={Community} />
         <Route exact path="/Reference" component={Reference} />
         <Route
