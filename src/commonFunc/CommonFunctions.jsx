@@ -8,11 +8,9 @@ export const executeQuery = ({
   error,
   fail,
 }) => {
-  //   const token = sessionStorage.getItem("token");
   axios.defaults.baseURL = "https://api.on-startup.co.kr/";
+  //   axios.defaults.headers = { "content-type": "multipart/form-data" };
   //   axios.defaults.withCredentials = true;
-  //   data.token = token;
-  //   data.currenturl = currenturl;
 
   const params = new FormData();
   Object.keys(data).map((element) => {
@@ -27,6 +25,9 @@ export const executeQuery = ({
     data: params || {},
   })
     .then((res) => {
+      //   for (const keyValue of params) {
+      //     console.log(keyValue);
+      //   }
       if (res.data.response === "error") {
         if (error) {
           error(res.data);
@@ -34,6 +35,9 @@ export const executeQuery = ({
         } else if (res.data.msg === "이미 사용중인 E-mail 주소입니다.") {
           error(res.data);
           console.log(res);
+        } else if (res.data.msg === "이미 로그인하셨습니다.") {
+          console.log(res);
+          success(res.data);
         } else {
           alert(res.data.msg);
           console.log("error2", res);
