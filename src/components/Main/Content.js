@@ -9,6 +9,18 @@ import saveIcon from "../../images/icon_sav.png";
 import saveOnIcon from "../../images/icon_sav_on.png";
 
 const Content = (props) => {
+  const {
+    belong,
+    boardImg,
+    content,
+    likeNum,
+    reviewNum,
+    shareNum,
+    saveNum,
+    name,
+    profileImg,
+    writeTime,
+  } = props;
   return (
     <div className="home_view_cove">
       <div className="home_view_content_cove">
@@ -17,20 +29,20 @@ const Content = (props) => {
             <h2 className="hidden">view title</h2>
             <p>
               <a href="user_board.php">
-                <img src={props.checkUserImg} alt="default_user.png" />
+                <img src={profileImg} alt="default_user.png" />
               </a>
             </p>
             <div>
               <ul className="home_ti">
                 <li>
-                  <a href="#">{props.title}</a>
+                  <a href="#">title</a>
                 </li>
                 <li>
-                  <a href="#">{props.belong}</a>
+                  <a href="#">{belong}</a>
                 </li>
               </ul>
               <ul className="home_it">
-                <li>{props.commentTime}</li>
+                <li>{writeTime}</li>
               </ul>
             </div>
           </section>
@@ -39,13 +51,13 @@ const Content = (props) => {
             <div className="home_notice_info_top">
               <p>
                 <a href="#">
-                  <img src={props.checkCommentImg} alt="gallery.png" />
+                  <img src={boardImg} alt="gallery.png" />
                 </a>
               </p>
             </div>
             <div className="home_notice_info_middle">
               <h2>Title Text</h2>
-              <p>{props.commentText}</p>
+              <p>{content}</p>
             </div>
           </section>
           <section className="home_notice_info_lower">
@@ -60,13 +72,13 @@ const Content = (props) => {
                       alt="icon_like"
                       className="active_img"
                     />
-                    <span>{props.commentLikeNum}</span>
+                    <span>{likeNum}</span>
                   </a>
                 </li>
                 <li className="ic_click">
                   <a href="#">
                     <img src={commentIcon} alt="icon_comment" />
-                    <span>{props.commentReplyNum}</span>
+                    <span>{reviewNum}</span>
                   </a>
                 </li>
               </ul>
@@ -81,7 +93,7 @@ const Content = (props) => {
                     />
                   </a>
                   <a href="#">
-                    공유<span>{props.commentShareNum}</span>
+                    공유<span>{shareNum}</span>
                   </a>
                 </li>
                 <li className="ic_click">
@@ -94,7 +106,7 @@ const Content = (props) => {
                     />
                   </a>
                   <a href="#">
-                    저장<span>{props.commentSaveNum}</span>
+                    저장<span>{saveNum}</span>
                   </a>
                 </li>
               </ul>
