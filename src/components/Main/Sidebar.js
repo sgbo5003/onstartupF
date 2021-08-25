@@ -15,9 +15,6 @@ import * as fnc from "../../commonFunc/CommonFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import * as refreshActions from "../../modules/refresh";
 const Sidebar = () => {
-  //   const allRefresh = useSelector((state) => state.refresh.get("allRefresh"));
-  //   const dispatch = useDispatch();
-  //   const jwtToken = sessionStorage.getItem("jwtToken");
   const mainCategoryArray = [
     {
       link: "/",
@@ -36,6 +33,7 @@ const Sidebar = () => {
   const [checkedBottomItems, setBottomCheckedItems] = useState(new Set()); //카테고리 항목 -> 클릭 된 것들 담는 state
   const [checkedTopItems, setCheckedTopItems] = useState(new Set()); // 홈 & 저장글 항목 -> 클릭 된 것들 담는 state
   const [categoryData, setCategoryData] = useState([]);
+  const [categoryName, setCategoryName] = useState(""); // 선택한 카테고리 이름
 
   // 홈 & 저장글 클릭 & 색깔 변경 제어
   const onCheckedTopItemsHandler = () => {
@@ -55,15 +53,6 @@ const Sidebar = () => {
 
   // 카테고리 선택 제어
   const onCheckedBottomItemsHandler = (data) => {
-    // console.log(jwtToken);
-
-    // if (jwtToken) {
-    //   sessionStorage.removeItem("jwtToken");
-    // } else {
-    //   sessionStorage.setItem("jwtToken", "1234");
-    // }
-    // dispatch(refreshActions.setAllRefresh(allRefresh + 1));
-
     let itemSet = new Set(checkedBottomItems);
     if (checkedBottomItems.has(data)) {
       itemSet.delete(data);
@@ -89,6 +78,12 @@ const Sidebar = () => {
     getCategoryData();
     onCheckedTopItemsHandler();
   }, []);
+
+  useEffect(() => {
+    checkedBottomItems.forEach((v) => {
+      setCategoryName(v);
+    });
+  }, [checkedBottomItems]);
 
   return (
     <div className="side_bar_cove">
@@ -160,7 +155,7 @@ const Sidebar = () => {
                         return (
                           <li className="side_subsm_bar" key={index}>
                             <Link
-                              to={`/MiddleCategory${item.value}`}
+                              to={`/MiddleCategory?${categoryName}`}
                               className="side_subsm_menu commerce_menu2"
                               key={item}
                             >

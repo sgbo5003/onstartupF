@@ -8,15 +8,32 @@ import shareIcon from "../../images/icon_share.png";
 import messageBackIcon from "../../images/message_back.png";
 import saveIcon from "../../images/icon_sav.png";
 import saveOnIcon from "../../images/icon_sav_on.png";
-import { useParams } from "react-router-dom";
-const MiddleCategory = () => {
-  const sort = useParams();
-  const categoryId = sort.id;
-  console.log(sort);
-  //   const sort = useParams
-  //   useEffect((
-  //       const repsone = await axios(`/getCommersInfo/${sort}`)
-  //   ))
+import { useLocation, useParams } from "react-router-dom";
+import * as fnc from "../../commonFunc/CommonFunctions";
+const MiddleCategory = (props) => {
+  const paramsIdStr = props.location.search.split("?")[1];
+  const paramsId = decodeURI(paramsIdStr);
+  console.log(props);
+  //   const useQuery = () => new URLSearchParams(useLocation().search)
+  //   let query = useQuery()
+
+  console.log(paramsIdStr);
+  console.log(paramsId);
+
+  const getData = () => {
+    fnc.executeQuery({
+      url: "action/main/board.php",
+      data: {
+        root: paramsId,
+      },
+      success: (res) => {},
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const renderComponents = (idx) => {
     return (
       <div className="middle_category_content_home_tag_cove" key={idx}>
@@ -122,7 +139,7 @@ const MiddleCategory = () => {
       <div className="middle_category_content">
         <div className="middle_category_title_container">
           <p className="middle_category_title_main">커머스 정보</p>
-          <p className="middle_category_title_sub">중분류{categoryId}</p>
+          <p className="middle_category_title_sub">중분류 {paramsId}</p>
         </div>
         <div className="middle_category_content_container">
           {arr.map((data, idx) => {
