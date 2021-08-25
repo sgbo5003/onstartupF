@@ -14,7 +14,7 @@ import WritePortfolioModal from "./WritePortfolioModal";
 
 const Write = () => {
   const [content, setContent] = useState(""); // 코멘트
-  const [image, setImage] = useState(); // 파일
+  const [image, setImage] = useState(null); // 파일
   const [imageName, setImageName] = useState(""); // 파일 이름
   const [url, setUrl] = useState(""); // url
   const [category, setCategory] = useState(""); // 분야
@@ -46,6 +46,7 @@ const Write = () => {
 
   const onChangeImg = (e) => {
     setImage(e.target.files[0]);
+    console.log(image);
     setImageName(e.target.files[0].name);
   };
 
@@ -112,31 +113,16 @@ const Write = () => {
     }
   }
   const pushData = () => {
-    // const params = new FormData();
-    // params.append("comment_text", content);
-    // params.append("img_file", image);
-    // params.append("comment_url", url);
-    // params.append("comment_select", category);
-    // params.append("user_idx", sessionStorage.getItem("user_idx"));
-    // axios({
-    //   method: "post",
-    //   url: "/response/write_text_in_db.php",
-    //   data: params,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.data.complete === 0) {
-    //       console.log("성공");
-    //       setSubmitIsTrueModalOn(true);
-    //     } else {
-    //       console.log("실패");
-    //       setSubmitIsFalseModalOn(true);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    fnc.executeQuery({
+      url: "action/board/write.php",
+      data: {
+        content: content,
+        file: image,
+        url: url,
+        category: category,
+      },
+      success: (res) => {},
+    });
   };
 
   const getCategoryData = () => {
@@ -162,11 +148,7 @@ const Write = () => {
   return (
     <div className="wap write_wap">
       <div className="write_content">
-        <form
-          className="write_view"
-          // onSubmit={onSubmit}
-          encType="multipart/form-data"
-        >
+        <form className="write_view" encType="multipart/form-data">
           <h2 className="write_view_title">글쓰기</h2>
           <section className="write_comment">
             <h2>코멘트 / 포트폴리오 입력</h2>
@@ -226,6 +208,7 @@ const Write = () => {
                   onChange={onChangeImg}
                   id="file"
                   accept="image/gif, image/jpeg, image/png, image/bmp,"
+                  multiple
                 />
                 <input
                   className="comment_group upload-name comment_file_text write_text_box"
