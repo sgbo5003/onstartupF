@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import * as fnc from "../../commonFunc/CommonFunctions";
 const NoticeDetail = (props) => {
   //   console.log(match.params.post.notice_num);
 
   const [content, setContent] = useState({});
-  //   const paramsId = props.location.search.split("=")[1];
-
+  const paramsId = props.location.search.split("=")[1];
+  const paramsIdValue = parseInt(paramsId);
   const getData = () => {
     fnc.executeQuery({
       url: "action/board/notice.php",
@@ -17,7 +18,7 @@ const NoticeDetail = (props) => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [location.href]);
   return (
     <div className="wap notice_wap">
       <div className="notice_content">
@@ -97,11 +98,21 @@ const NoticeDetail = (props) => {
               <ul>
                 <li>
                   이전글
-                  <a className="prev_notice">{content.prev}</a>
+                  <Link
+                    to={`/NoticeDetail?view=${paramsIdValue - 1}`}
+                    className="prev_notice"
+                  >
+                    {content.prev}
+                  </Link>
                 </li>
                 <li>
                   다음글
-                  <a className="next_notice">{content.next}</a>
+                  <Link
+                    to={`/NoticeDetail?view=${paramsIdValue + 1}`}
+                    className="next_notice"
+                  >
+                    {content.next}
+                  </Link>
                 </li>
               </ul>
             </div>

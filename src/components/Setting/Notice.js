@@ -3,83 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as fnc from "../../commonFunc/CommonFunctions";
 
 const Notice = (props) => {
-  //   console.log(props);
   const history = useHistory();
-  //   const boardList = [
-  //     {
-  //       boardNo: 1,
-  //       boardTitle: "게시글1",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 2,
-  //       boardTitle: "게시글2",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 3,
-  //       boardTitle: "게시글3",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 4,
-  //       boardTitle: "게시글4",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 5,
-  //       boardTitle: "게시글5",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 6,
-  //       boardTitle: "게시글6",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 7,
-  //       boardTitle: "게시글7",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 8,
-  //       boardTitle: "게시글8",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 9,
-  //       boardTitle: "게시글9",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 10,
-  //       boardTitle: "게시글10",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 11,
-  //       boardTitle: "게시글11",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //     {
-  //       boardNo: 12,
-  //       boardTitle: "게시글12",
-  //       boardDate: new Date(),
-  //       boardViews: 1,
-  //     },
-  //   ];
-
   const [posts, setPosts] = useState([]); // 전체 데이터
 
   const getData = () => {
@@ -90,7 +14,6 @@ const Notice = (props) => {
         setPosts(res.notice);
       },
     });
-    // setPosts(boardList);
   };
 
   useEffect(() => {
