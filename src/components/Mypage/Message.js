@@ -3,8 +3,7 @@ import userImg1 from "../../images/messenger_user1.png";
 import userImg2 from "../../images/messenger_user2.png";
 import userImg3 from "../../images/messenger_user3.png";
 import userImg4 from "../../images/messenger_user4.png";
-import MessageWindow from "../../components/Message/MessageWindow";
-import MessageWindowTest from "../Message/MessageWindowTest";
+import MessageWindow from "./MessageWindow";
 
 const Message = () => {
   const userInfo = [
@@ -102,7 +101,7 @@ const Message = () => {
               );
             })}
           </section>
-          {messageOn ? <MessageWindowTest /> : ""}
+          {messageOn ? <MessageWindow /> : ""}
         </div>
       </div>
     </div>

@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-
-import userImg1 from "../../images/messenger_img1.png";
+import React, { useState } from "react";
 import backImg from "../../images/message_back.png";
 import fileImg from "../../images/messenger_file.png";
 import enterImg from "../../images/messenger_enter.png";
 
-const MessageWindowTest = () => {
-  const [inputText, setInputText] = useState("");
-  const [chatBox, setChatBox] = useState([]);
+const MessageWindow = () => {
+  const [inputText, setInputText] = useState(""); // 메세지
+  const [chatBox, setChatBox] = useState([]); // 메세지를 담는 배열
   const [image, setImage] = useState(); // 이미지 파일
   const [imageName, setImageName] = useState(""); // 이미지 파일 이름
+
   const onInputTextChange = (e) => {
     setInputText(e.target.value);
     console.log(inputText);
@@ -81,4 +80,4 @@ const MessageWindowTest = () => {
   );
 };
 
-export default MessageWindowTest;
+export default MessageWindow;
