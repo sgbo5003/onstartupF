@@ -32,13 +32,13 @@ const Content = (props) => {
                 <img src={profileImg} alt="default_user.png" />
               </a>
             </p>
-            <div>
+            <div className="home_title_box">
               <ul className="home_ti">
                 <li>
-                  <a href="#">title</a>
+                  <a>title</a>
                 </li>
                 <li>
-                  <a href="#">{belong}</a>
+                  <a>{belong}</a>
                 </li>
               </ul>
               <ul className="home_it">
@@ -50,7 +50,7 @@ const Content = (props) => {
             <h2 className="hidden">view info</h2>
             <div className="home_notice_info_top">
               <p>
-                <a href="#">
+                <a>
                   <img src={boardImg} alt="gallery.png" />
                 </a>
               </p>
@@ -65,7 +65,7 @@ const Content = (props) => {
             <div>
               <ul className="icon_left">
                 <li className="ic_click">
-                  <a href="#">
+                  <a>
                     <img src={likeIcon} alt="icon_like" className="nor_img" />
                     <img
                       src={likeOnIcon}
@@ -76,7 +76,7 @@ const Content = (props) => {
                   </a>
                 </li>
                 <li className="ic_click">
-                  <a href="#">
+                  <a>
                     <img src={commentIcon} alt="icon_comment" />
                     <span>{reviewNum}</span>
                   </a>
@@ -84,7 +84,7 @@ const Content = (props) => {
               </ul>
               <ul className="icon_right">
                 <li className="ic_click">
-                  <a className="share_btn" href="#">
+                  <a className="share_btn">
                     <img src={shareIcon} alt="icon_share" className="nor_img" />
                     <img
                       src={messageBackIcon}
@@ -92,12 +92,12 @@ const Content = (props) => {
                       className="active_img"
                     />
                   </a>
-                  <a href="#">
+                  <a>
                     공유<span>{shareNum}</span>
                   </a>
                 </li>
                 <li className="ic_click">
-                  <a href="#">
+                  <a>
                     <img src={saveIcon} alt="icon_sav" className="nor_img" />
                     <img
                       src={saveOnIcon}
@@ -105,7 +105,7 @@ const Content = (props) => {
                       className="active_img"
                     />
                   </a>
-                  <a href="#">
+                  <a>
                     저장<span>{saveNum}</span>
                   </a>
                 </li>

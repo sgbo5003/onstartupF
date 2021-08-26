@@ -24,13 +24,9 @@ const ContentPage = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     arrows: true,
-    prevArrow: (
-      <button type="button" className="slick-prev">
-        Previous
-      </button>
-    ), // 이전 화살표 모양 설정
+
     nextArrow: (
       <button type="button" className="slick-next">
         Next
@@ -63,24 +59,26 @@ const ContentPage = () => {
             <img src={viewIcon1} alt="icon1.png" />
           </h2>
           <Slider {...settings}>
-            {topData.slice(4).map((item, idx) => {
-              return (
-                <Content
-                  key={idx}
-                  //   title={data.user_name[idx]}
-                  belong={item.member_belong}
-                  boardImg={item.board_img}
-                  content={item.content}
-                  likeNum={item.like_num}
-                  reviewNum={item.review_num}
-                  shareNum={item.share_num}
-                  saveNum={item.save_num}
-                  name={item.member_name}
-                  profileImg={item.profile_img}
-                  writeTime={item.write_time}
-                />
-              );
-            })}
+            {topData == null
+              ? ""
+              : topData.slice(4).map((item, idx) => {
+                  return (
+                    <Content
+                      key={idx}
+                      //   title={data.user_name[idx]}
+                      belong={item.member_belong}
+                      boardImg={item.board_img}
+                      content={item.content}
+                      likeNum={item.like_num}
+                      reviewNum={item.review_num}
+                      shareNum={item.share_num}
+                      saveNum={item.save_num}
+                      name={item.member_name}
+                      profileImg={item.profile_img}
+                      writeTime={item.write_time}
+                    />
+                  );
+                })}
           </Slider>
         </div>
         <div className="home_view">
@@ -89,30 +87,52 @@ const ContentPage = () => {
             <img src={viewIcon2} alt="icon2.png" />
           </h2>
           <Slider {...settings}>
-            {midData.slice(4).map((item, idx) => {
-              return (
-                <Content
-                  key={idx}
-                  //   title={data.user_name[idx]}
-                  belong={item.member_belong}
-                  boardImg={item.board_img}
-                  content={item.content}
-                  likeNum={item.like_num}
-                  reviewNum={item.review_num}
-                  shareNum={item.share_num}
-                  saveNum={item.save_num}
-                  name={item.member_name}
-                  profileImg={item.profile_img}
-                  writeTime={item.write_time}
-                />
-              );
-            })}
+            {midData == null
+              ? ""
+              : midData.slice(4).map((item, idx) => {
+                  return (
+                    <Content
+                      key={idx}
+                      //   title={data.user_name[idx]}
+                      belong={item.member_belong}
+                      boardImg={item.board_img}
+                      content={item.content}
+                      likeNum={item.like_num}
+                      reviewNum={item.review_num}
+                      shareNum={item.share_num}
+                      saveNum={item.save_num}
+                      name={item.member_name}
+                      profileImg={item.profile_img}
+                      writeTime={item.write_time}
+                    />
+                  );
+                })}
           </Slider>
         </div>
         <div className="home_view">
           <h2>오늘의 NEW TOPIC</h2>
           <Slider {...settings}>
-            {botData.slice(4).map((item, idx) => {
+            {botData == null
+              ? ""
+              : botData.slice(4).map((item, idx) => {
+                  return (
+                    <Content
+                      key={idx}
+                      //   title={data.user_name[idx]}
+                      belong={item.member_belong}
+                      boardImg={item.board_img}
+                      content={item.content}
+                      likeNum={item.like_num}
+                      reviewNum={item.review_num}
+                      shareNum={item.share_num}
+                      saveNum={item.save_num}
+                      name={item.member_name}
+                      profileImg={item.profile_img}
+                      writeTime={item.write_time}
+                    />
+                  );
+                })}
+            {/* {botData.slice(4).map((item, idx) => {
               return (
                 <Content
                   key={idx}
@@ -129,7 +149,7 @@ const ContentPage = () => {
                   writeTime={item.write_time}
                 />
               );
-            })}
+            })} */}
           </Slider>
         </div>
         <CoinButton />
