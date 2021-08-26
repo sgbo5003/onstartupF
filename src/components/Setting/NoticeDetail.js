@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as fnc from "../../commonFunc/CommonFunctions";
 const NoticeDetail = (props) => {
-  //   console.log(match.params.post.notice_num);
-
   const [content, setContent] = useState({});
   const paramsId = props.location.search.split("=")[1];
   const paramsIdValue = parseInt(paramsId);
@@ -36,7 +34,7 @@ const NoticeDetail = (props) => {
                 className="node_input_title"
                 disabled
               /> */}
-              <p className="node_input_title">{content.title}</p>
+              <div className="node_input_title">{content.title}</div>
               <div className="notice_ts_group">
                 <p>작성자</p>
                 <input
