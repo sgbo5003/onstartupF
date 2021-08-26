@@ -2,76 +2,39 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import defaultUserImg from "../../images/default_user.png";
 import editTagImg from "../../images/edit_tag_cancel.png";
+import cameraImg from "../../images/camera.png";
+import * as fnc from "../../commonFunc/CommonFunctions";
 const MypageEdit = (props) => {
-  const getUserData = () => {
-    // const params = new FormData();
-    // params.append("command", "uinfo");
-    // params.append("idx", sessionStorage.getItem("user_idx"));
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("alldata response :", response.data);
-    //     setUserData(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  };
-
-  const getInterestingData = () => {
-    // const params = new FormData();
-    // params.append("command", "ca");
-    // params.append("kind", "interesting");
-    // axios({
-    //   method: "post",
-    //   url: "/response/get_info.php",
-    //   data: params,
-    // })
-    //   .then((response) => {
-    //     console.log("interesting response :", response.data);
-    //     setInterestSelectItemList(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  };
-
-  // axios로 받아온 data들 상태관리
-  const [userData, setUserData] = useState({
-    user_name: "", // 이름
-    user_belong: "", // 소속
-    user_title: "", // 직함
-    user_introduce: "", // 소개글
-    user_representation_url: "", // 대표 홈페이지 URL
-    user_interesting: [],
-  });
-
-  //axios로 받아온 관심분야 선택을 담는 배열
-  const [interestSelectItemList, setInterestSelectItemList] = useState({
-    category_order_num: [],
-    category_parent_idx: [],
-    category_text: [],
-  });
-
-  // 관심분야 선택하기에서 선택한 것들을 담는 객체
+  const [userData, setUserData] = useState([]); // 유저의 모든 정보
+  const [interestData, setInterestData] = useState([]); // 관심분야 all data
+  //   const [userInterestData, setUserInterestData] = useState([]); // 관심분야
   const [interestSelectItemRenderList, setInterestSelectItemRenderList] =
-    useState(new Set());
+    useState(new Set()); // 관심분야 선택하기에서 선택한 것들을 담는 객체
+  const [careerItem, setCareerItem] = useState([]); // 경력사항
+  const [careerItemList, setCareerItemList] = useState([]); // 경력사항을 담는 배열
+  const [educationItem, setEducationItem] = useState(""); //학력사항
+  const [educationItemList, setEducationItemList] = useState([]); //학력사항을 담는 배열
+  const [userImg, setUserImg] = useState(null); // 유저의 이미지
+  const [fileImg, setFileImg] = useState(null); // 파일 업로드 할 이미지
 
-  useEffect(() => {
-    userData.user_interesting.map((data) => {
-      interestSelectItemRenderList.add(data);
-      setInterestSelectItemRenderList(interestSelectItemRenderList);
-    });
-  }, [userData]);
+  const onChangeImg = (e) => {
+    if (e.target.files[0]) {
+      console.log("picture", e.target.files[0]);
+      setUserImg(e.target.files[0]);
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setUserImg(e.target.result);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
 
-  // 관심분야 -> 추가한 항목 삭제 기능
-  const onInterestCancelClick = (item) => {
-    let interestSubSet = new Set(interestSelectItemRenderList);
-    interestSubSet.delete(item);
-    setInterestSelectItemRenderList(interestSubSet);
+  console.log(userImg);
+
+  //input 값 감지 함수
+  const onChangeInputHandler = (e) => {
+    setUserData(e.target.value);
+    console.log(e.target.value);
   };
 
   // 관심분야 선택 클릭 함수 (항목 추가)
@@ -82,19 +45,11 @@ const MypageEdit = (props) => {
     console.log(interestSelectItemRenderList.values());
   };
 
-  //경력사항
-  const [careerItem, setCareerItem] = useState("");
-  //경력사항을 담는 배열
-  const [careerItemList, setCareerItemList] = useState([]);
-  //학력사항
-  const [educationItem, setEducationItem] = useState("");
-  //학력사항을 담는 배열
-  const [educationItemList, setEducationItemList] = useState([]);
-
-  //input 값 감지 함수
-  const OnChangeInputHandler = (e) => {
-    setUserData(e.target.value);
-    console.log(e.target.value);
+  // 관심분야 -> 추가한 항목 삭제 기능
+  const onInterestCancelClick = (data) => {
+    let interestSubSet = new Set(interestSelectItemRenderList);
+    interestSubSet.delete(data);
+    setInterestSelectItemRenderList(interestSubSet);
   };
 
   // 경력추가 input 값 감지 함수
@@ -105,12 +60,18 @@ const MypageEdit = (props) => {
 
   // 경력추가 버튼 기능
   const onCareerSubmit = () => {
-    if (careerItem === "") {
+    if (careerItem == "") {
       return;
     } else {
       setCareerItemList(careerItemList.concat(careerItem));
     }
     setCareerItem("");
+  };
+
+  // 경력사항 -> 추가한 항목 삭제버튼 기능
+  const onCareerCancelClick = (item) => {
+    const checkNewArray = careerItemList.filter((el) => el !== item);
+    setCareerItemList(checkNewArray);
   };
 
   // 학력사항 input 변경 값 감지 함수
@@ -129,27 +90,55 @@ const MypageEdit = (props) => {
     setEducationItem("");
   };
 
-  // 경력사항 -> 추가한 항목 삭제버튼 기능
-  const onCareerCancelClick = (item) => {
-    const checkNewArray = careerItemList.filter((el) => el !== item);
-    setCareerItemList(checkNewArray);
-  };
-
   // 학력사항 -> 추가한 항목 삭제버튼 기능
   const onEducationCancelClick = (item) => {
     const checkNewArray = educationItemList.filter((el) => el !== item);
     setEducationItemList(checkNewArray);
   };
 
+  const getData = () => {
+    fnc.executeQuery({
+      url: "action/member/edit.php",
+      data: {},
+      success: (res) => {
+        setUserData(res.member_info);
+        setInterestData(res.interesting);
+        setInterestSelectItemRenderList(res.member_info.interesting);
+        setCareerItem(res.member_info.career);
+        setEducationItem(res.member_info.edu);
+        setUserImg(res.member_info.img_url);
+      },
+    });
+  };
+
   useEffect(() => {
-    getUserData();
-    getInterestingData();
+    getData();
   }, []);
 
   return (
     <div className="mypage_edit_wap">
       <div className="mypage_profile_component">
-        <img src={defaultUserImg} />
+        <div className="mypage_edit_profile_box">
+          <img
+            src={userImg}
+            id="preview"
+            // style={{ width: "100%", height: "100%" }}
+          />
+          <p
+          // style={{ position: "absolute", top: 81, left: 61 }}
+          >
+            <input
+              type="file"
+              id="getfile"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={onChangeImg}
+            />
+            <label for="getfile">
+              <img src="src/images/camera.png" alt="camera.png" />
+            </label>
+          </p>
+        </div>
       </div>
       <div className="mypage_edit_content">
         <form className="mypage_edit_view">
@@ -158,8 +147,8 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.user_name}
-                onChange={OnChangeInputHandler}
+                value={userData.name}
+                onChange={onChangeInputHandler}
               />
             </div>
           </div>
@@ -169,18 +158,18 @@ const MypageEdit = (props) => {
               <div>
                 <input
                   className="mypage_input"
-                  value={userData.user_belong}
-                  onChange={OnChangeInputHandler}
+                  value={userData.belong == "N" ? "" : userData.belong}
+                  onChange={onChangeInputHandler}
                 />
               </div>
             </div>
-            <div className="mypage_subTitle_container">
+            <div className="mypage_subtitle_container">
               <h2 className="mypage_input_title">직함</h2>
               <div>
                 <input
                   className="mypage_input"
-                  value={userData.user_title}
-                  onChange={OnChangeInputHandler}
+                  value={userData.ranks == "N" ? "" : userData.ranks}
+                  onChange={onChangeInputHandler}
                 />
               </div>
             </div>
@@ -190,49 +179,73 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.user_introduce}
-                onChange={OnChangeInputHandler}
+                value={userData.introduce == "N" ? "" : userData.introduce}
+                onChange={onChangeInputHandler}
               />
             </div>
           </div>
           <div className="mypage_interest_container">
             <div className="mypage_interest_view">
               <h2 className="mypage_input_title">관심분야</h2>
-              {/* {userData.user_interesting.map((item) => {
+              {[...interestSelectItemRenderList].map((data) => {
                 return (
                   <div className="mypage_input_interest">
-                    {item}
+                    {data}
                     <a
                       className="mypage_edit_tag_cancel_img_box"
-                      onClick={() => onInterestCancelClick(item)}
-                    >
-                      <img src={editTagImg} alt="edit_tag_cancel" />
-                    </a>
-                  </div>
-                );
-              })} */}
-              {[...interestSelectItemRenderList].map((item) => {
-                return (
-                  <div className="mypage_input_interest">
-                    {item}
-                    <a
-                      className="mypage_edit_tag_cancel_img_box"
-                      onClick={() => onInterestCancelClick(item)}
+                      onClick={() => onInterestCancelClick(data)}
                     >
                       <img src={editTagImg} alt="edit_tag_cancel" />
                     </a>
                   </div>
                 );
               })}
+              {/* {userData.interesting.map((data) => {
+                return (
+                  <div className="mypage_input_interest">
+                    {data}
+                    <a
+                      className="mypage_edit_tag_cancel_img_box"
+                      //   onClick={() => onInterestCancelClick(item)}
+                    >
+                      <img src={editTagImg} alt="edit_tag_cancel" />
+                    </a>
+                  </div>
+                );
+              })} */}
+              {/* {[...interestSelectItemRenderList].map((data) => {
+                return (
+                  <div className="mypage_input_interest">
+                    {data}
+                    <a
+                      className="mypage_edit_tag_cancel_img_box"
+                      onClick={() => onInterestCancelClick(data)}
+                    >
+                      <img src={editTagImg} alt="edit_tag_cancel" />
+                    </a>
+                  </div>
+                );
+              })} */}
             </div>
             <div className="mypage_interest_select">
               <h2 className="mypage_input_title">관심분야 선택하기</h2>
               <ul className="mypage_edit_select_interest_list_container">
-                {interestSelectItemList.category_text.map((data) => {
+                {/* {interestSelectItemList.category_text.map((data) => {
                   return (
                     <li
                       className="mypage_edit_select_interest_list"
                       onClick={() => onInterestSelectClick(data)}
+                    >
+                      <a className="wirte_select_list">{data}</a>
+                    </li>
+                  );
+                })} */}
+                {interestData.map((data, idx) => {
+                  return (
+                    <li
+                      className="mypage_edit_select_interest_list"
+                      onClick={() => onInterestSelectClick(data)}
+                      key={idx}
                     >
                       <a className="wirte_select_list">{data}</a>
                     </li>
@@ -301,8 +314,8 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.user_representation_url}
-                onChange={OnChangeInputHandler}
+                value={userData.url == "N" ? "" : userData.url}
+                onChange={onChangeInputHandler}
               />
             </div>
           </div>
