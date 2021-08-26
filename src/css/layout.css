@@ -44,7 +44,7 @@
   z-index: 100;
   left: 0px;
   top: calc(50% - 75px);
-  display: inline-block;
+  display: none;
   width: 100px;
   height: 100px;
   opacity: 0;
@@ -133,11 +133,11 @@
   width: 30px;
   height: 30px;
 }
-.home_view .slick-slide {
+/* .home_view .slick-slide {
   margin-left: 5px !important;
   margin-right: 5px !important;
   margin-bottom: 10px !important;
-}
+} */
 .home_viewer .slick-slide {
   margin-left: 5px !important;
   margin-right: 5px !important;
@@ -147,10 +147,12 @@
   position: relative;
   display: inline-block;
   width: 100%;
+  padding: 0 10px;
 }
 .home_view_content_cove {
   position: relative;
   display: inline-block;
+  width: 100%;
 }
 .home_tag_cove {
   display: inline-block;
@@ -159,10 +161,11 @@
   box-sizing: border-box;
   border-radius: 10px;
   margin-bottom: 1em;
+  width: 100%;
 }
 .home_title {
   position: relative;
-  display: inline-block;
+  display: flex;
   width: auto;
   height: 67px;
 }
@@ -181,6 +184,10 @@
 .home_title > div {
   width: auto;
   height: 67px;
+}
+.home_title_box {
+  display: flex;
+  flex-direction: column;
 }
 .home_ti {
   float: left;
@@ -232,13 +239,19 @@
 .home_notice_info_top {
   position: relative;
   width: 100%;
+  height: 120px;
   background-color: #ccc;
 }
 .home_notice_info_top > p {
   display: inline-block;
   width: 100%;
-  height: 127px;
+  height: 100%;
   overflow: hidden;
+}
+
+.home_notice_info_top > p > a img {
+  height: 100%;
+  width: 100%;
 }
 .home_notice_info_middle {
   width: 100%;
@@ -4169,6 +4182,7 @@ select::-ms-expand {
   height: 55px;
   padding-top: 1.25em;
   padding-bottom: 1.25em;
+  margin-bottom: 10px;
   border: 0px;
   background-color: #fff;
   color: #444;
@@ -4880,6 +4894,23 @@ progress::-webkit-progress-value {
   margin-right: 30px;
 }
 
+.mypage_edit_profile_box {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.mypage_edit_profile_box > img {
+  width: 100%;
+  height: 100%;
+}
+
+.mypage_edit_profile_box > p {
+  position: absolute;
+  top: 81px;
+  left: 61px;
+}
+
 .mypage_edit_content {
   position: relative;
   width: 100%;
@@ -4916,10 +4947,16 @@ progress::-webkit-progress-value {
 .mypage_belongTitle_container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .mypage_belong_container {
+  flex: 1;
   padding-right: 30px;
+}
+
+.mypage_subtitle_container {
+  flex: 1;
 }
 
 .mypage_interest_container {
