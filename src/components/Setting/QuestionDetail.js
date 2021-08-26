@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
-const QuestionDetail = () => {
+const QuestionDetail = (props) => {
+  const [content, setContent] = useState({});
+  const paramsId = props.location.search.split("=")[1];
+  const paramsIdValue = parseInt(paramsId);
+  const getData = () => {
+    fnc.executeQuery({
+      url: "action/board/faq.php",
+      data: {},
+      success: (res) => {
+        setContent(res.faq);
+      },
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, [location.href]);
   return (
     <div className="wap notice_wap">
       <div className="notice_content">
@@ -15,7 +32,7 @@ const QuestionDetail = () => {
                 type="text"
                 name="notice_title"
                 placeholder="제목"
-                value="Lorem ipsum dolor sit amet."
+                value={content.title}
                 className="node_input_title"
                 disabled
               />
@@ -25,7 +42,7 @@ const QuestionDetail = () => {
                   type="text"
                   name="writer"
                   placeholder="작성자"
-                  value="OSU 관리자"
+                  value={content.writer}
                   className="notice_ts notice_twriter"
                   disabled
                 />
@@ -36,7 +53,7 @@ const QuestionDetail = () => {
                   type="text"
                   name="date"
                   placeholder="작성일자"
-                  value="2021-05-11"
+                  value={content.write_date}
                   className="notice_ts notice_tdate"
                   disabled
                 />
@@ -44,7 +61,7 @@ const QuestionDetail = () => {
                   type="text"
                   name="time"
                   placeholder="시간"
-                  value="00:00"
+                  value={content.write_time}
                   className="notice_ts notice_ttime"
                   disabled
                 />
@@ -55,7 +72,7 @@ const QuestionDetail = () => {
                   type="text"
                   name="view"
                   placeholder="조회수"
-                  value="16"
+                  value={content.view}
                   className="notice_ts notice_tview"
                   disabled
                 />
@@ -82,19 +99,8 @@ const QuestionDetail = () => {
                 id="ta"
                 className="notice_ttext"
                 disabled
-              >
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, dolor
-                sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-                elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore
-              </textarea>
+                value={content.text}
+              ></textarea>
             </form>
           </section>
           <section className="notice_menu">
@@ -102,22 +108,28 @@ const QuestionDetail = () => {
               <ul>
                 <li>
                   이전글
-                  <a className="prev_notice" href="#">
-                    Lorem ipsum dolor sit amet
-                  </a>
+                  <Link
+                    to={`/QuestionDetail?view=${paramsIdValue - 1}`}
+                    className="prev_notice"
+                  >
+                    {content.prev}
+                  </Link>
                 </li>
                 <li>
                   다음글
-                  <a className="next_notice" href="#">
-                    Lorem ipsum dolor
-                  </a>
+                  <Link
+                    to={`/QuestionDetail?view=${paramsIdValue + 1}`}
+                    className="next_notice"
+                  >
+                    {content.next}
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="notice_menu_right">
               <ul className="writing_icon_right writing_right_ico">
                 <li className="ic_click">
-                  <a href="#">
+                  <a>
                     <img
                       src="src/images/icon_like.png"
                       alt="icon_like"
@@ -129,7 +141,7 @@ const QuestionDetail = () => {
                       className="active_img"
                     />
                   </a>
-                  <span className="icon_click_num">0</span>
+                  <span className="icon_click_num">{content.like}</span>
                 </li>
                 <div className="notice_share_cove">
                   <ul className="notice_share_box">
@@ -139,7 +151,7 @@ const QuestionDetail = () => {
                   </ul>
                 </div>
                 <li className="ic_click notice_shared_icon">
-                  <a className="notice_share_btn" href="#">
+                  <a className="notice_share_btn">
                     <img
                       src="src/images/icon_share.png"
                       alt="icon_share"
@@ -151,8 +163,8 @@ const QuestionDetail = () => {
                       className="active_img"
                     />
                   </a>
-                  <a className="icon_click_name" href="#">
-                    공유<span className="icon_click_num">0</span>
+                  <a className="icon_click_name">
+                    공유<span className="icon_click_num">{content.share}</span>
                   </a>
                 </li>
               </ul>

@@ -53,7 +53,7 @@ const inquiry = () => {
           <section className="inquiry_comment inq_sty">
             <div className="inq_que_gruop">
               <h2>자주 묻는 질문</h2>
-              <Link to="/Question" className="question_tab">
+              <Link to="/Question?page=1" className="question_tab">
                 <img className="question_tab_img" src={questionImg} />
               </Link>
             </div>

@@ -1,45 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import * as fnc from "../../commonFunc/CommonFunctions";
 
-const Question = () => {
+const Question = (props) => {
   const history = useHistory();
-  const boardList = [
-    {
-      boardNo: 0,
-      boardWriter: "",
-      boardCategory: "카테고리 선택",
-      boardTitle: "",
-      boardDate: new Date(),
-    },
-    {
-      boardNo: 1,
-      boardWriter: "박상준",
-      boardCategory: "카테고리1",
-      boardTitle: "게시글1",
-      boardDate: new Date(),
-    },
-    {
-      boardNo: 2,
-      boardWriter: "홍길동",
-      boardCategory: "카테고리2",
-      boardTitle: "게시글2",
-      boardDate: new Date(),
-    },
-    {
-      boardNo: 3,
-      boardWriter: "아무개",
-      boardCategory: "카테고리3",
-      boardTitle: "게시글3",
-      boardDate: new Date(),
-    },
-    {
-      boardNo: 4,
-      boardWriter: "세종대왕",
-      boardCategory: "카테고리4",
-      boardTitle: "게시글4",
-      boardDate: new Date(),
-    },
-  ];
+  const paramsId = props.location.search.split("=")[1];
+  const [posts, setPosts] = useState([]); // 전체 데이터 수
+  const postsPerpage = 10; // 한 페이지에서 보여줄 게시글 수
+  const pageNumber = []; // 페이징 넘버를 담는 배열
+  const [totalPageNum, setTotalPageNum] = useState(0); // 전체 페이지 데이터 수
+  for (let i = 1; i <= Math.ceil(totalPageNum / postsPerpage); i++) {
+    pageNumber.push(i);
+  }
+
+  const getData = () => {
+    fnc.executeQuery({
+      url: "action/board/faq.php",
+      data: {},
+      success: (res) => {
+        setPosts(res.faq);
+        setTotalPageNum(res.total_num);
+      },
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, [location.href]);
 
   const [categorySelected, setCategorySelected] = useState("");
 
@@ -64,9 +51,6 @@ const Question = () => {
                   카테고리 선택
                 </option>
                 <option>전체보기</option>
-                {boardList.slice(1).map((data, idx) => {
-                  return <option key={idx}>{data.boardCategory}</option>;
-                })}
               </select>
             </div>
           </div>
@@ -77,50 +61,46 @@ const Question = () => {
                   <th>번호</th>
                   <th>카테고리</th>
                   <th>제목</th>
-                  <th>작성일</th>
                 </tr>
               </thead>
               <tbody className="tbody_num">
-                {boardList
-                  .slice(1)
-                  .filter((val) => {
-                    if (
-                      categorySelected == "" ||
-                      categorySelected == "전체보기"
-                    ) {
-                      return val;
-                    } else if (val.boardCategory.includes(categorySelected)) {
-                      return val;
-                    }
-                  })
-
-                  .map((data, idx) => {
-                    return (
-                      <tr
-                        //   onMouseOut=" window.status = '' "
-                        onClick={() => {
-                          history.push("/QuestionDetail");
-                        }}
-                        key={idx}
-                      >
-                        <td className="fq_tr_num">{data.boardNo}</td>
-                        <td className="fq_tr_ctn">{data.boardCategory}</td>
-                        <td className="fq_tr_tit">{data.boardTitle}</td>
-                        <td className="fq_tr_tit">
-                          {data.boardDate.toLocaleDateString("ko-KR")}
-                        </td>
-                      </tr>
-                    );
-                  })}
+                {posts.map((post, idx) => {
+                  return (
+                    <tr
+                      onClick={() => {
+                        history.push(`/QuestionDetail?view=${post.faq_num}`);
+                      }}
+                      key={idx}
+                    >
+                      <td className="no_tr_num">{post.faq_num}</td>
+                      <td className="no_tr_tit">카테고리{post.faq_num}</td>
+                      <td className="no_tr_view">{post.faq_title}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <div className="no_paging">
               <span className="prev">
                 <a className="pasing_arrow">&lt;</a>
               </span>
-              <a className="no_paging_active">1</a>
+              {/* <a className="no_paging_active">1</a>
               <a>2</a>
               <a>3</a>
+               */}
+              {pageNumber.map((data) => {
+                return (
+                  <Link
+                    to={`/Question?page=${data}`}
+                    className={
+                      paramsId == data ? "no_paging_active" : "paging_number"
+                    }
+                    key={data}
+                  >
+                    {data}
+                  </Link>
+                );
+              })}
               <span className="next">
                 <a className="pasing_arrow">&gt;</a>
               </span>
