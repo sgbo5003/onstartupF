@@ -4903,12 +4903,17 @@ progress::-webkit-progress-value {
 .mypage_edit_profile_box > img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
 }
 
 .mypage_edit_profile_box > p {
   position: absolute;
   top: 81px;
-  left: 61px;
+  left: 74px;
+}
+
+.mypage_edit_profile_box > p img {
+  cursor: pointer;
 }
 
 .mypage_edit_content {
