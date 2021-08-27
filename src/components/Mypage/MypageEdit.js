@@ -4,23 +4,32 @@ import defaultUserImg from "../../images/default_user.png";
 import editTagImg from "../../images/edit_tag_cancel.png";
 import cameraImg from "../../images/camera.png";
 import * as fnc from "../../commonFunc/CommonFunctions";
-const MypageEdit = (props) => {
+import { join } from "lodash";
+const MypageEdit = () => {
   const [userData, setUserData] = useState([]); // 유저의 모든 정보
+  const [inputData, setInputData] = useState({
+    name: "",
+    belong: "",
+    rank: "",
+    introduce: "",
+    url: "",
+  }); // 이름, 소속, 직함, 소개글, 대표 홈페이지 url input 제어
   const [interestData, setInterestData] = useState([]); // 관심분야 all data
   //   const [userInterestData, setUserInterestData] = useState([]); // 관심분야
   const [interestSelectItemRenderList, setInterestSelectItemRenderList] =
     useState(new Set()); // 관심분야 선택하기에서 선택한 것들을 담는 객체
   const [careerItem, setCareerItem] = useState([]); // 경력사항
   const [careerItemList, setCareerItemList] = useState([]); // 경력사항을 담는 배열
-  const [educationItem, setEducationItem] = useState(""); //학력사항
+  const [schoolItem, setSchoolItem] = useState(""); //학교
+  const [majorItem, setMajorItem] = useState(""); // 전공
   const [educationItemList, setEducationItemList] = useState([]); //학력사항을 담는 배열
   const [userImg, setUserImg] = useState(null); // 유저의 이미지
   const [fileImg, setFileImg] = useState(null); // 파일 업로드 할 이미지
 
   const onChangeImg = (e) => {
     if (e.target.files[0]) {
-      console.log("picture", e.target.files[0]);
-      setUserImg(e.target.files[0]);
+      //   console.log("picture", e.target.files[0]);
+      setFileImg(e.target.files[0]);
       const reader = new FileReader();
       reader.onload = function (e) {
         setUserImg(e.target.result);
@@ -29,12 +38,10 @@ const MypageEdit = (props) => {
     }
   };
 
-  console.log(userImg);
-
   //input 값 감지 함수
   const onChangeInputHandler = (e) => {
-    setUserData(e.target.value);
-    console.log(e.target.value);
+    const { name, value } = e.target;
+    setInputData({ ...inputData, [name]: value });
   };
 
   // 관심분야 선택 클릭 함수 (항목 추가)
@@ -42,7 +49,6 @@ const MypageEdit = (props) => {
     let interestAddSet = new Set(interestSelectItemRenderList);
     interestAddSet.add(data);
     setInterestSelectItemRenderList(interestAddSet);
-    console.log(interestSelectItemRenderList.values());
   };
 
   // 관심분야 -> 추가한 항목 삭제 기능
@@ -54,13 +60,14 @@ const MypageEdit = (props) => {
 
   // 경력추가 input 값 감지 함수
   const careerOnChangeHandler = (e) => {
-    console.log(e.target.value);
     setCareerItem(e.target.value);
   };
 
   // 경력추가 버튼 기능
   const onCareerSubmit = () => {
     if (careerItem == "") {
+      return;
+    } else if (careerItem == careerItemList.includes(careerItem)) {
       return;
     } else {
       setCareerItemList(careerItemList.concat(careerItem));
@@ -74,26 +81,36 @@ const MypageEdit = (props) => {
     setCareerItemList(checkNewArray);
   };
 
-  // 학력사항 input 변경 값 감지 함수
+  // 학교 input 변경 값 감지 함수
   const educationOnChangeHandler = (e) => {
-    console.log(e.target.value);
-    setEducationItem(e.target.value);
+    setSchoolItem(e.target.value);
   };
 
-  // 학력추가 버튼 기능
+  // 학력 추가 버튼 기능
   const onEducationSubmit = () => {
-    if (educationItem === "") {
+    if (schoolItem == "" || majorItem == "") {
       return;
     } else {
-      setEducationItemList(educationItemList.concat(educationItem));
+      const concatItem = schoolItem.concat("-", majorItem);
+      setEducationItemList(educationItemList.concat(concatItem));
     }
-    setEducationItem("");
+    setSchoolItem("");
+    setMajorItem("");
   };
 
-  // 학력사항 -> 추가한 항목 삭제버튼 기능
+  // 학교 -> 추가한 항목 삭제버튼 기능
   const onEducationCancelClick = (item) => {
     const checkNewArray = educationItemList.filter((el) => el !== item);
     setEducationItemList(checkNewArray);
+  };
+
+  // 전공 input 변경 값 감지 함수
+  const majorOnChangeHandler = (e) => {
+    setMajorItem(e.target.value);
+  };
+
+  const onSubmit = () => {
+    sendData();
   };
 
   const getData = () => {
@@ -101,13 +118,45 @@ const MypageEdit = (props) => {
       url: "action/member/edit.php",
       data: {},
       success: (res) => {
-        setUserData(res.member_info);
         setInterestData(res.interesting);
         setInterestSelectItemRenderList(res.member_info.interesting);
         setCareerItem(res.member_info.career);
-        setEducationItem(res.member_info.edu);
+        setSchoolItem(res.member_info.edu.nd);
+        setMajorItem(res.member_info.edu.st);
         setUserImg(res.member_info.img_url);
+        setInputData({
+          name: res.member_info.name,
+          belong: res.member_info.belong,
+          rank: res.member_info.ranks,
+          introduce: res.member_info.introduce,
+          url: res.member_info.url,
+        });
       },
+    });
+  };
+
+  const editData = {
+    is_update: true,
+    name: inputData.name,
+    belong: inputData.belong,
+    ranks: inputData.rank,
+    introduce: inputData.introduce,
+    url: inputData.url,
+    interesting: [...interestSelectItemRenderList],
+    career: careerItemList,
+    education: educationItemList,
+  };
+
+  const json = btoa(encodeURIComponent(JSON.stringify(editData)));
+
+  const sendData = () => {
+    fnc.executeQuery({
+      url: "action/member/edit.php",
+      data: {
+        json,
+        file: fileImg,
+      },
+      success: (res) => {},
     });
   };
 
@@ -119,14 +168,8 @@ const MypageEdit = (props) => {
     <div className="mypage_edit_wap">
       <div className="mypage_profile_component">
         <div className="mypage_edit_profile_box">
-          <img
-            src={userImg}
-            id="preview"
-            // style={{ width: "100%", height: "100%" }}
-          />
-          <p
-          // style={{ position: "absolute", top: 81, left: 61 }}
-          >
+          <img src={userImg} id="preview" />
+          <p>
             <input
               type="file"
               id="getfile"
@@ -134,7 +177,7 @@ const MypageEdit = (props) => {
               style={{ display: "none" }}
               onChange={onChangeImg}
             />
-            <label for="getfile">
+            <label htmlFor="getfile">
               <img src="src/images/camera.png" alt="camera.png" />
             </label>
           </p>
@@ -147,8 +190,9 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.name}
+                value={inputData.name == "N" ? "" : inputData.name}
                 onChange={onChangeInputHandler}
+                name="name"
               />
             </div>
           </div>
@@ -158,8 +202,9 @@ const MypageEdit = (props) => {
               <div>
                 <input
                   className="mypage_input"
-                  value={userData.belong == "N" ? "" : userData.belong}
+                  value={inputData.belong == "N" ? "" : inputData.belong}
                   onChange={onChangeInputHandler}
+                  name="belong"
                 />
               </div>
             </div>
@@ -168,8 +213,9 @@ const MypageEdit = (props) => {
               <div>
                 <input
                   className="mypage_input"
-                  value={userData.ranks == "N" ? "" : userData.ranks}
+                  value={inputData.rank == "N" ? "" : inputData.rank}
                   onChange={onChangeInputHandler}
+                  name="rank"
                 />
               </div>
             </div>
@@ -179,17 +225,18 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.introduce == "N" ? "" : userData.introduce}
+                value={inputData.introduce == "N" ? "" : inputData.introduce}
                 onChange={onChangeInputHandler}
+                name="introduce"
               />
             </div>
           </div>
           <div className="mypage_interest_container">
             <div className="mypage_interest_view">
               <h2 className="mypage_input_title">관심분야</h2>
-              {[...interestSelectItemRenderList].map((data) => {
+              {[...interestSelectItemRenderList].map((data, idx) => {
                 return (
-                  <div className="mypage_input_interest">
+                  <div className="mypage_input_interest" key={idx}>
                     {data}
                     <a
                       className="mypage_edit_tag_cancel_img_box"
@@ -200,46 +247,10 @@ const MypageEdit = (props) => {
                   </div>
                 );
               })}
-              {/* {userData.interesting.map((data) => {
-                return (
-                  <div className="mypage_input_interest">
-                    {data}
-                    <a
-                      className="mypage_edit_tag_cancel_img_box"
-                      //   onClick={() => onInterestCancelClick(item)}
-                    >
-                      <img src={editTagImg} alt="edit_tag_cancel" />
-                    </a>
-                  </div>
-                );
-              })} */}
-              {/* {[...interestSelectItemRenderList].map((data) => {
-                return (
-                  <div className="mypage_input_interest">
-                    {data}
-                    <a
-                      className="mypage_edit_tag_cancel_img_box"
-                      onClick={() => onInterestCancelClick(data)}
-                    >
-                      <img src={editTagImg} alt="edit_tag_cancel" />
-                    </a>
-                  </div>
-                );
-              })} */}
             </div>
             <div className="mypage_interest_select">
               <h2 className="mypage_input_title">관심분야 선택하기</h2>
               <ul className="mypage_edit_select_interest_list_container">
-                {/* {interestSelectItemList.category_text.map((data) => {
-                  return (
-                    <li
-                      className="mypage_edit_select_interest_list"
-                      onClick={() => onInterestSelectClick(data)}
-                    >
-                      <a className="wirte_select_list">{data}</a>
-                    </li>
-                  );
-                })} */}
                 {interestData.map((data, idx) => {
                   return (
                     <li
@@ -263,9 +274,9 @@ const MypageEdit = (props) => {
               value={careerItem}
               onChange={careerOnChangeHandler}
             />
-            {careerItemList.map((item) => {
+            {careerItemList.map((item, idx) => {
               return (
-                <div className="mypage_input_add_button_component">
+                <div className="mypage_input_add_button_component" key={idx}>
                   {item}
                   <a
                     className="mypage_edit_tag_cancel_img_box"
@@ -283,16 +294,23 @@ const MypageEdit = (props) => {
             </p>
           </div>
           <div className="mypage_education_container">
-            <h2 className="mypage_input_title">학력</h2>
+            <h2 className="mypage_input_title">학교</h2>
             <input
               className="mypage_input_add"
-              placeholder="OO학교 OO전공"
-              value={educationItem}
+              placeholder="OO학교"
+              value={schoolItem}
               onChange={educationOnChangeHandler}
             />
-            {educationItemList.map((item) => {
+            <h2 className="mypage_input_title">전공</h2>
+            <input
+              className="mypage_input_add"
+              placeholder="OO전공"
+              value={majorItem}
+              onChange={majorOnChangeHandler}
+            />
+            {educationItemList.map((item, idx) => {
               return (
-                <div className="mypage_input_add_button_component">
+                <div className="mypage_input_add_button_component" key={idx}>
                   {item}
                   <a
                     className="mypage_edit_tag_cancel_img_box"
@@ -314,8 +332,9 @@ const MypageEdit = (props) => {
             <div>
               <input
                 className="mypage_input"
-                value={userData.url == "N" ? "" : userData.url}
+                value={inputData.url == "N" ? "" : inputData.url}
                 onChange={onChangeInputHandler}
+                name="url"
               />
             </div>
           </div>
@@ -329,6 +348,7 @@ const MypageEdit = (props) => {
               className="mypage_submit_button_on"
               type="button"
               value="완료"
+              onClick={onSubmit}
             />
           </div>
         </form>
