@@ -219,8 +219,12 @@ const MypageInitial = () => {
                     </div>
                   </div>
                   <div className="it">
-                    {userData.user_interesting.map((data) => {
-                      return <span className="mypage_title_tag">{data}</span>;
+                    {userData.user_interesting.map((data, idx) => {
+                      return (
+                        <span className="mypage_title_tag" key={idx}>
+                          {data}
+                        </span>
+                      );
                     })}
                   </div>
                   <div className="mypage_profile_range_container">
@@ -248,11 +252,10 @@ const MypageInitial = () => {
                             <button
                               className="profile_add_section_button"
                               onClick={data.handler}
+                              key={idx}
                             >
                               {data.text}
                             </button>
-                            {/* {data.modalon ? <div>hi</div> : ""}
-                            {profileImgModalOn ? <div>hi</div> : ""} */}
                           </>
                         );
                       })}
