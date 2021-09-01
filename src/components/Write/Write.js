@@ -1,6 +1,6 @@
 // git commit test
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import detailClickImg from "../../images/detaile_click.png";
 import selectBackImg from "../../images/select_back.png";
 import BackImg from "../../images/back.png";
@@ -13,6 +13,7 @@ import * as fnc from "../../commonFunc/CommonFunctions";
 import WritePortfolioModal from "./WritePortfolioModal";
 
 const Write = () => {
+  const history = useHistory();
   const [content, setContent] = useState(""); // 코멘트
   const [image, setImage] = useState(null); // 파일
   const [imageName, setImageName] = useState(""); // 파일 이름
@@ -121,7 +122,13 @@ const Write = () => {
         url: url,
         category: category,
       },
-      success: (res) => {},
+      success: (res) => {
+        if (res.response == "ok") {
+          history.push("/");
+        } else {
+          setSubmitIsFalseModalOn(true);
+        }
+      },
     });
   };
 
