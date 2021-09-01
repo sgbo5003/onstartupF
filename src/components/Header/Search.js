@@ -5,7 +5,6 @@ const Search = () => {
 
   const onChangeInputHandler = (e) => {
     setSearchInput(e.target.value);
-    console.log(e.target.value);
   };
   return (
     <div className="search_tab">

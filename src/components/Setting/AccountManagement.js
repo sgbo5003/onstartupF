@@ -33,7 +33,6 @@ const AccountManagement = () => {
 
   const onChangeInputEmail = (e) => {
     setInputEmail(e.target.value);
-    console.log(e.target.value);
   };
 
   function checkBtnOn() {

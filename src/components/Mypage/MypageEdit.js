@@ -4,7 +4,6 @@ import defaultUserImg from "../../images/default_user.png";
 import editTagImg from "../../images/edit_tag_cancel.png";
 import cameraImg from "../../images/camera.png";
 import * as fnc from "../../commonFunc/CommonFunctions";
-import { join } from "lodash";
 const MypageEdit = () => {
   const [userData, setUserData] = useState([]); // 유저의 모든 정보
   const [inputData, setInputData] = useState({

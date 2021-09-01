@@ -15,7 +15,6 @@ const ReferenceHaveCoin = (props) => {
 
   const onCoinModalButtonClicked = () => {
     setReferenceChargeCoinModalOn(false);
-    console.log("clicked");
   };
 
   return (

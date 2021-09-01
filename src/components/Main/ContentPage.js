@@ -132,24 +132,6 @@ const ContentPage = () => {
                     />
                   );
                 })}
-            {/* {botData.slice(4).map((item, idx) => {
-              return (
-                <Content
-                  key={idx}
-                  //   title={data.user_name[idx]}
-                  belong={item.member_belong}
-                  boardImg={item.board_img}
-                  content={item.content}
-                  likeNum={item.like_num}
-                  reviewNum={item.review_num}
-                  shareNum={item.share_num}
-                  saveNum={item.save_num}
-                  name={item.member_name}
-                  profileImg={item.profile_img}
-                  writeTime={item.write_time}
-                />
-              );
-            })} */}
           </Slider>
         </div>
         <CoinButton />

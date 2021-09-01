@@ -68,8 +68,6 @@ const Join = (props) => {
         setSocialLogin(true);
         setSocialToken(res.token);
         console.log(res.token);
-      },
-      error: (res) => {
         // redux 사용
         dispatch(refreshActions.setAllRefresh(allRefresh + 1));
         history.push("/");
